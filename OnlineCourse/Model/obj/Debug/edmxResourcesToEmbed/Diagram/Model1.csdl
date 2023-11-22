@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineLearnModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentDate" Type="DateTime" Precision="3" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="UserID" Type="Int64" />
+    <Property Name="ParentID" Type="Int64" />
+    <Property Name="Rate" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="OnlineLearnModel.ProductComment" FromRole="Comment" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="OnlineLearnModel.CommentUser" FromRole="Comment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="QuestionList" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="AnswerList" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="TotalScore" Type="Int16" />
+    <Property Name="Time" Type="Int16" />
+    <Property Name="TotalQuestion" Type="Int16" />
+    <Property Name="Type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="QuestionEssay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserList" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="ScoreList" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Product" Relationship="OnlineLearnModel.ProductExam" FromRole="Exam" ToRole="Product" />
+    <NavigationProperty Name="Results" Relationship="OnlineLearnModel.ExamResult" FromRole="Exam" ToRole="Result" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PromotionPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IncludeVAT" Type="Boolean" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="CategoryID" Type="Int64" />
+    <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MetaKeywords" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaDescriptions" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="ViewCount" Type="Int32" />
+    <Property Name="LinkVideo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ListType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ListFile" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Questions" Relationship="OnlineLearnModel.ProductQuestion" FromRole="Product" ToRole="Question" />
+    <NavigationProperty Name="Comments" Relationship="OnlineLearnModel.ProductComment" FromRole="Product" ToRole="Comment" />
+    <NavigationProperty Name="ProductCategory" Relationship="OnlineLearnModel.FK_Cate_Prod" FromRole="Product" ToRole="ProductCategory" />
+    <NavigationProperty Name="Exams" Relationship="OnlineLearnModel.ProductExam" FromRole="Product" ToRole="Exam" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ParentID" Type="Int64" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="ShowOnHome" Type="Boolean" />
+    <NavigationProperty Name="Products" Relationship="OnlineLearnModel.FK_Cate_Prod" FromRole="ProductCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="OnlineLearnModel.ProductQuestion" FromRole="Question" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Result">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="ExamID" />
+    </Key>
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="ExamID" Type="Int64" Nullable="false" />
+    <Property Name="ResultQuiz" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="ResultEssay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDateQuiz" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="StartTimeQuiz" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FinishTimeQuiz" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="StartDateEssay" Type="DateTime" Precision="3" />
+    <Property Name="StartTimeEssay" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FinishTimeEssay" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Score" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Exam" Relationship="OnlineLearnModel.ExamResult" FromRole="Result" ToRole="Exam" />
+    <NavigationProperty Name="User" Relationship="OnlineLearnModel.UserResult" FromRole="Result" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="ProductList" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comments" Relationship="OnlineLearnModel.CommentUser" FromRole="User" ToRole="Comment" />
+    <NavigationProperty Name="Results" Relationship="OnlineLearnModel.UserResult" FromRole="User" ToRole="Result" />
+  </EntityType>
+  <EntityContainer Name="OnlineLearnEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Exams" EntityType="Self.Exam" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="Results" EntityType="Self.Result" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="ProductQuestion" Association="OnlineLearnModel.ProductQuestion">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="ProductComment" Association="OnlineLearnModel.ProductComment">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Comment" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cate_Prod" Association="OnlineLearnModel.FK_Cate_Prod">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ProductExam" Association="OnlineLearnModel.ProductExam">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Exam" EntitySet="Exams" />
+    </AssociationSet>
+    <AssociationSet Name="CommentUser" Association="OnlineLearnModel.CommentUser">
+      <End Role="Comment" EntitySet="Comments" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ExamResult" Association="OnlineLearnModel.ExamResult">
+      <End Role="Exam" EntitySet="Exams" />
+      <End Role="Result" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="UserResult" Association="OnlineLearnModel.UserResult">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Result" EntitySet="Results" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="ProductQuestion">
+    <End Type="OnlineLearnModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="OnlineLearnModel.Question" Role="Question" Multiplicity="*" />
+  </Association>
+  <Association Name="ProductComment">
+    <End Type="OnlineLearnModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="OnlineLearnModel.Comment" Role="Comment" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Cate_Prod">
+    <End Type="OnlineLearnModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+    <End Type="OnlineLearnModel.Product" Role="Product" Multiplicity="*" />
+  </Association>
+  <Association Name="ProductExam">
+    <End Type="OnlineLearnModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="OnlineLearnModel.Exam" Role="Exam" Multiplicity="*" />
+  </Association>
+  <Association Name="CommentUser">
+    <End Type="OnlineLearnModel.Comment" Role="Comment" Multiplicity="*" />
+    <End Type="OnlineLearnModel.User" Role="User" Multiplicity="1" />
+  </Association>
+  <Association Name="ExamResult">
+    <End Type="OnlineLearnModel.Exam" Role="Exam" Multiplicity="1" />
+    <End Type="OnlineLearnModel.Result" Role="Result" Multiplicity="*" />
+  </Association>
+  <Association Name="UserResult">
+    <End Type="OnlineLearnModel.User" Role="User" Multiplicity="1" />
+    <End Type="OnlineLearnModel.Result" Role="Result" Multiplicity="*" />
+  </Association>
+</Schema>

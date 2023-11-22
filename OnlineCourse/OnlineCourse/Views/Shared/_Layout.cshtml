@@ -1,0 +1,365 @@
+﻿@{
+    Layout = null;
+    var productcategory = (List<Model.Models.ProductCategory>)ViewBag.CategoryID;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>@ViewBag.Title</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Eduport- LMS, Education and Course Theme">
+
+    <!-- Theme CustomCSS -->
+    @RenderSection("CustomHomeCSS", required: false)
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/client/images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/tiny-slider/tiny-slider.css">
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/glightbox/css/glightbox.css">
+
+    <!-- Theme CSS -->
+    @RenderSection("Childcss", required: false)
+    <link rel="stylesheet" type="text/css" href="/assets/client/css/style.css">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N7LGGGWT1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-7N7LGGGWT1');
+    </script>
+
+    <style>
+        .navbar .nav {
+            overflow: visible;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header START -->
+    <header class="navbar-light navbar-sticky header-static">
+        <!-- Logo Nav START -->
+        <nav class="navbar navbar-expand-xl">
+            <div class="container-fluid px-3 px-xl-5">
+                <!-- Logo START -->
+                <!-- Logo END -->
+                <!-- Responsive navbar toggler -->
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </button>
+
+                <!-- Main navbar START -->
+                <div class="navbar-collapse w-100 collapse" id="navbarCollapse">
+
+                    <!-- Nav category menu START -->
+                    <ul class="navbar-nav navbar-nav-scroll me-auto">
+                        <!-- Nav item 1 Demos -->
+                        <li class="nav-item dropdown dropdown-menu-shadow-stacked">
+                            <a class="nav-link bg-primary bg-opacity-10 rounded-3 text-primary px-3 py-3 py-xl-0" href="#" id="categoryMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-ui-radios-grid me-2"></i><span>Category</span></a>
+                            <ul class="dropdown-menu" aria-labelledby="categoryMenu">
+                                @foreach (var category in productcategory)
+                                {
+                                    <li> <a class="dropdown-item" href="\khoa-hoc\@category.MetaTitle-@category.ID">@category.Name</a></li>
+                                }
+                                <li> <a class="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0" href="\khoa-hoc\tat-ca-0">Tất cả khóa học</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Nav category menu END -->
+                    <!-- Nav Main menu START -->
+                    <ul class="navbar-nav navbar-nav-scroll me-auto">
+                        <!-- Nav item 1 Demos -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown active" href="\trang-chu">Trang chủ</a>
+                        </li>
+
+                        <!-- Nav item 2 Pages -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\gioi-thieu">Tổng quan</a></li>
+                                <li> <a class="dropdown-item" href="\gioi-thieu\giang-vien">Giảng viên</a></li>
+                            </ul>
+                        </li>
+                        <!-- Nav item 2 Pages -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khóa học</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\khoa-hoc\tat-ca-0">Tất cả khóa học</a></li>
+                                @foreach (var category1 in productcategory)
+                                {
+                                    <li> <a class="dropdown-item" href="\khoa-hoc\@category1.MetaTitle-@category1.ID">@category1.Name</a></li>
+
+                                }
+
+                            </ul>
+                        </li>
+
+                        <!-- Nav item 2 Pages -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kiểm tra</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\kiem-tra\tat-ca-0">Tất cả kiểm tra</a></li>
+                                <li> <a class="dropdown-item" href="\kiem-tra\on-tap-2">Ôn tập</a></li>
+                                <li> <a class="dropdown-item" href="\kiem-tra\bai-thi-1">Thi</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sách</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\sach\tat-ca-0">Tất cả sách</a></li>
+                                <li> <a class="dropdown-item" href="\sach\cong-nghe-thong-tin-1">CNTT</a></li>
+                                <li> <a class="dropdown-item" href="\sach\kinh-te-2">Kinh tế</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin tức</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\bai-chia-se">Bài chia sẻ</a></li>
+                                <li> <a class="dropdown-item" href="\thu-vien-anh">Thư viện ảnh</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <!-- Nav Main menu END -->
+                    <!-- Nav Search START -->
+                    <div class="nav my-3 my-xl-0 px-4 flex-nowrap align-items-center">
+                        <div class="nav-item w-100">
+                            <form class="position-relative">
+                                <input class="form-control pe-5 bg-transparent" type="search" placeholder="Nhập khóa học cần tìm" aria-label="Search">
+                                <button class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Nav Search END -->
+                </div>
+                <!-- Main navbar END -->
+                <!-- Profile START -->
+                @{
+                    var user = (OnlineCourse.Common.UserLogin)HttpContext.Current.Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
+                    if (user != null)
+                    {
+                        <div class="dropdown ms-1 ms-lg-0">
+                            <a class="avatar avatar-sm p-0 " data-toggle="dropdown" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="avatar-img rounded-circle" src="@user.Image" alt="avatar">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-end shadow pt-3" aria-labelledby="profileDropdown">
+                                <!-- Profile info -->
+                                <li class="px-3">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Avatar -->
+                                        <div class="avatar me-3">
+                                            <img class="avatar-img rounded-circle shadow" src="@user.Image" alt="avatar">
+                                        </div>
+                                        <div>
+                                            <a class="h6" href="#">@user.FullName</a>
+                                            <p class="small m-0">@user.Email</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </li>
+                                <!-- Links -->
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Profile")"><i class="bi bi-person fa-fw me-2"></i>Hồ sơ cá nhân</a></li>
+                                <li><a class="dropdown-item bg-danger-soft-hover" href="@Url.Action("LogUot", "User")"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
+                                <li> <hr class="dropdown-divider"></li>
+
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="dropdown-toggle" href="~/dang-nhap">
+                            <i class="fa fa-user fa-fw"></i> Đăng nhập <b class="caret"></b>
+                        </a>
+                    }
+                }
+                <!-- Profile START -->
+            </div>
+        </nav>
+        <!-- Logo Nav END -->
+    </header>
+    <!-- Header END -->
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        @RenderBody()
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+    <!-- =======================
+    Footer START -->
+    <footer class="pt-5">
+        <div class="container">
+            <!-- Row START -->
+            <div class="row g-4">
+
+                <!-- Widget 1 START -->
+                <div class="col-lg-3">
+                    <!-- logo -->
+                    <a class="me-0" href="index.html">
+                        <img class="light-mode-item h-40px" src="/assets/client/images/logo.png" alt="logo">
+                        <img class="dark-mode-item h-40px" src="/assets/client/images/logo-light.svg" alt="logo">
+                    </a>
+                    <p class="my-3">Hệ thống đào tạo trực tuyến được phát triển trên nền tảng ASP.NET MVC</p>
+                    <!-- Social media icon -->
+                    <ul class="list-inline mb-0 mt-3">
+                        <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-facebook" href="#"><i class="fab fa-fw fa-facebook-f"></i></a> </li>
+                        <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-instagram" href="#"><i class="fab fa-fw fa-instagram"></i></a> </li>
+                        <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-twitter" href="#"><i class="fab fa-fw fa-twitter"></i></a> </li>
+                        <li class="list-inline-item"> <a class="btn btn-white btn-sm shadow px-2 text-linkedin" href="#"><i class="fab fa-fw fa-linkedin-in"></i></a> </li>
+                    </ul>
+                </div>
+                <!-- Widget 1 END -->
+                <!-- Widget 2 START -->
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <!-- Link block -->
+                        <div class="col-6 col-md-4">
+                            <h5 class="mb-2 mb-md-4">Giới thiệu</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item"><a class="nav-link" href="\gioi-thieu">Tổng quan</a></li>
+                                <li class="nav-item"><a class="nav-link" href="\giang-vien">Giảng viên</a></li>
+                                <li class="nav-item"><a class="nav-link" href="\tin-tuc-chia-se">Tin tức và chia sẻ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="\sach">Sách</a></li>
+
+                            </ul>
+                        </div>
+
+                        <!-- Link block -->
+                        <div class="col-6 col-md-4">
+                            <h5 class="mb-2 mb-md-4">Khóa học</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item"><a class="nav-link" href="\khoa-hoc\cong-nghe-thong-tin-1">CNTT</a></li>
+                                <li class="nav-item"><a class="nav-link" href="\khoa-hoc\ngoai-ngu-2">Ngoại ngữ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="\khoa-hoc\tin-hoc-van-phong-3">Tin học văn phòng</a></li>
+                                <li class="nav-item"><a class="nav-link" href="\khoa-hoc\makerting-5">Marketing</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Link block -->
+                        <div class="col-6 col-md-4">
+                            <h5 class="mb-2 mb-md-4">Bài kiểm tra</h5>
+                            <ul class="nav flex-column">
+                                <li class="nav-item"><a class="nav-link" href="#">Ôn tập</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Thi</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Widget 2 END -->
+                <!-- Widget 3 START -->
+                <div class="col-lg-3">
+                    <h5 class="mb-2 mb-md-4">Contact</h5>
+                    <!-- Time -->
+                    <p class="mb-2">
+                        Hỗ trợ:<span class="h6 fw-light ms-2">+0393574180</span>
+                        <span class="d-block small"></span>
+                    </p>
+
+                    <p class="mb-0">Email:<span class="h6 fw-light ms-2">OnlineLearning@gmail.com</span></p>
+
+                    <div class="row g-2 mt-2">
+                        <!-- Google play store button -->
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-6">
+                            <a href="#"> <img src="/assets/client/images/client/google-play.svg" alt=""> </a>
+                        </div>
+                        <!-- App store button -->
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-6">
+                            <a href="#"> <img src="/assets/client/images/client/app-store.svg" alt="app-store"> </a>
+                        </div>
+                    </div> <!-- Row END -->
+                </div>
+                <!-- Widget 3 END -->
+            </div><!-- Row END -->
+            <!-- Divider -->
+            <hr class="mt-4 mb-0">
+
+            <!-- Bottom footer -->
+            <div class="py-3">
+                <div class="container px-0">
+                    <div class="d-md-flex justify-content-between align-items-center py-3 text-center text-md-left">
+                        <!-- copyright text -->
+                        <div class="text-primary-hover"> Copyrights <a href="#" class="text-body">TV Online Learning</a>.</div>
+                        <!-- copyright links-->
+                        <div class=" mt-3 mt-md-0">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <!-- Language selector -->
+                                    <div class="dropup mt-0 text-center text-sm-end">
+                                        <a class="dropdown-toggle nav-link" href="#" role="button" id="languageSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-globe me-2"></i>Ngôn ngữ
+                                        </a>
+                                        <ul class="dropdown-menu min-w-auto" aria-labelledby="languageSwitcher">
+                                            <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2" src="/assets/client/images/flags/uk.svg" alt="">English</a></li>
+                                            <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2" src="/assets/client/images/flags/gr.svg" alt="">German </a></li>
+                                            <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2" src="/assets/client/images/flags/sp.svg" alt="">French</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="list-inline-item"><a class="nav-link" href="#">Điều khoản</a></li>
+                                <li class="list-inline-item"><a class="nav-link pe-0" href="#">Chính sách bảo mật</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- =======================
+    Footer END -->
+    <!-- Back to top -->
+    <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+
+    <script src="/assets/admin/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/admin/libs/jquery/jquery.unobtrusive-ajax.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="/assets/client/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Vendors -->
+    <script src="/assets/client/vendor/tiny-slider/tiny-slider.js"></script>
+    <script src="/assets/client/vendor/glightbox/js/glightbox.js"></script>
+    <script src="/assets/client/vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+    <script src="~/Scripts/site.js"></script>
+
+
+    <!-- Template Functions -->
+    @RenderSection("jsFooter", required: false)
+
+    <script src="/assets/client/js/functions.js"></script>
+
+
+
+    @RenderSection("CustomHomeJavaScript", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+
+ 
+</html>

@@ -1,0 +1,280 @@
+C:\Course\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll.config
+C:\Course\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\OnlineCourse.pdb
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe.config
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\csc.rsp
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe.config
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\csi.rsp
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\System.Collections.Immutable.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\System.Memory.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\System.Reflection.Metadata.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe.config
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\vbc.rsp
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe
+C:\Course\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe.config
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Model.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\System.Buffers.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\System.Numerics.Vectors.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\System.Threading.Tasks.Extensions.dll
+C:\Course\OnlineCourse\OnlineCourse\bin\Model.pdb
+C:\Course\OnlineCourse\OnlineCourse\bin\Model.dll.config
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.xml
+C:\Course\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.xml
+C:\Course\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.xml
+C:\Course\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.AssemblyReference.cache
+C:\Course\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CoreCompileInputs.cache
+C:\Course\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CopyComplete
+C:\Course\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.dll
+C:\Course\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll.config
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\OnlineCourse.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\csc.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\csi.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\System.Memory.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\vbc.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Model.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\System.Buffers.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\System.Numerics.Vectors.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Model.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Model.dll.config
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.xml
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.AssemblyReference.cache
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CoreCompileInputs.cache
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CopyComplete
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.dll
+C:\Users\HONG VINH\OneDrive\Desktop\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\OnlineCourse.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\csc.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\csi.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\System.Memory.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\vbc.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Model.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\System.Buffers.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\System.Numerics.Vectors.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Model.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Model.dll.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.AssemblyReference.cache
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CoreCompileInputs.cache
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CopyComplete
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev2\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\OnlineCourse.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\csc.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\csi.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\System.Memory.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\vbc.rsp
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Model.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\System.Buffers.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\System.Numerics.Vectors.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Model.pdb
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Model.dll.config
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.xml
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.AssemblyReference.cache
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CoreCompileInputs.cache
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CopyComplete
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.dll
+C:\Users\HONG VINH\OneDrive\Desktop\New folder\OnlineCoursev3\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.pdb
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll.config
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\OnlineCourse.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\OnlineCourse.pdb
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Model.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\System.Buffers.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\System.Numerics.Vectors.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\System.Threading.Tasks.Extensions.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Model.pdb
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Model.dll.config
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Http.Features.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.Extensions.Primitives.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\Microsoft.Net.Http.Headers.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\System.Text.Encodings.Web.xml
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.AssemblyReference.cache
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CoreCompileInputs.cache
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.csproj.CopyComplete
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\obj\Debug\OnlineCourse.pdb
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\csc.exe.config
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\csc.rsp
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\csi.exe.config
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\csi.rsp
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.Managed.Core.targets
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\System.Collections.Immutable.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\System.Memory.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\System.Reflection.Metadata.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\vbc.exe.config
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\vbc.rsp
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe
+D:\KTPM_T4\SE113-TestingSoftware\OnlineCourse\OnlineCourse\bin\roslyn\VBCSCompiler.exe.config

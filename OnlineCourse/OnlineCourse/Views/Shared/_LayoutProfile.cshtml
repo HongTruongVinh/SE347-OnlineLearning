@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from coderthemes.com/moltran/layouts/blue-horizontal/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Dec 2021 02:22:18 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Responsive bootstrap 4 admin template" name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/admin/images/logo.png">
+    <!-- Plugins css-->
+    <link href="/assets/admin/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="/assets/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+
+    @RenderSection("Css", required: false)
+</head>
+<body data-layout="horizontal">
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Navigation Bar-->
+        <header id="topnav">
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <ul class="list-unstyled topnav-menu float-right mb-0">
+                        <li class="dropdown notification-list">
+                            <!-- Mobile menu toggle-->
+                            <a class="navbar-toggle nav-link">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </li>
+                    </ul>
+                    <!-- LOGO -->
+                    <div class="logo-box">
+                        <a href="@Url.Action("Index","Home")" class="logo text-center logo-light">
+                            <span style="color:white;vertical-align:middle;font-size:x-large;">TV Online Learning</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="topbar-menu">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <ul class="navigation-menu">
+                            <li class="has-submenu">
+                                @Html.ActionLink("Thông tin cá nhân",
+                                        "Index",
+                                        "Profile"
+                                        )
+                            </li>
+                            <li class="has-submenu">
+                                @Html.ActionLink("Thành tích học tập",
+                                        "AcademicAchievement",
+                                        "Profile"
+                                        )
+                            </li>
+                            <li class="has-submenu">
+                                @Html.ActionLink("Các bài kiểm tra",
+                                        "Exam",
+                                        "Profile"
+                                        )
+                            </li>
+                            <li class="has-submenu">
+                                @Html.ActionLink("Các khóa học đã mua",
+                                        "CourseBought",
+                                        "Profile"
+                                        )
+                            </li>
+                            <li class="has-submenu">
+                                @Html.ActionLink("Giỏ hàng khóa học",
+                                        "Cart",
+                                        "Profile"
+                                        )
+                            </li>
+                            <li class="has-submenu">
+                                @Html.ActionLink("Các khóa học của tôi",
+                                        "MyCourse",
+                                        "Profile"
+                                        )
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Navigation Bar-->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <div class="content">
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+                <!-- end container-fluid -->
+            </div>
+            <!-- end content -->
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            2023 &copy; Thiết kế bởi <a href="\Admin\Home">TV Online Learning</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- END wrapper -->
+    <!-- Vendor js -->
+    <script src="/assets/admin/js/vendor.min.js"></script>
+    <script src="/assets/admin/libs/moment/moment.min.js"></script>
+    <script src="/assets/admin/libs/jquery-scrollto/jquery.scrollTo.min.js"></script>
+    <script src="/assets/admin/libs/sweetalert2/sweetalert2.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="/assets/admin/js/app.min.js"></script>
+    @RenderSection("Script", required: false)
+</body>
+</html>
