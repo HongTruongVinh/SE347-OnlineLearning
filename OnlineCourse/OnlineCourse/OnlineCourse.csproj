@@ -184,6 +184,7 @@
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagementCourseController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -323,6 +324,11 @@
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Detaill.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\ManagementCourse\Index.cshtml" />
+    <Content Include="Views\ManagementCourse\ManagementCourseDetail.cshtml" />
+    <Content Include="Views\ManagementCourse\ViewEditCourse.cshtml" />
+    <Content Include="Views\ManagementCourse\ViewAddVieoToCourse.cshtml" />
+    <Content Include="Views\ManagementCourse\AddDocumentToCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
