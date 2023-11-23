@@ -84,7 +84,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\CommentDao.cs" />
     <Compile Include="Dao\GetInforDao.cs" />
+    <Compile Include="Dao\ProductCatagoryDao.cs" />
+    <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\RoleDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Models\Comment.cs">
