@@ -183,6 +183,8 @@
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementCourseController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -329,6 +331,14 @@
     <Content Include="Views\ManagementCourse\ViewEditCourse.cshtml" />
     <Content Include="Views\ManagementCourse\ViewAddVieoToCourse.cshtml" />
     <Content Include="Views\ManagementCourse\AddDocumentToCourse.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\ProfileUser.cshtml" />
+    <Content Include="Views\Profile\AcademicAchievement.cshtml" />
+    <Content Include="Views\Profile\Exam.cshtml" />
+    <Content Include="Views\Profile\CourseBought.cshtml" />
+    <Content Include="Views\Profile\Cart.cshtml" />
+    <Content Include="Views\Profile\MyCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
