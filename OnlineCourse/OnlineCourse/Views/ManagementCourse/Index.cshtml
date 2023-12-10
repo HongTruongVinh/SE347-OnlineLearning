@@ -1,1 +1,74 @@
 ﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+
+    var products = (List<OnlineCourse.Models.ProductModel>)ViewBag.MyProducts;
+
+
+}
+
+<div class="card">
+    <div class="card-header">
+        <table style="width:100%;">
+            <tr>
+                <td>
+                    <h3 class="card-title">Hãy tạo khóa học của bạn</h3>
+                </td>
+                <td style="text-align:right;">
+                    @Html.ActionLink("Tạo khóa học", // <-- Link text
+                                                                    "ViewEditCourse", // <-- Action Method Name
+                                                                    "ManagementCourse",
+                                                                        new { productId = -1 },
+                                                                        new { @class = "btn btn-primary waves-effect waves-light" }// <-- Route value
+                                                                    )
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<hr />
+
+<div class="col-lg-12 mb-4 mb-sm-5">
+    <div class="card card-style1 border-0">
+        <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+            @{
+                if (products.Count != 0)
+                {
+                    foreach (var product in products)
+                    {
+                        <div class="row p-2 bg-white border rounded mt-2" id="@product.ID">
+                            <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="@product.Image"></div>
+                            <div class="col-md-6 mt-1">
+                                <h5>
+                                    @Html.ActionLink(product.Name, // <-- Link text
+                                                                    "ManagementCourseDetail", // <-- Action Method Name
+                                                                    "ManagementCourse",
+                                                                        new { productId = @product.ID },
+                                                                        new { @class = "" }// <-- Route value
+                                                                    )
+                                </h5>
+                                <div class="d-flex flex-row">
+                                    <div class="fas fa-user-graduate text-orange me-2">
+
+                                    </div>
+                                    <span>@product.CountLearner học viên</span>
+                                </div>
+                                <div class="mt-1 mb-1 spec-1"><span>@product.CreateBy </span></div>
+                                <div class="mt-1 mb-1 spec-1"><span>Cập nhật mới nhất: @product.ModifiDate</span></div>
+                                <p class="text-justify text-truncate para mb-0">@product.Description<br><br></p>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <span>Bạn chưa tạo khóa học nào!</span>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
