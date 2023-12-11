@@ -95,5 +95,143 @@ namespace Model.Dao
             return DataProvider.Ins.DB.Products.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
         }
 
+        public List<Product> ListByCategoryID(string searchString, long CategoryID, int page, int itemPerPage)
+        {
+            if (page < 1) page = 1;
+            IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
+            if (CategoryID == 0)
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    return model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                }
+                else
+                {
+                    return model.Where(x => (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                }
+
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    return model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status && x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                }
+                else
+                {
+                    return model.Where(x => (bool)x.Status && x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                }
+            }
+
+
+        }
+
+        public int CountByCategoryID(string searchString, long CategoryID)
+        {
+            IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
+            if (CategoryID == 0)
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    return model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status).Count();
+                }
+                else
+                {
+                    return model.Where(x => (bool)x.Status).Count();
+                }
+
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    return model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status && x.CategoryID == CategoryID).Count();
+                }
+                else
+                {
+                    return model.Where(x => (bool)x.Status && x.CategoryID == CategoryID).Count();
+                }
+            }
+        }
+
+        public User GetCreatedByUser(int userId)
+        {
+            User user = DataProvider.Ins.DB.Users.Where(x => x.ID.Equals(userId)).FirstOrDefault();
+            return user;
+        }
+
+        public int GetCountComment(long productId)
+        {
+            return DataProvider.Ins.DB.Comments.Where(x => x.ProductID == productId).ToList().Count();
+        }
+
+        public int GetCountLearner(long productId)
+        {
+            return DataProvider.Ins.DB.WishProducts.Where(x => x.ProductID == productId).ToList().Count();
+        }
+
+        public bool BuyProduct(int userId, int productId)
+        {
+            bool result = false;
+            try
+            {
+                DataProvider.Ins.DB.WishProducts.Where(x => x.ProductID == productId && x.UserID == userId).SingleOrDefault().IsBought = true;
+                DataProvider.Ins.DB.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return result;
+            }
+        }
+
+        public bool AddProductToCart(int userId, int productId)
+        {
+            try
+            {
+                WishProduct wishProduct = new WishProduct() { ProductID = productId, UserID = userId, IsBought = false };
+                DataProvider.Ins.DB.WishProducts.Add(wishProduct);
+                DataProvider.Ins.DB.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteProductFromCart(int userId, int productId)
+        {
+            try
+            {
+                WishProduct wishProduct = DataProvider.Ins.DB.WishProducts.Where(x => x.ProductID == productId && x.UserID == userId).SingleOrDefault();
+                DataProvider.Ins.DB.WishProducts.Remove(wishProduct);
+                DataProvider.Ins.DB.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
+        public Dictionary<string, bool> GetWishListProduct(int userId)
+        {
+            Dictionary<string, bool> lisId = new Dictionary<string, bool>();
+            foreach (var item in DataProvider.Ins.DB.WishProducts.Where(x => x.UserID == userId))
+            {
+                if (item.IsBought == true)
+                {
+                    lisId.Add(item.ProductID.ToString(), true);
+                }
+                else
+                {
+                    lisId.Add(item.ProductID.ToString(), false);
+                }
+            }
+            return lisId;
+        }
     }
 }
