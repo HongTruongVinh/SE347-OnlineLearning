@@ -1,1 +1,343 @@
-﻿
+﻿@model Model.Models.Exam
+
+@{
+    ViewBag.Title = "Bài ôn tập - kiểm tra";
+    Layout = "~/Views/Shared/_LayoutExam.cshtml";
+    var examquestion = (List<Model.Models.Question>)ViewBag.ExamQuestion;
+    var result = (Model.Models.Result)ViewBag.Result;
+}
+@section Childcss
+{
+    <link href="/assets/client/css/quiz.css" rel="stylesheet" />
+    <style>
+        .circle {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .circleblue {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 10px;
+            background-color: #325d81;
+        }
+
+        .circlelist {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 2px;
+
+        }
+
+        .circlelistblue {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 2px;
+            background-color: blue;
+        }
+    </style>
+}
+<div style="text-align:center;width:70%;padding-left:30%;padding-top:30px;" id="div_startquiz">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header" style="background-color:lightblue;">
+            <div style="float:left;width:10%">
+                <a href="\trang-chu"><img src="~/assets/client/images/logo.png" /> </a>
+
+            </div>
+            <div style="float:right;width:90%;margin-top:4px;">
+                <h5 class="my-0 font-weight-normal">@Model.Name</h5>
+            </div>
+        </div>
+        <div class="card-body" style="text-align:center;">
+            <p style="color:red;">Bài ôn tập</p>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Bạn có <b style="font-size:17pt;color:blue;">@Model.Time</b> phút để trả lời
+                    <b style="font-size:17pt;color:blue;">@Model.TotalQuestion</b> câu hỏi.
+                </li>
+                <li>
+                    Mã số nhân viên <b style="font-size:17pt;color:blue;">@ViewBag.Msnv</b>
+
+                </li>
+
+            </ul>
+            @if (result != null)
+            {
+                <input type="button" disabled="disabled" value="Bạn đã hoàn thành bài kiểm tra"
+                    class="btn btn-lg btn-block btn-active-icon-success" id="btnExit" />
+                <br />
+
+                <a href="/lich-su-kiem-tra"></a>
+
+            }
+            else
+            {
+                <input type="submit" value="Vào làm bài" data-examid="@Model.ID" data-userid="@ViewBag.UserID"
+                    id="btnStartQuiz" class="btn btn-lg btn-block btn-success" />
+                <br />
+
+                <a href="/lich-su-kiem-tra"></a>
+            }
+        </div>
+
+    </div>
+
+
+</div>
+<main class="main-page-content main-top-gape-papexam" style="font-size:12px">
+    <section class="cart-main-sec pb-8">
+        <div class="container" style="display:none;" id="div_container">
+            <div class="cart-main-content d-flex flex-wrap flex-lg-nowrap justify-content-between">
+                <ul class="cart-course-list w-100">
+                    <li>
+                        <h5 class="text-center" style="border: 1px solid #dee2e6 !important; padding:10px;">
+                            <b>@Model.Name</b></h5>
+
+                    </li>
+                    @{
+                        var i = 0;
+                        string[] arrListQuestion = null;
+                        var abc = "";
+                    }
+                    @foreach (var item in examquestion)
+                    {
+                        arrListQuestion = item.Content.Replace("**", "*").Split('*');
+                        i++;
+                        <li class="col-md-12" style="border: 1px solid #dee2e6 !important; padding: 10px;">
+                            <h4>Câu hỏi @i.ToString()</h4>
+                        </li>
+                        <li
+                            class="cart-course-item border p-3 bg-white d-flex align-items-center justify-content-between flex-md-nowrap">
+                            <div class="cart-course-info d-flex align-items-center flex-wrap flex-sm-nowrap">
+                                <div class="cart-course-txt ms-sm-4 mt-sm-0 mt-3">
+                                    <h5 class="card-title mb-4" style="color:#325d81"><b>@Html.Raw(item.Name)</b></h5>
+                                    @for (int k = 0; k < arrListQuestion.Length; k++)
+                                    {
+                                        if (k == 0)
+                                        {
+                                            abc = "A";
+                                        }
+                                        if (k == 1)
+                                        {
+                                            abc = "B";
+                                        }
+                                        if (k == 2)
+                                        {
+                                            abc = "C";
+                                        }
+                                        if (k == 3)
+                                        {
+                                            abc = "D";
+                                        }
+                                        if (k == 4)
+                                        {
+                                            abc = "E";
+                                        }
+                                        <button class="remove-cart-course" data-bid="@i@abc" id="btnAddOption">
+                                            <span class="card-title d-block mb-2">
+                                                <a class="btn slide-btn circle" style="border:1px;" data-id="@i@abc">
+                                                    @abc</a> @arrListQuestion[k].ToString()
+
+                                            </span>
+
+                                        </button>
+
+                                        <br />
+                                    }
+
+                                </div>
+
+
+                            </div>
+
+
+                        </li>
+                    }
+
+                    <li class="col-md-12" style="border:1px solid #dee2e6 !important;padding:10px;">
+                        <h4>PHẦN THI TỰ LUẬN</h4>
+                        @Html.Raw(@Model.QuestionEssay)
+                    </li>
+                    <li
+                        class="cart-course-item border p-3 bg-white d-flex align-items-center justify-content-between flex-wrap flex-md-wrap">
+                        @Html.TextAreaFor(model => model.QuestionEssay, new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class =
+                                 "form-control"
+                                },
+                                id = "txtContent"
+                            })
+
+                    </li>
+
+                </ul>
+                <div class="check-out-crd p-lg-4 p-sm-5 p-4 mt-5 ms-lg-3 mt-lg-0 col-md-2"
+                    style="border-style:solid;border-width:1px;border-color:blueviolet;">
+                    <div style="position:fixed;">
+                        @for (int z = 1; z <= examquestion.Count; z++)
+                        {
+                            var listid = "cauhoi" + z.ToString();
+                            if (z % 4 == 0)
+                            {
+                                <a class="btn slide-btn-list circlelist" id="@listid" data-list="@z">@z</a>
+
+                                <br />
+                            }
+                            else
+                            {
+                                <a class="btn slide-btn-list circlelist" id="@listid" data-list="@z">@z</a>
+                            }
+                        }
+                        <hr />
+                        <h3 class="card-title" style="text-align:center;visibility:visible;">
+                            <p style="font-size:12pt;color:#325d81;"><b>Thời gian còn lại</b></p>
+                            <span id="timer" class="timer timer-fixed">@Model.Time : 00</span>
+
+                        </h3>
+                        <hr />
+                        <p style="font-size:12pt;color:#325d81;">
+                            Số câu : <b>@Model.TotalQuestion</b>
+                            <br /> Thời gian : <b>@Model.Time phút</b>
+                            <br /> MSNV : <b>@ViewBag.Msnv</b>
+
+                        </p>
+                        <hr />
+                        <div class="cart-totale-price mt-3 mb-4 d-flex align-items-center justify-content-between"
+                            style="text-align:center;">
+                            <button data-resultessay="@Model.QuestionEssay" data-examfinishid="@Model.ID"
+                                data-userfinishid="@ViewBag.UserID" class="btn btn-primary w-100" id="btnFinish"
+                                type="button">Nộp bài</button>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+@section jsFooter
+{
+    <script src="/assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/assets/admin/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="/assets/client/vendor/bootstrap/bootbox.min.js"></script>
+    <script src="/assets/client/controller/examController.js"></script>
+
+    <script>
+        var editor = CKEDITOR.replace('txtContent', { customConfig: '/assets/admin/js/plugins/ckeditor/config.js', });
+        var min = @Model.Time;
+        var sec = 00;
+
+        function countdown() {
+            cdID = setInterval(function () {
+                if (sec == 0) {
+                    min--;
+                    sec = 60;
+                }
+                sec--;
+                if (min < 10) {
+                    $('#timer').css('color', 'red');
+                    min_text = '0' + min;
+                }
+                else {
+                    min_text = min;
+                }
+                if (sec < 10)
+                    sec_text = '0' + sec;
+                else
+                    sec_text = sec;
+                $('#timer').text(min_text + ' : ' + sec_text);
+                if (min < 0) {
+                    document.getElementById("btnFinish").click();
+                }
+
+            }, 1000);
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".remove-cart-course").each(function () {
+                $(this).on("click", function () {
+                    var bid = $(this).data('bid');
+                    AddOptionIntoList(bid);
+                    CheckListQuestion(bid);
+                });
+            });
+            $("#btnFinish").click(function () {
+                GetResult();
+                document.getElementById("btnFinish").disabled = true;
+                document.getElementById("btnFinish").textContent = "Đã nộp bài";
+                $('#timer').text("00 : 00");
+                clearInterval(cdID);
+
+
+            }
+            );
+            $("#btnStartQuiz").click(function () {
+                go_full_screen();
+                countdown();
+                document.getElementById("div_startquiz").style.display = 'none';
+                document.getElementById("div_container").style.display = 'block';
+
+            });
+
+        });
+        function AddOptionIntoList(bid) {
+            $('button span a').each(function () {
+                if ($(this).data('id') == bid) {
+                    $(this).removeClass("btn slide-btn circle");
+                    $(this).removeClass("btn slide-btn circleblue");
+                    $(this).addClass("btn slide-btn circleblue");
+                }
+                else {
+                    var a = $(this).data('id');
+                    if (a.substring(0, a.length - 1) == bid.substring(0, bid.length - 1)) {
+                        $(this).removeClass("btn slide-btn circleblue");
+                        $(this).removeClass("btn slide-btn circl");
+                        $(this).addClass("btn slide-btn circle");
+                    }
+                }
+            });
+        }
+        function CheckListQuestion(bid) {
+            var bien = "#cauhoi" + bid.substring(0, bid.length - 1);
+            $(bien).removeClass("btn slide-btn-list circlelist");
+            $(bien).removeClass("btn slide-btn-list circlelistblue");
+            $(bien).addClass("btn slide-btn-list circlelistblue");
+        }
+        function GetResult() {
+            bootbox.alert({
+                message: "Chúc mừng anh/ chị đã hoàn thành bài. Kết quả sẽ được thông báo tại mục Cá nhân trong thời gian sớm nhất<br>",
+                size: 'medium',
+                closeButton: false,
+            });
+
+        }
+        function go_full_screen() {
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            }
+            else
+                if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen;
+                }
+                else if (elem.mozRequestFullscreen) {
+                    elem.mozRequestFullscreen;
+                }
+                else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen;
+                }
+
+        }
+
+    </script>
+}
