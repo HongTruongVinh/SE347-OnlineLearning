@@ -1,0 +1,13 @@
+﻿@model OnlineCourse.Common.UserLogin
+
+@{
+    Layout = null;
+
+    var homeInfor = (Model.Dao.HomeInfor)ViewBag.HomeInfor;
+
+    Dictionary<string, string> listResultExamOfUser = ViewBag.ListResultExam;
+
+    List<OnlineCourse.Models.ProductModel> cartProducts = (List<OnlineCourse.Models.ProductModel>)ViewBag.CartProducts;
+
+    List<OnlineCourse.Models.ProductModel> ListOwnProducts = (List<OnlineCourse.Models.ProductModel>)ViewBag.ListOwnProducts;
+}

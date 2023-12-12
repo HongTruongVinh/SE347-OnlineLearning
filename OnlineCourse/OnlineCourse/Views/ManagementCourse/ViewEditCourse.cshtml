@@ -1,1 +1,115 @@
 ﻿
+@model Model.Models.Product
+
+
+@{
+    ViewBag.Title = "ViewEditCourse";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+
+@{
+
+    var Categories = (List<Model.Models.ProductCategory>)ViewBag.ListCategories;
+
+    List<SelectListItem> listCategories = new List<SelectListItem>();
+
+    foreach (var category in Categories)
+    {
+        listCategories.Add(new SelectListItem
+        {
+            Text = category.Name,
+            Value = category.ID.ToString()
+        });
+    }
+
+
+
+}
+
+<div>
+    <div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật thông tin khóa học của bạn</h5>
+
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UpdateCourse", "ManagementCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.ID, new { @class = "form-control", type = "text", style = "display:none" })
+                                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Loại khóa học</label>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.CategoryID, listCategories, "-- Select Status --")
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Tên khóa học</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", type = "text" }, @disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Mô tả ngắn</label>
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", type = "text" }, rows = 2, cols = 100 })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Mô tả chi tiết</label>
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control", type = "text" }, rows = 5, cols = 100 })
+                                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Giá </label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", type = "text" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Ảnh bìa</label>
+                            <div class="col-md-10">
+
+                                <input type="file" id="imageFile" name="imageFile" class="btn btn-info" />
+
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group " style="text-align:right;">
+                            <a id="save" class="abclaice ">
+                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+

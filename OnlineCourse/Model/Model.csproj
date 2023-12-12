@@ -89,6 +89,8 @@
     <Compile Include="Dao\CourseVideoDao.cs" />
     <Compile Include="Dao\ExamDao.cs" />
     <Compile Include="Dao\GetInforDao.cs" />
+    <Compile Include="Dao\ManagementCourseDao.cs" />
+    <Compile Include="Dao\OwnProductDao.cs" />
     <Compile Include="Dao\ProductCatagoryDao.cs" />
     <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\RoleDao.cs" />

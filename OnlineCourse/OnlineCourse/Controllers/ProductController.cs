@@ -22,35 +22,128 @@ namespace OnlineCourse.Controllers
         }
         public ActionResult Category(string searchString, long cateId)
         {
-            return View();
+            countPages = (int)Math.Ceiling((double)new ProductDao().CountByCategoryID(searchString, cateId) / ITEMS_PER_PAGE);
+
+            if (currentPage < 1)
+            {
+                currentPage = 1;
+            }
+            if (currentPage > countPages)
+            {
+                currentPage = countPages;
+            }
+
+            ViewBag.currentPage = currentPage;
+            ViewBag.countPages = countPages;
+
+            var category = new ProductCategoryDao().ViewDetail(cateId);
+            ViewBag.Category = category;
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+            var model = new ProductDao().ListByCategoryID(searchString, cateId, currentPage, ITEMS_PER_PAGE);
+
+            return View(model);
         }
 
         public ActionResult Detaill(long id, long detailid)
         {
-            return View();
+            var product = new ProductDao().ViewDetail(id);
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
+            var sessionUser = (UserLogin)Session[CommonConstants.USER_SESSION];
+            ViewBag.UserID = sessionUser.UserID;
+            ViewBag.ListComment = new CommentDao().ListCommentViewModel(0, id);
+
+            ViewBag.DetailID = detailid.ToString();
+
+            int createrID = (int)Convert.ToDouble(product.CreateBy);
+            ViewBag.CreatedBy = new ProductDao().GetCreatedByUser(createrID);
+
+            return View(product);
         }
 
         public ActionResult Detail(int productId, int playingIdVideo)
         {
-            return View();
+            var product = new ProductDao().ViewDetail(productId);
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
+            var sessionUser = (UserLogin)Session[CommonConstants.USER_SESSION];
+            ViewBag.UserID = sessionUser.UserID;
+            ViewBag.ListComment = new CommentDao().ListCommentViewModel(0, productId);
+
+            ViewBag.isProductOfUserSession = new ProductDao().IsProductOfUserSession(productId, (int)sessionUser.UserID);
+
+            int createrID = (int)Convert.ToDouble(product.CreateBy);
+            ViewBag.CreatedBy = new ProductDao().GetCreatedByUser(createrID);
+
+            List<CourseVideo> productVideos = new CourseVideoDao().GetListVideoInfor(productId);
+            ViewBag.productVideos = productVideos;
+
+            ViewBag.productDocuments = new CourseDocumentDao().GetListDocumentInfor(productId);
+
+            if (playingIdVideo == -1 && productVideos.Count > 0)
+            {
+                playingIdVideo = new CourseVideoDao().GetListVideoInfor(productId).OrderByDescending(o => o.DateUpdate).ToList().FirstOrDefault().ID;
+            }
+
+            ViewBag.playingVideo = new CourseVideoDao().GetVideo(playingIdVideo);
+
+            return View(product);
         }
 
         [ChildActionOnly]
         public ActionResult _ChildComment(long parentid, long productid)
         {
-            return PartialView("~/Views/Shared/_ChildComment.cshtml");
+            var data = new CommentDao().ListCommentViewModel(parentid, productid);
+            var sessionuser = (UserLogin)Session[CommonConstants.USER_SESSION];
+            for (int k = 0; k < data.Count; k++)
+            {
+                data[k].UserID = sessionuser.UserID;
+            }
+            return PartialView("~/Views/Shared/_ChildComment.cshtml", data);
         }
         [HttpPost]
         public JsonResult AddNewComment(long productid, long userid, long parentid, string commentmsg, string rate)
         {
-            return Json(new
+            try
             {
-                status = true
-            });
+                var dao = new CommentDao();
+                Comment comment = new Comment();
+
+                comment.CommentMsg = commentmsg;
+                comment.ProductID = productid;
+                comment.UserID = userid;
+                comment.ParentID = parentid;
+                comment.Rate = Convert.ToInt16(rate);
+                comment.CommentDate = DateTime.Now;
+
+                bool addcomment = dao.Insert(comment);
+                if (addcomment == true)
+                {
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        status = false
+                    });
+                }
+            }
+            catch
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
         }
         public ActionResult GetComment(long productid)
         {
-            return PartialView("~/Views/Shared/_ChildComment.cshtml");
+            var data = new CommentDao().ListCommentViewModel(0, productid);
+            return PartialView("~/Views/Shared/_ChildComment.cshtml", data);
         }
 
         public FileResult LearnerDownloadDocument(string link)
