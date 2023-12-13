@@ -13,15 +13,13 @@ namespace Model.Dao
 
         public HomeInfor GetHomeInfor()
         {
-            return new HomeInfor()
-            {
-                CountProduct = DataProvider.Ins.DB.Products.Count(),
+            return new HomeInfor() { 
+                CountProduct = DataProvider.Ins.DB.Products.Count(), 
                 CountStudent = DataProvider.Ins.DB.WishProducts.Where(x => x.IsBought == true).GroupBy(x => x.UserID).Count(), //user are students
                 CountTeacher = DataProvider.Ins.DB.Products.GroupBy(x => x.CreateBy).Count(), //user are teachers
                 CountCertification = new Random().Next(DataProvider.Ins.DB.Products.Count())
             };
         }
-
 
         public HomeDashboardInfor GetHomeDashboardInfor()
         {

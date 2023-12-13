@@ -22,6 +22,7 @@ namespace OnlineCourse.Controllers
         }
         public ActionResult Category(string searchString, long cateId)
         {
+
             countPages = (int)Math.Ceiling((double)new ProductDao().CountByCategoryID(searchString, cateId) / ITEMS_PER_PAGE);
 
             if (currentPage < 1)

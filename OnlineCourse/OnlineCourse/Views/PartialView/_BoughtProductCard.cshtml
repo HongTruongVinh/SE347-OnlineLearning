@@ -1,0 +1,33 @@
+﻿@{
+    List<OnlineCourse.Models.ProductModel> ListOwnProducts = (List<OnlineCourse.Models.ProductModel>)ViewBag.ListOwnProducts;
+}
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+
+            @foreach (var product in ListOwnProducts)
+            {
+                var url = "/chi-tiet/" + product.MetaTitle + "-" + product.ID + "-1";
+
+                <div class="row p-2 bg-white border rounded mt-2">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="@product.Image"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5><a href="@url">@product.Name</a></h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>@product.CountVideo video</span>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span>@product.CreateBy </span></div>
+                        <div class="mt-1 mb-1 spec-1"><span>Cập nhật mới nhất: @product.ModifiDate</span></div>
+                        <p class="text-justify text-truncate para mb-0">@product.Description<br><br></p>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<hr />

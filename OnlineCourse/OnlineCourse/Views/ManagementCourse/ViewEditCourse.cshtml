@@ -1,5 +1,4 @@
-﻿
-@model Model.Models.Product
+﻿@model Model.Models.Product
 
 
 @{
@@ -23,11 +22,11 @@
     }
 
 
-
+    
 }
 
-<div>
-    <div>
+<div >
+    <div >
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Cập nhật thông tin khóa học của bạn</h5>
@@ -89,7 +88,7 @@
                             <label class="control-label col-md-2">Ảnh bìa</label>
                             <div class="col-md-10">
 
-                                <input type="file" id="imageFile" name="imageFile" class="btn btn-info" />
+                                <input type="file" id="imageFile" name="imageFile" class="btn btn-info"/>
 
                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                             </div>
@@ -101,7 +100,7 @@
                             <a id="save" class="abclaice ">
                                 <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
                             </a>
-
+                            
                         </div>
 
                     </div>

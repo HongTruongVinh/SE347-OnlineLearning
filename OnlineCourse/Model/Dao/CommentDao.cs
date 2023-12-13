@@ -11,10 +11,10 @@ namespace Model.Dao
 {
     public class CommentDao
     {
-
+        
         public CommentDao()
         {
-
+            
         }
         public bool Insert(Comment entity)
         {
@@ -26,7 +26,6 @@ namespace Model.Dao
         {
             return DataProvider.Ins.DB.Comments.Where(x => x.ParentID == parentId && x.ProductID == productId).ToList();
         }
-
         public List<CommentViewModel> ListCommentViewModel(long parentId, long productId)
         {
             var model = (from a in DataProvider.Ins.DB.Comments
@@ -46,16 +45,16 @@ namespace Model.Dao
                              Rate = a.Rate,
                              LinkAvatar = b.LinkImage
                          }).AsEnumerable().Select(x => new CommentViewModel()
-                         {
-                             ID = x.ID,
-                             CommentMsg = x.CommentMsg,
-                             CommentDate = x.CommentDate,
-                             ProductID = (long)x.ProductID,
-                             UserID = (long)x.UserID,
-                             FullName = x.FullName,
-                             ParentID = (long)x.ParentID,
-                             Rate = (int)x.Rate,
-                             LinkAvatar = x.LinkAvatar
+                            {
+                                ID = x.ID,
+                                CommentMsg = x.CommentMsg,
+                                CommentDate = x.CommentDate,
+                                ProductID = (long)x.ProductID,
+                                UserID = (long)x.UserID,
+                                FullName = x.FullName,
+                                ParentID = (long)x.ParentID,
+                                Rate = (int)x.Rate,
+                                LinkAvatar = x.LinkAvatar
                          });
             return model.OrderByDescending(y => y.ID).ToList();
         }

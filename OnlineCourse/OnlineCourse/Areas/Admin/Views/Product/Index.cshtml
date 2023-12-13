@@ -1,0 +1,389 @@
+﻿@model PagedList.IPagedList<Model.Models.Product>
+
+@{
+    ViewBag.Title = "Quản trị khóa học";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var productcategory = (List<Model.Models.ProductCategory>)ViewBag.CategoryID;
+    var dropdownid = (String)ViewBag.DropDownID;
+}
+@section Childcss
+{
+    <link href="/assets/admin/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/libs/datatables/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <table style="width:100%;">
+                    <tr>
+                        <td>
+                            <h3 class="card-title">Danh sách khóa học</h3>
+                        </td>
+                        <td>
+                            <select class="form-control" id="categoryDropDownList">
+                                <option value="-1" selected="selected">Tất cả</option>
+                                @foreach (var category in productcategory)
+                                {
+                                    if (@category.ID == Convert.ToInt16(dropdownid))
+                                    {
+                                        <option value="@category.ID" selected="selected">@category.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@category.ID">@category.Name</option>
+
+                                    }
+
+                                }
+                            </select>
+
+                        </td>
+                        <td style="text-align:right;">
+
+                            <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg">Thêm mới</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-12">
+                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên khóa học</th>
+                                    <th>Thể loại</th>
+                                    @*<th>Trạng thái</th>*@
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="row_@item.ID">
+                                        <td>@item.ID</td>
+                                        <td><img src="@item.Image" style="width:50px;height:30px" /> </td>
+                                        <td>@item.Name</td>
+                                        <td>
+                                            @foreach (var itemcate in productcategory)
+                                            {
+                                                if (itemcate.ID == @item.CategoryID)
+                                                {
+                                                    @itemcate.Name;
+                                                }
+                                            }
+                                        </td>
+
+
+                                        @*<td><a href="#" class="badge bg-info">@Html.Raw(@item.Status ? "<strong>Kích hoạt</strong>" : "<font style='color:red;'>Khóa</font>")</a></td>*@
+                                        <td style="text-align:center;width:15px;vertical-align:middle;">
+
+                                            @Ajax.ActionLink("Xóa khóa học", "Delete", new { @id = item.ID }, new AjaxOptions
+                                         {
+                                             Confirm = "Bạn có muốn xóa không ?",
+                                             OnComplete = "$('#row_" + item.ID + "').remove()",
+                                             HttpMethod = "Delete"
+                                         }, new
+                                         {
+                                             @class = "badge badge-danger"
+                                         })
+
+                                        </td>
+                                        <td style="width:10px;">
+                                            <a class="badgebtnlink" href="#" id="alert_@item.ID" role="button" data-toggle="modal" data-target="#product-edit-@item.ID">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <div id="product-edit-@item.ID" class="modal fade bs-example-modal-lg-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="myLargeModalLabel">Màn hình cập nhật khóa học</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="field-1" class="control-label">Tên khóa học</label>
+                                                                        <input type="text" class="form-control" value="@item.Name" id="e_name_@item.ID" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label for="field-2" class="control-label">Mã khóa học</label>
+                                                                        <input type="text" class="form-control" value="@item.Code" id="e_code__@item.ID" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label for="field-2" class="control-label">Tên thể hiện</label>
+                                                                        <input type="text" class="form-control" value="@item.MetaTitle" id="e_metatitle__@item.ID" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group no-margin">
+                                                                        <label for="field-7" class="control-label">Diễn giải ngắn gọn</label>
+                                                                        <input type="text" class="form-control" value="@item.Description" id="e_description_@item.ID" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="field-1" class="control-label">Thể loại</label>
+                                                                        <select class="form-control" id="ddlCategory_@item.ID" placeholder="---Chọn thể loại---">
+                                                                            @foreach (var item1 in productcategory)
+                                                                            {
+                                                                                if (item1.ID == @item.CategoryID)
+                                                                                {
+                                                                                    <option value="@item1.ID" selected="selected">@item1.Name</option>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <option value="@item1.ID">@item1.Name</option>
+                                                                                }
+
+
+                                                                            }
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="field-2" class="control-label">Ảnh đại diện</label><input type="text" class="form-control" id="e_image" hidden="hidden">
+                                                                        <input type="text" class="form-control" id="e_image_@item.ID" value="@item.Image" placeholder="">
+                                                                        &nbsp;<a class="xyzpopup" id="btnSelectImageEdit" href="#">Chọn ảnh khác</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group no-margin">
+                                                                        <label for="field-7" class="control-label">List loại file (0 video,1 là pdf)</label>
+                                                                        <input type="text" class="form-control" value="@item.ListType" id="e_listtype_@item.ID">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group no-margin">
+                                                                        <label for="field-7" class="control-label">List tên file</label>
+                                                                        <input type="text" class="form-control" value="@item.ListFile" id="e_listfile_@item.ID">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group no-margin">
+                                                                        <a class="editabcdef" data-detailedit="@item.Detail">
+                                                                            <input type="submit" class="btn btn-outline-info" data-toggle="modal" data-target=".editnoidung" value="Cập nhật nội dung chi tiết">
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Thoát</button>
+                                                            <a class="abclaice" data-listid="@item.ID" data-name="e_name_@item.ID" data-code="e_code__@item.ID" data-metatitle="e_metatitle__@item.ID"
+                                                               data-description="e_description_@item.ID" data-detailedit="e_detail_@item.ID" data-categoryid="ddlCategory_@item.ID" data-image="e_image_@item.ID"
+                                                               data-listtype="e_listtype_@item.ID" data-listfile="e_listfile_@item.ID">
+                                                                <input type="submit" id="btnUpdateProduct" class="btn btn-info waves-effect waves-light" value="Cập nhật" />
+                                                            </a>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ClientScript
+{
+    <script src="/assets/admin/libs/bootstrap/js/bootbox.min.js"></script>
+
+    //Chay Ajax
+    <script src="/assets/admin/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/admin/libs/jquery/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/assets/admin/libs/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="/assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/assets/admin/js/plugins/ckfinder/ckfinder.js"></script>
+
+    <script>
+
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#m_image').val(url);
+            };
+            finder.popup();
+        })
+        $('.xyzpopup').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#e_image').val(url);
+            };
+            finder.popup();
+        })
+
+        var ckEditor = CKEDITOR.replace('m_detail', {
+            customConfig: '/assets/admin/js/plugins/ckeditor/config.js',
+        });
+        var ckEditor1 = CKEDITOR.replace('m_detailedit', {
+            customConfig: '/assets/admin/js/plugins/ckeditor/config.js',
+        });
+    </script>
+
+
+    <script src="/assets/admin/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="/assets/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/admin/libs/jszip/jszip.min.js"></script>
+    <script src="/assets/admin/libs/pdfmake/pdfmake.min.js"></script>
+    <script src="/assets/admin/libs/pdfmake/vfs_fonts.js"></script>
+    @*<script src="/assets/admin/libs/datatables/buttons.html5.min.js"></script>*@
+    <script src="/assets/admin/libs/datatables/buttons.print.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.scroller.min.js"></script>
+    <!-- Datatables init -->
+    <script src="/assets/admin/js/pages/datatables.init.js"></script>
+    <script src="/assets/admin/controller/productController.js"></script>
+}
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Màn hình thêm khóa học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Tên khóa học</label>
+                            <input type="text" class="form-control" id="m_name" placeholder="Tên khóa học">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Mã khóa học</label>
+                            <input type="text" class="form-control" id="m_code" placeholder="Mã khóa học">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Tên thể hiện</label>
+                            <input type="text" class="form-control" id="m_metatitle" placeholder="Tên thể hiện">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">Diễn giải ngắn gọn</label>
+                            <input type="text" class="form-control" id="m_description" placeholder="Diễn giải">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Thể loại</label>
+                            <select class="form-control" id="ddlCategory" placeholder="---Chọn thể loại---">
+                                @foreach (var item in productcategory)
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Ảnh đại diện</label>
+                            <input type="text" class="form-control" id="m_image" placeholder="Hình ảnh">
+                            &nbsp;<a id="btnSelectImage" href="#">Chọn ảnh</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">Nội dung khóa học</label>
+                            <input type="text" class="form-control" id="m_detail" placeholder="Nội dung khóa học">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">List loại file (0 video,1 là pdf)</label>
+                            <input type="text" class="form-control" id="m_listtype">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">List tên file</label>
+                            <input type="text" class="form-control" id="m_listfile">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Thoát</button>
+                <button type="button" id="btnAddNew" class="btn btn-info waves-effect waves-light">Tạo mới</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade editnoidung" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Cập nhật nội dung khóa học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <label for="field-7" class="control-label">Nội dung khóa học</label>
+                <input type="text" class="form-control" id="m_detailedit" placeholder="">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+

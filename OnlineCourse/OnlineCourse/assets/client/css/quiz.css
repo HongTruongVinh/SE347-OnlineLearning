@@ -1,0 +1,183 @@
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/** spacing **/
+.pt-8, .py-8 {
+  padding-top: 80px;
+}
+
+.pb-8, .py-8 {
+  padding-bottom: 80px;
+}
+
+.mt-8, .my-8 {
+  margin-top: 80px;
+}
+
+.mb-8, .my-8 {
+  margin-bottom: 80px;
+}
+.categories-crd-list, .multi-course-crd-list,
+.row-y-spacing {
+}
+.btn {
+  text-transform: capitalize;
+}
+.btn-check:focus + .btn, .btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+button {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+.btn-primary, .btn-secondary {
+  background: #325d81;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 25px;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-primary:active, .btn-secondary:active, .btn-primary:focus, .btn-secondary:focus, .btn-primary:active:focus, .btn-secondary:active:focus {
+  background-color: #325d81;
+}
+
+.btn-outline-primary {
+  border-radius: 4px;
+  padding: 12px 25px;
+  font-size: 16px;
+  transition: 0.2s;
+  color: #F56962;
+  border-color: blue;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus, .btn-outline-primary:active:focus {
+  color: #fff;
+  background-color: #e65750;
+  /*box-shadow: 0 7px 15px -2px #e65750;*/
+  border-color: #e65750;
+}
+
+.btn-secondary {
+  background: #EFEFF6;
+  color: #5F5982;
+}
+
+.btn-secondary:hover, .btn-secondary:active, .btn-secondary:focus, .btn-secondary:active:focus {
+  color: #5F5982;
+  box-shadow: 0 7px 15px -2px #ccc;
+  background-color: #EFEFF6;
+}
+
+.btn-secondary-outline {
+  border-radius: 4px;
+  padding: 12px 25px;
+  font-size: 16px;
+  transition: 0.2s;
+  color: #5F5982;
+  border-color: #EFEFF6;
+}
+
+.btn-secondary-outline:hover, .btn-secondary-outline:active, .btn-secondary-outline:focus, .btn-secondary-outline:active:focus {
+  color: #5F5982;
+  box-shadow: 0 7px 15px -2px #ccc;
+  background-color: #EFEFF6;
+}
+
+/** main Content Top Gap Strat **/
+.main-top-gap {
+  margin-top: 85px;
+}
+
+.main-top-gapexam {
+  margin-top: 35px;
+}
+
+
+ 
+/** common sec parts **/
+.sec-heading {
+  color: #302D3A;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.text-white .sec-heading {
+  color: #fff;
+}
+
+.sec-brief {
+  font-size: 20px;
+  color: #5F5982;
+}
+
+.card-title {
+  color: #302D3A;
+  font-weight: 500;
+  font-size: 22px;
+  text-align:left;
+}
+
+.card-subtitle {
+  color: #302D3A;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #5F5982;
+}
+
+.sec-header-btn a {
+  white-space: nowrap;
+}
+
+/** Crd Slider  css**/
+.crd-slider-list {
+  margin: -15px;
+}
+
+ 
+ 
+.slider-dark .slide-btn {
+  background-color: #EFEFF6;
+}
+
+.slide-btn {
+  height: 45px;
+  width: 45px;
+  /*background-color: #fff;*/
+  transition: 0.3s;
+  background-color: whitesmoke; 
+}
+
+.slide-btn-list {
+  height: 30px;
+  width: 35px;
+  background-color: #fff;
+  transition: 0.3s;
+  padding-left: 7px;
+}
+
+
+.slide-btn svg {
+  fill: #909090;
+  transition: 0.3s;
+}
+
+.slide-btn:hover {
+  box-shadow: 0 0 10px -3px #ddd;
+}
+
+.slide-btn:hover svg {
+  fill: #F68C20;
+}
+
+ 

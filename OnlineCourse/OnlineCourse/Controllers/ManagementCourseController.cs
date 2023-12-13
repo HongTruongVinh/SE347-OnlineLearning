@@ -50,7 +50,7 @@ namespace OnlineCourse.Controllers
             GetListProductOfUser((int)user.UserID);
 
             Product product = MyProducts.Where(x => x.ID == productId).FirstOrDefault();
-
+            
             ProductModel model = new ProductModel() { ID = product.ID, Name = product.Name, Description = product.Description };
 
             return View(model);
@@ -102,7 +102,7 @@ namespace OnlineCourse.Controllers
                 return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index" }));
             }
 
-            if (file != null && video.Title != null)
+            if(file != null && video.Title != null)
             {
                 video.Name = file.FileName;
                 video.DateUpdate = DateTime.Now;
@@ -203,7 +203,7 @@ namespace OnlineCourse.Controllers
             product.ModifiDate = DateTime.Now;
 
 
-            if (imageFile != null)
+            if(imageFile != null)
             {
                 string path = UploadImage(imageFile);
 
@@ -305,7 +305,7 @@ namespace OnlineCourse.Controllers
                 model.ModifiDate = product.ModifiDate;
                 model.Detail = product.Detail;
                 model.Image = product.Image;
-
+                
                 model.Price = product.Price;
                 model.MetaTitle = product.MetaTitle;
 

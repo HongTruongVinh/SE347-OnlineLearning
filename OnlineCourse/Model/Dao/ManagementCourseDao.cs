@@ -15,9 +15,9 @@ namespace Model.Dao
         {
             List<Product> products = new List<Product>();
 
-            foreach (Product product in DataProvider.Ins.DB.Products)
+            foreach(Product product in DataProvider.Ins.DB.Products)
             {
-                if (int.Parse(product.CreateBy) == userId)
+                if (int.Parse(product.CreateBy) == userId) 
                 {
                     products.Add(product);
                 }

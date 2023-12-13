@@ -14,6 +14,14 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Index()
         {
+            var dao = new ProductCategoryDao();
+            ViewBag.CategoryID = dao.ListAll();
+            var productdao = new ProductDao();
+            ViewBag.HomeProducts = productdao.ListAllProduct();
+            var examDao = new ExamDao();
+            ViewBag.HomeExams = examDao.ListAllExam();
+            HomeInfor homeInfor = new GetInforDao().GetHomeInfor();
+            ViewBag.HomeInfor = homeInfor;
             return View();
         }
 

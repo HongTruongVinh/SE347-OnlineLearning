@@ -4,3 +4,31 @@
     Layout = "~/Views/Shared/_LayoutProfile.cshtml";
     var listExams = (List<Model.Models.Exam>)ViewBag.Exams;
 }
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+
+            @foreach (var exam in listExams)
+            {
+                var link = "/chi-tiet-kiem-tra/" + exam.MetaTitle + "-" + exam.ID;
+
+                <div class="row p-2 bg-white border rounded mt-2">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="/assets/client/images/courses/IconExam.png"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5><a href="@link">@exam.Name</a></h5>
+                        <div class="d-flex flex-row">
+                            <span>Thời gian làm @exam.Time.ToString()</span>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span>Bắt đầu từ: @exam.StartDate</span></div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<hr />

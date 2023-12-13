@@ -4,22 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7fbe30ff5e3d45838dacb929bffa5b46" Name="Diagram1" ZoomLevel="110">
-        <EntityTypeShape EntityType="OnlineLearnModel.Comment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Exam" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Permission" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Product" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.ProductCategory" Width="1.75" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Question" Width="1.5" PointX="10.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Result" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Role" Width="1.5" PointX="0.5" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.Role_Per" Width="1.5" PointX="8.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.sysdiagram" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.User" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.User_Role" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineLearnModel.CourseDocument" Width="1.875" PointX="1.875" PointY="9.125" />
-        <EntityTypeShape EntityType="OnlineLearnModel.CourseVideo" Width="1.5" PointX="0.875" PointY="6.5" />
-        <EntityTypeShape EntityType="OnlineLearnModel.WishProduct" Width="1.5" PointX="9.375" PointY="0.75" />
+      <Diagram DiagramId="0d0df366eafa4bc28be2474a3b5da777" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineLearnModel.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Author" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Comment" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.CourseDocument" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.CourseVideo" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Exam" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Permission" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Product" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.ProductCategory" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Question" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.RecommenedCourse" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.RelatedCourse" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Result" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Role" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.Role_Per" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.sysdiagram" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.User" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.User_Role" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineLearnModel.WishProduct" Width="1.5" PointX="8.75" PointY="11.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

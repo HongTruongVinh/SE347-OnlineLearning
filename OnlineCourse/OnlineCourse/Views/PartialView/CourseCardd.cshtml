@@ -1,0 +1,46 @@
+﻿@{
+    var product = (Model.Models.Product)ViewBag.product;
+}
+
+@{
+    var url = "/chi-tiet/" + product.MetaTitle + "-" + product.ID + "-1";
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+        <div class="card shadow h-100">
+            <!-- Image -->
+            <img src="@product.Image" class="card-img-top" alt="@product.Name">
+            <!-- Card body -->
+            <div class="card-body pb-0">
+                <!-- Badge and favorite -->
+                <div class="d-flex justify-content-between mb-2">
+                    <a href="#" class="badge bg-purple bg-opacity-10 text-purple">@product.Code</a>
+                    <a href="#" class="h6 mb-0"><i class="far fa-heart"></i></a>
+                </div>
+                <!-- Title -->
+                <h5 class="card-title fw-normal"><a href="@url">@product.Name</a></h5>
+                <p class="mb-2 text-truncate-2">@product.Description</p>
+                <!-- Rating star -->
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                    <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                    <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
+                    <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li>
+                </ul>
+                @*<p class="old-price">10 <sup>đ</sup></p>
+        <p class="price-differentiate">-1<sup>đ</sup></p>*@
+                <p class="price text-right">@String.Format("{0:#,##0.##}", product.Price) <sup>đ</sup></p>
+
+                
+            </div>
+            <!-- Card footer -->
+            <div class="card-footer pt-0 pb-3">
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>12h 56m</span>
+                    <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>@product.ListType.Split(',').Count() bài giảng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,339 @@
+﻿@model List<Model.Models.Role>
+
+@{
+    ViewBag.Title = "Phân quyền người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Childcss
+{
+    <link href="/assets/admin/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/libs/datatables/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+
+}
+
+<div>
+    <div id="save_success" class="alert alert-success" style="text-align:center;">
+        <strong>Success!</strong> Lưu thành công
+    </div>
+    <div id="save_failue" class="alert alert-warning"  style="text-align:center;">
+        <strong>Failue!</strong> Lưu thất bại
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <table style="width:100%;">
+                    <tr>
+                        <td style="text-align:center;">
+                            <h2 class="card-title" style="text-align:center;">Nhóm người dùng</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center; height:2rem">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            @{
+                                for (int i = 0; i < 7; i++)
+                                {
+                                    <input type="button" id="@i"
+                                           data-name="@("btn_Role" + i)"
+                                           data-url="@Url.Action($"ViewPermissionDetail?roleId={i}", "Permission")"
+                                           value=@(Model[i].Name)
+                                           class="btn btn-secondary ml-4 mb-4"
+                                           onclick="RoleClick(@i)" />
+                                }
+                            }
+                        </td>
+                        <td style="text-align:right;">
+                            <input type="button" id="btn_Save"
+                                   data-url="@Url.Action($"UpdatePermissionDetail", "Permission")"
+                                   value="Lưu chỉnh sửa"
+                                   data-roleId=""
+                                   data-action="save_Click"
+                                   style="background-color: mediumseagreen; border-style: none"
+                                   class="btn btn-secondary ml-4 mb-4" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-12 row">
+                        <div class="col-5 card" >
+                            <div class="container">
+                                <h2 class="card-header" style="text-align:center;">Các quyền đã có</h2>
+                                <ul class="list-group card" id="tb1">
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="container">
+                                <div class="row" style="height:5rem;"></div>
+                                <div style="text-align:center;">
+                                    <button id="btn_moveToLeft" data-child="" data-action="moveToRight" data-toggle="tooltip" data-placement="top" title="Chuyển sang phải"> >> </button>
+                                </div>
+                                <div class="row" style="height:5rem;"></div>
+                                <div style="text-align:center;">
+                                    <button id="btn_moveToRight" data-child="" data-action="moveToLeft" data-toggle="tooltip" data-placement="top" title="Chuyển sang trái"> << </button>
+                                </div>
+                                <div class="row" style="height:5rem;"></div>
+                                <div style="text-align:center;">
+                                    <button id="btn_moveAllToLeft" data-child="" data-action="moveAllToRight" data-toggle="tooltip" data-placement="top" title="Chuyển hết sang phải"> >>> </button>
+                                </div>
+                                <div class="row" style="height:5rem;"></div>
+                                <div style="text-align:center;">
+                                    <button id="btn_moveAllToRight" data-child="" data-action="moveAllToLeft"   data-toggle="tooltip" data-placement="top" title="Chuyển hết sang trái"> <<< </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-5 card">
+                            <div class="container">
+                                <h2  class="card-header" style="text-align:center;">Các quyền chưa có</h2>
+                                <ul class="list-group card" id="tb2">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ajaxactionlink" data-role="">
+    @Ajax.ActionLink("value", "Add", new { @id = "$('value')" },
+    new AjaxOptions { Confirm = "Thêm quyền này cho ?", HttpMethod = "Post", OnComplete = "var li = $('#' + value + ''); $('#tb1').append(li);", },
+    new { @class = "" });
+</div>
+
+
+@section ClientScript
+{
+    <script src="/assets/admin/libs/bootstrap/js/bootbox.min.js"></script>
+
+    //Chay Ajax
+    <script src="/assets/admin/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/admin/libs/jquery/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="/assets/admin/libs/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="/assets/admin/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="/assets/admin/libs/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.buttons.min.js"></script>
+    <script src="/assets/admin/libs/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/admin/libs/jszip/jszip.min.js"></script>
+    <script src="/assets/admin/libs/pdfmake/pdfmake.min.js"></script>
+    <script src="/assets/admin/libs/pdfmake/vfs_fonts.js"></script>
+    @*<script src="/assets/admin/libs/datatables/buttons.html5.min.js"></script>*@
+    <script src="/assets/admin/libs/datatables/buttons.print.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.keyTable.min.js"></script>
+    <script src="/assets/admin/libs/datatables/dataTables.scroller.min.js"></script>
+    <!-- Datatables init -->
+    <script src="/assets/admin/js/pages/datatables.init.js"></script>
+    <script src="/assets/admin/controller/userController.js"></script>
+
+    <script src="~/Areas/Admin/Scripts/site.js"></script>
+
+    <script>
+            $("#save_success").hide();
+            $("#save_failue").hide();
+
+            var defaultListPermission = [];
+
+            var oldLiRoleClicked;
+            var oldRoleClicked;
+            function RoleClick(i) {
+                if (i != oldRoleClicked) {
+
+                    $('#btn_moveToLeft').data('child', null);
+                    $('#btn_moveToRight').data('child', null);
+
+                    var url = $("#" + i).data('url');
+                    var decodeUrl = decodeURIComponent(url);
+
+                    $.get(decodeUrl).done(function (data) {
+                        var listPer_IHave = data['listPer_IHave'];
+                        var listPer_IHaveNo = data['listPer_IHaveNo'];
+                        
+                        $('#tb1').empty();
+                        $('#tb2').empty();
+
+                        $.each(listPer_IHave, function (key, value) {
+                            var newLi = $('<li class="list-group-item badge badge-info border-light" style="color: black; background-color:LightSkyBlue; border-width: medium; border-radius: 5px;"  id="' + key + '">' + value + '</li>');
+
+                            newLi.click(function () {
+                                $('#btn_moveToLeft').data('child', newLi);
+                                $('#btn_moveToRight').data('child', newLi);
+
+                                if (oldLiRoleClicked != newLi) {
+
+                                    if (oldLiRoleClicked != null) {
+                                        oldLiRoleClicked.css({ "backgroundColor": "LightSkyBlue" });
+                                    }
+
+                                    newLi.css({ "backgroundColor": "#FFC107" });
+                                    oldLiRoleClicked = newLi;
+                                }
+                            })
+
+                            $('#tb1').append(newLi);
+                        });
+
+                        //lấy dữ liệu gốc để lúc nữa biết có thay đổi gì hay không
+                        $('#tb1 li').each(function () {
+                            defaultListPermission.push($(this).attr('id'));
+                        });
+
+                        $.each(listPer_IHaveNo, function (key, value) {
+                            var newLi = $('<li class="list-group-item badge badge-info border-light" style="color: black; background-color:LightSkyBlue; border-width: medium; border-radius: 5px;" id="' + key + '" >' + value + '</li >');
+
+                            newLi.click(function () {
+                                $('#btn_moveToLeft').data('child', newLi);
+                                $('#btn_moveToRight').data('child', newLi);
+                                
+                                if (oldLiRoleClicked != newLi) {
+
+                                    if (oldLiRoleClicked != null) {
+                                        oldLiRoleClicked.css({ "backgroundColor": "LightSkyBlue" });
+                                    }
+
+                                    newLi.css({ "backgroundColor": "#FFC107" });
+                                    oldLiRoleClicked = newLi;
+                                }
+                            })
+
+                            $('#tb2').append(newLi);
+                        });
+
+                    })
+
+                    $("#btn_Save").data('roleId', i);
+
+                    $("#" + i).removeClass('btn-secondary').addClass('btn-primary');
+                    $("#" + oldRoleClicked).removeClass('btn-primary').addClass('btn-secondary');
+                }
+
+                oldRoleClicked = i;
+                return oldRoleClicked;
+            }
+
+
+            $('button[data-action="moveToLeft"]').click(function (event) {
+                var liChild = $(this).data('child');
+                $('#tb1').append(liChild);
+
+            })
+
+            $('button[data-action="moveToRight"]').click(function (event) {
+                var liChild = $(this).data('child');
+                $('#tb2').append(liChild);
+
+            })
+
+            $('button[data-action="moveAllToLeft"]').click(function (event) {
+                $('#tb2 > li').clone().appendTo('#tb1');
+                $('#tb2').empty();
+            })
+
+            $('button[data-action="moveAllToRight"]').click(function (event) {
+                $('#tb1 > li').clone().appendTo('#tb2');
+                $('#tb1').empty();
+            })
+
+
+            $('input[data-action="save_Click"]').click(function (event) {
+
+                var perNames = [];
+                $('#tb1 li').each(function () {
+                    perNames.push($(this).attr('id'));
+                });
+
+                //đạo ngược list cho việc phát hiện sự thay đổi nhanh hơn
+                perNames = perNames.reverse();
+
+                var roleId = $("#btn_Save").data('roleId');
+
+                        var da = $.ajax({
+                            async: false,
+                            type: "POST",
+                            global: false,
+                            dataType: 'json',
+                            url: '@Url.Action("UpdatePermissionDetail", "Permission")',
+                            data: {
+                                    'roleId': roleId,
+                                    'listPermissionName': perNames,
+                                  },
+                            success: function (dataResponse)
+                            {
+                                var result = dataResponse['result'];
+
+                                if (result == true) {
+                                    $("#save_success").show();
+                                    setTimeout(function () { $("#save_success").hide(); }, 5000);
+                                }
+                                else {
+                                    $("#save_failue").show();
+                                    setTimeout(function () { $("#save_failue").hide(); }, 5000);
+                                }
+
+                            }
+                        });
+
+                //nếu mà có sự thay đổi thì mới gửi dữ liệu lên controller
+                //$.each(perNames, function (key, value) {
+
+                    //var index = $.inArray(value, defaultListPermission);
+
+                    //if (index == -1) {
+
+                        //var roleId = $("#btn_Save").data('roleId');
+
+                        //var da = $.ajax({
+                            //async: false,
+                            //type: "POST",
+                            //global: false,
+                            //dataType: 'json',
+                            //url: 'Url.Action("UpdatePermissionDetail", "Permission")',
+                            //data: {
+                                    //'roleId': roleId,
+                                    //'listPermissionName': perNames,
+                                  //},
+                            //success: function (dataResponse)
+                            //{
+                                //var result = dataResponse['result'];
+
+                                //if (result == "true") {
+                                    //$("#save_success").show().delay(3000).fadeOut();
+                                //}
+                                //else {
+                                    //$("#save_failue").show().delay(3000).fadeOut();
+                                //}
+
+                            //}
+                        //});
+                    //}
+                //});
+
+
+            })
+
+    </script>
+
+
+
+
+}
+

@@ -4,7 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="OnlineLearnModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="OnlineLearnModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productID" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Decription" Type="nvarchar(max)" />
+          <Property Name="DateUpdate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="ID" />
@@ -24,8 +43,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="productID" Type="int" />
           <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="Link" Type="nvarchar(max)" />
-          <Property Name="Title" Type="varchar" MaxLength="200" />
+          <Property Name="Link" Type="varchar" MaxLength="200" />
+          <Property Name="Title" Type="nvarchar(max)" />
           <Property Name="DateUpdate" Type="datetime" />
         </EntityType>
         <EntityType Name="CourseVideo">
@@ -35,8 +54,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="productID" Type="int" />
           <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="Link" Type="nvarchar(max)" />
-          <Property Name="Title" Type="varchar" MaxLength="200" />
+          <Property Name="Link" Type="varchar" MaxLength="200" />
+          <Property Name="Title" Type="nvarchar(max)" />
           <Property Name="DateUpdate" Type="datetime" />
         </EntityType>
         <EntityType Name="Exam">
@@ -125,6 +144,24 @@
           <Property Name="ProductID" Type="bigint" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="RecommenedCourse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productID" Type="int" />
+          <Property Name="Decription" Type="nvarchar(max)" />
+          <Property Name="DateUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RelatedCourse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productID" Type="int" />
+          <Property Name="Decription" Type="nvarchar(max)" />
+          <Property Name="DateUpdate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Result">
           <Key>
             <PropertyRef Name="UserID" />
@@ -209,6 +246,8 @@
           <Property Name="DateBought" Type="datetime" />
         </EntityType>
         <EntityContainer Name="OnlineLearnModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseDocument" EntityType="Self.CourseDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseVideo" EntityType="Self.CourseVideo" Schema="dbo" store:Type="Tables" />
@@ -217,6 +256,8 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecommenedCourse" EntityType="Self.RecommenedCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelatedCourse" EntityType="Self.RelatedCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role_Per" EntityType="Self.Role_Per" Schema="dbo" store:Type="Tables" />
@@ -225,10 +266,30 @@
           <EntitySet Name="User_Role" EntityType="Self.User_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WishProduct" EntityType="Self.WishProduct" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineLearnModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="ID" />
@@ -240,6 +301,28 @@
           <Property Name="UserID" Type="Int64" />
           <Property Name="ParentID" Type="Int64" />
           <Property Name="Rate" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CourseDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CourseVideo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -327,6 +410,24 @@
           <Property Name="ProductID" Type="Int64" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="RecommenedCourse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RelatedCourse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productID" Type="Int32" />
+          <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Result">
           <Key>
             <PropertyRef Name="UserID" />
@@ -400,45 +501,6 @@
           <Property Name="idRole" Type="Int32" Nullable="false" />
           <Property Name="Describe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="OnlineLearnEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Comments" EntityType="Self.Comment" />
-          <EntitySet Name="Exams" EntityType="Self.Exam" />
-          <EntitySet Name="Permissions" EntityType="Self.Permission" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
-          <EntitySet Name="Questions" EntityType="Self.Question" />
-          <EntitySet Name="Results" EntityType="Self.Result" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="Role_Per" EntityType="Self.Role_Per" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="User_Role" EntityType="Self.User_Role" />
-          <EntitySet Name="CourseDocuments" EntityType="OnlineLearnModel.CourseDocument" />
-          <EntitySet Name="CourseVideos" EntityType="OnlineLearnModel.CourseVideo" />
-          <EntitySet Name="WishProducts" EntityType="OnlineLearnModel.WishProduct" />
-        </EntityContainer>
-        <EntityType Name="CourseDocument">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="productID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="CourseVideo">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="productID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DateUpdate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="WishProduct">
           <Key>
             <PropertyRef Name="UserID" />
@@ -449,12 +511,54 @@
           <Property Name="IsBought" Type="Boolean" />
           <Property Name="DateBought" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityContainer Name="OnlineLearnEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="CourseDocuments" EntityType="Self.CourseDocument" />
+          <EntitySet Name="CourseVideos" EntityType="Self.CourseVideo" />
+          <EntitySet Name="Exams" EntityType="Self.Exam" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="RecommenedCourses" EntityType="Self.RecommenedCourse" />
+          <EntitySet Name="RelatedCourses" EntityType="Self.RelatedCourse" />
+          <EntitySet Name="Results" EntityType="Self.Result" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Role_Per" EntityType="Self.Role_Per" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="User_Role" EntityType="Self.User_Role" />
+          <EntitySet Name="WishProducts" EntityType="Self.WishProduct" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OnlineLearnModelStoreContainer" CdmEntityContainer="OnlineLearnEntities">
+        <EntityContainerMapping StorageEntityContainer="OnlineLearnModelStoreContainer" CdmEntityContainer="OnlineLearnEntities1">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="OnlineLearnModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="OnlineLearnModel.Author">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="OnlineLearnModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
@@ -465,6 +569,30 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseDocuments">
+            <EntityTypeMapping TypeName="OnlineLearnModel.CourseDocument">
+              <MappingFragment StoreEntitySet="CourseDocument">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseVideos">
+            <EntityTypeMapping TypeName="OnlineLearnModel.CourseVideo">
+              <MappingFragment StoreEntitySet="CourseVideo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -559,6 +687,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RecommenedCourses">
+            <EntityTypeMapping TypeName="OnlineLearnModel.RecommenedCourse">
+              <MappingFragment StoreEntitySet="RecommenedCourse">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelatedCourses">
+            <EntityTypeMapping TypeName="OnlineLearnModel.RelatedCourse">
+              <MappingFragment StoreEntitySet="RelatedCourse">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Results">
             <EntityTypeMapping TypeName="OnlineLearnModel.Result">
               <MappingFragment StoreEntitySet="Result">
@@ -609,7 +757,6 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="OnlineLearnModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="LinkImage" ColumnName="LinkImage" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -623,6 +770,7 @@
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ProductList" ColumnName="ProductList" />
+                <ScalarProperty Name="LinkImage" ColumnName="LinkImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -635,37 +783,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CourseDocuments">
-            <EntityTypeMapping TypeName="OnlineLearnModel.CourseDocument">
-              <MappingFragment StoreEntitySet="CourseDocument">
-                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="productID" ColumnName="productID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourseVideos">
-            <EntityTypeMapping TypeName="OnlineLearnModel.CourseVideo">
-              <MappingFragment StoreEntitySet="CourseVideo">
-                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="productID" ColumnName="productID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WishProducts">
             <EntityTypeMapping TypeName="OnlineLearnModel.WishProduct">
               <MappingFragment StoreEntitySet="WishProduct">
-                <ScalarProperty Name="DateBought" ColumnName="DateBought" />
-                <ScalarProperty Name="IsBought" ColumnName="IsBought" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="IsBought" ColumnName="IsBought" />
+                <ScalarProperty Name="DateBought" ColumnName="DateBought" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

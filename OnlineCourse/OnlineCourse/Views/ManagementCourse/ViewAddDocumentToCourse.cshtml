@@ -1,0 +1,64 @@
+﻿@model Model.Models.CourseDocument
+
+@{
+    ViewBag.Title = "ViewEditCourse";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+
+    var product = (OnlineCourse.Models.ProductModel)ViewBag.product;
+
+}
+
+<div>
+    <div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm tài liệu vào khóa học @product.Name</h5>
+
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddDocumentToCourse", "ManagementCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.productID, new { @class = "form-control", type = "text", style = "display:none" })
+                                @Html.ValidationMessageFor(model => model.productID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Tiêu đề file</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", type = "text" }, @disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Link file</label>
+                            <div class="col-md-10">
+
+                                <input type="file" id="file" name="file" class="btn btn-info" />
+
+                                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group " style="text-align:right;">
+                            <a id="save" class="abclaice ">
+                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

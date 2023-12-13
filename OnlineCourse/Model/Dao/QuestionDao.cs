@@ -9,10 +9,10 @@ namespace Model.Dao
 {
     public class QuestionDao
     {
-
+        
         public QuestionDao()
         {
-
+            
         }
         public long Insert(Question entity)
         {
@@ -36,7 +36,7 @@ namespace Model.Dao
         }
         public IEnumerable<Question> ListAllPaging(string searchString, int page, int pagesize)
         {
-            IQueryable<Question> model = DataProvider.Ins.DB.Questions;
+            IQueryable<Question> model = DataProvider.Ins.DB.Questions;           
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Content.Contains(searchString) || x.Name.Contains(searchString));
@@ -56,7 +56,7 @@ namespace Model.Dao
                 question.Name = entity.Name;
                 question.Content = entity.Content;
                 question.Answer = entity.Answer;
-                question.ProductID = entity.ProductID;
+                question.ProductID = entity.ProductID;          
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
             }

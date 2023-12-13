@@ -2,4 +2,24 @@
 @{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+
+    List<OnlineCourse.Models.ProductModel> cartProducts = (List<OnlineCourse.Models.ProductModel>)ViewBag.CartProducts;
 }
+
+<div>
+    
+    @{
+        if (cartProducts.Count != 0)
+        {
+            Html.RenderPartial("~/Views/PartialView/_CartProductCard.cshtml");
+        }
+        else
+        {
+            <div class="row" style="text-align:center;">
+                <span>Không có dữ liệu</span>
+            </div>
+        }
+    }
+</div>
+
+<hr />

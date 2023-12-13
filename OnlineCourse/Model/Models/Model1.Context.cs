@@ -25,20 +25,24 @@ namespace Model.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<CourseDocument> CourseDocuments { get; set; }
+        public virtual DbSet<CourseVideo> CourseVideos { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<RecommenedCourse> RecommenedCourses { get; set; }
+        public virtual DbSet<RelatedCourse> RelatedCourses { get; set; }
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Role_Per> Role_Per { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<User_Role> User_Role { get; set; }
-        public virtual DbSet<CourseDocument> CourseDocuments { get; set; }
-        public virtual DbSet<CourseVideo> CourseVideos { get; set; }
         public virtual DbSet<WishProduct> WishProducts { get; set; }
     }
 }

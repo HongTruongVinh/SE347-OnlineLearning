@@ -1,4 +1,4 @@
-using Model.Dao;
+﻿using Model.Dao;
 using Model.Models;
 using OnlineCourse.Common;
 using System;
@@ -11,6 +11,9 @@ namespace OnlineCourse.Controllers
 {
     public class ExamController : BaseController
     {
+        //
+        // GET: /Exam/
+
         public ActionResult Index()
         {
             return View();
@@ -47,7 +50,7 @@ namespace OnlineCourse.Controllers
             }
         }
         [HttpPost]
-        public JsonResult AddResult(long examid, long userid)
+        public JsonResult AddResult(long examid,long userid)
         {
             try
             {
@@ -68,31 +71,31 @@ namespace OnlineCourse.Controllers
                 int totalQuestion = 0;
                 foreach (var item in x)
                 {
-                    if (item != "")
+                    if(item != "")
                     {
                         totalQuestion += 1;
                     }
                 }
                 Random random = new Random();
-                int score = (100 / totalQuestion) * random.Next(1, totalQuestion);
+                int score = (100/totalQuestion)*random.Next(1, totalQuestion);
                 result.Score = score.ToString();
 
 
                 bool addresult = dao.Insert(result);
-                if (addresult == true)
+                if(addresult == true)
                 {
 
                     return Json(new
-                    {
-                        status = true
-                    });
+                        {
+                            status = true
+                        });                       
                 }
                 else
                 {
                     return Json(new
                     {
                         status = false
-                    });
+                    });        
                 }
             }
             catch
@@ -100,7 +103,7 @@ namespace OnlineCourse.Controllers
                 return Json(new
                 {
                     status = false
-                });
+                });        
             }
         }
 
@@ -119,7 +122,7 @@ namespace OnlineCourse.Controllers
                 result.ResultEssay = resultessay;
                 result.FinishTimeEssay = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute;
                 result.FinishTimeQuiz = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute;
-
+                 
                 bool addresult = dao.Update(result);
                 if (addresult == true)
                 {
@@ -148,6 +151,6 @@ namespace OnlineCourse.Controllers
 
 
 
-
+    
     }
 }

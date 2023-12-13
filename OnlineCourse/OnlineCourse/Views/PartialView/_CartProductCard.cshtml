@@ -1,0 +1,75 @@
+﻿@model OnlineCourse.Common.UserLogin
+
+@{
+    List<OnlineCourse.Models.ProductModel> cartProducts = (List<OnlineCourse.Models.ProductModel>)ViewBag.CartProducts;
+
+}
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+
+            @foreach (var product in cartProducts)
+            {
+                var url = "/chi-tiet/" + product.MetaTitle + "-" + product.ID + "-1";
+
+                <div class="row p-2 bg-white border rounded mt-2" id="@product.ID">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="@product.Image"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5><a href="@url">@product.Name</a></h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2">
+                                @{
+                                    var r = new Random().Next(1, 5);
+                                    for (int start = 1; start <= r; start++)
+                                    {
+                                        <i class="fa fa-star text-warning"></i>
+                                    }
+                                }
+                            </div>
+                            <span>@product.CountVideo video</span>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span>@product.CreateBy </span></div>
+                        <div class="mt-1 mb-1 spec-1"><span>Cập nhật mới nhất: @product.ModifiDate</span></div>
+                        <p class="text-justify text-truncate para mb-0">@product.Description<br><br></p>
+                    </div>
+
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row align-items-center">
+                            <h4 class="mr-1">@String.Format("{0:#,##0.##}", product.Price) VND</h4>
+                        </div>
+                        
+                        <div class="d-flex flex-column mt-4">
+                            @Html.ActionLink("Mua", // <-- Link text
+                                            "BuyProduct", // <-- Action Method Name
+                                            "Profile",
+                                             new { productId = product.ID, userId = Model.UserID }, // <-- Route value
+                                             new { @class = "btn btn-primary btn-sm" } // <-- htmlArguments
+                                            )
+
+                            @Ajax.ActionLink("Xóa",
+                                        "DeleteProduct",
+                                        "Profile",
+                                        new { productId = product.ID, userId = Model.UserID },
+                                        new AjaxOptions
+                                        {
+                                            Confirm = "Bạn có muốn xóa không ?",
+                                            HttpMethod = "POST",
+                                            InsertionMode = InsertionMode.Replace,
+                                            UpdateTargetId = "dialog_window_id",
+                                            OnComplete = "$('#" + product.ID + "').remove();"
+                                        },
+                                        new { @class = "btn btn-outline-secondary btn-sm mt-2" }
+                                        )
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
