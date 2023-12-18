@@ -88,6 +88,9 @@ namespace OnlineCourse.Controllers
 
             ViewBag.playingVideo = new CourseVideoDao().GetVideo(playingIdVideo);
 
+            var productdao = new ProductDao();
+            ViewBag.HomeProducts = productdao.ListAllProduct();
+
             return View(product);
         }
 

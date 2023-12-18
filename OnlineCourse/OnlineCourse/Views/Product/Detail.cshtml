@@ -21,6 +21,8 @@
     var productVideos = (List<Model.Models.CourseVideo>)ViewBag.productVideos;
     var productDocuments = (List<Model.Models.CourseDocument>)ViewBag.productDocuments;
     var playingVideo = (Model.Models.CourseVideo)ViewBag.playingVideo;
+
+    var listHomeProducts = (List<Model.Models.Product>)ViewBag.HomeProducts;
 }
 @section Childcss
 {
@@ -696,8 +698,28 @@ Page content START -->
                     </div>
                     <!-- Tags END -->
                 </div><!-- Row End -->
+
+
             </div>
             <!-- Right sidebar END -->
+
+            <h4>Danh sách khóa học liên quan</h4>
+
+            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(4))
+            {
+                ViewBag.product = item;
+                Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
+
+            }
+
+            <h4>Danh sách khóa học được gợi ý bởi giảng viên</h4>
+
+            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(4))
+            {
+                ViewBag.product = item;
+                Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
+
+            }
 
         </div><!-- Row END -->
     </div>
