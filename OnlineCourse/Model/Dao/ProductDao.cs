@@ -249,5 +249,12 @@ namespace Model.Dao
             }
             return lisId;
         }
+
+        public List<Product> getByUserId(int userId)
+        {
+            IQueryable<Product> model = DataProvider.Ins.DB.Products;
+            model = model.Where(x => x.CreateBy == userId.ToString());
+            return model.OrderByDescending(x => x.CreateDate).ToList();
+        }
     }
 }

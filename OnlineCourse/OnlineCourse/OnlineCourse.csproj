@@ -2229,6 +2229,7 @@
     <Content Include="Views\ManagementCourse\ViewAddvieoToCourse.cshtml" />
     <Content Include="Views\ManagementCourse\ViewAddDocumentToCourse.cshtml" />
     <Content Include="Views\PartialView\CourseCard.cshtml" />
+    <Content Include="Views\User\ProductAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

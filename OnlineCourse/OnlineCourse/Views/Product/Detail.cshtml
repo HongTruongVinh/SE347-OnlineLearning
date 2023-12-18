@@ -153,7 +153,7 @@ Page content START -->
                                     <img class="avatar-img rounded-circle" src="@ownUser.LinkImage" alt="avatar">
                                 </div>
                                 <div class="ms-3">
-                                    <h6 class="mb-0"><a href="#">@ownUser.Name</a></h6>
+                                    <h6 class="mb-0"><a href="@Url.Action("ProductAuthor", "User" , new { userId = ownUser.ID })">@ownUser.Name</a></h6>
                                     <p class="mb-0 small">@ownUser.Email</p>
                                 </div>
                             </div>

@@ -115,5 +115,19 @@ namespace OnlineCourse.Controllers
             usersession.WishListIdProduct = new ProductDao().GetWishListProduct((int)user.ID);
             return usersession;
         }
+
+        public ActionResult ProductAuthor(int userId)
+        {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
+    
+            ViewBag.User = new UserDao().GetByUserId(userId);
+            ViewBag.UserProducts = new ProductDao().getByUserId(userId);
+
+
+
+            return View();
+        }
     }
 }

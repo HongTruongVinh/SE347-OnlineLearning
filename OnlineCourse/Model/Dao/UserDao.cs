@@ -174,6 +174,10 @@ namespace Model.Dao
             return model.OrderByDescending(x => x.CreateDate).ToPagedList(page, pagesize);
         }
 
-    
+        public User GetByUserId(int userId)
+        {
+            return DataProvider.Ins.DB.Users.SingleOrDefault(x => x.ID == userId);
+        }
+
     }
 }
