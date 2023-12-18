@@ -156,5 +156,24 @@ namespace Model.Dao
 
             return false;
         }
+
+        public IEnumerable<User> ListAllPagingPoster(string searchString, int page, int pagesize)
+        {
+            IQueryable<User> model = DataProvider.Ins.DB.Users;
+            IQueryable<Product> products = DataProvider.Ins.DB.Products;
+            model = model.Where(x => x.UserName != "admin");
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.UserName.Contains(searchString) || x.Name.Contains(searchString));
+            }
+
+            model = model.Where(item =>
+                products.Where(product => (product.CreateBy == item.ID.ToString())).Count() > 0
+            );
+
+            return model.OrderByDescending(x => x.CreateDate).ToPagedList(page, pagesize);
+        }
+
+    
     }
 }

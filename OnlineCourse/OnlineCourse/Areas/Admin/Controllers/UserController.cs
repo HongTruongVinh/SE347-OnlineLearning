@@ -177,5 +177,57 @@ namespace OnlineCourse.Areas.Admin.Controllers
             return RedirectToAction("Index", new { searchString = "", page = 1 , pageSize = 200 });
         }
 
+
+        //
+        // GET: /Admin/User/Student
+
+        [AdminAuthorize(PermissionName = "User_View", IsAccessPage = true)]
+        public ActionResult Student(string searchString, int page = 1, int pageSize = 200)
+        {
+            var dao = new UserDao();
+            var model = dao.ListAllPaging(searchString, page, pageSize);
+
+        
+            IEnumerable<User>  list = model.Where(item => new RoleDao().GetRoleUser(Convert.ToInt32(item.ID)).Contains("Learners"));
+
+            
+            ViewBag.SearchString = searchString;
+   
+
+            return View(list);
+        }
+
+        //
+        // GET: /Admin/User/Teacher
+
+        [AdminAuthorize(PermissionName = "User_View", IsAccessPage = true)]
+        public ActionResult Teacher(string searchString, int page = 1, int pageSize = 200)
+        {
+            var dao = new UserDao();
+            var model = dao.ListAllPaging(searchString, page, pageSize);
+
+
+            IEnumerable<User> list = model.Where(item => new RoleDao().GetRoleUser(Convert.ToInt32(item.ID)).Contains("Teachers"));
+
+
+            ViewBag.SearchString = searchString;
+         
+
+            return View(list);
+        }
+
+        //
+        // GET: /Admin/User/Poster
+
+        [AdminAuthorize(PermissionName = "User_View", IsAccessPage = true)]
+        public ActionResult Poster(string searchString, int page = 1, int pageSize = 200)
+        {
+            var dao = new UserDao();
+            var model = dao.ListAllPagingPoster(searchString, page, pageSize);
+
+            ViewBag.SearchString = searchString;
+            
+            return View(model);
+        }
     }   
 }
