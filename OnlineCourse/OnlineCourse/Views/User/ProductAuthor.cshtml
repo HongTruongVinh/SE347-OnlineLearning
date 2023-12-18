@@ -1,0 +1,105 @@
+﻿@model Model.Models.Product
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var user = (Model.Models.User)ViewBag.User;
+    var listProducts = (List<Model.Models.Product>)ViewBag.UserProducts;
+}
+@section Childcss
+{
+    <script src="/assets/pdfjs/pdf.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/choices/css/choices.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/assets/client/vendor/plyr/plyr.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/assets/client/css/style.css"/>
+}
+@section jsFooter
+{
+    <script src="/assets/client/vendor/choices/js/choices.min.js"></script>
+    <script src="/assets/client/vendor/aos/aos.js"></script>
+    <script src="/assets/client/vendor/plyr/plyr.js"></script>
+
+    <script src="/assets/admin/libs/bootstrap/js/bootbox.min.js"></script>
+    <script src="/assets/client/controller/productController.js"></script>
+}
+
+
+
+
+<section class="pt-5">
+    <div class="container">
+
+        <div class="row pb-5">
+            <div class="col-9">
+                <h4>GIẢNG VIÊN</h4>
+                <h2>@user.Name</h2>
+                <p>@user.Email</p>
+
+                <div class="row pb-5">
+                    <div class="col">
+                        <h5>Số học sinh</h5>
+                        <h4>2,447</h4>
+                    </div>
+
+                    <div class="col">
+                        <h5>Số đánh giá</h5>
+                        <h4>1,123</h4>
+                    </div>
+
+                </div>
+
+                <h4>Giới thiệu</h4>
+                <p>
+                    Tôi là @user.Name, một nhà phát triển với niềm đam mê giảng dạy. Tôi là giảng viên chính tại London App Brewery, trường Bootcamp lập trình hàng đầu tại London. Tôi đã giúp hàng trăm nghìn học viên học lập trình và thay đổi cuộc sống của họ bằng cách trở thành một nhà phát triển. Tôi đã được mời giảng dạy bởi các công ty như Twitter, Facebook và Google cho nhân viên của họ.
+                    </br></br>
+                    Hành trình đầu tiên của tôi vào lập trình là khi tôi mới 12 tuổi, muốn xây dựng trò chơi Space Invader của riêng mình. Kể từ đó, tôi đã tạo ra hàng trăm trang web, ứng dụng và trò chơi. Nhưng quan trọng nhất, tôi nhận ra rằng đam mê lớn nhất của mình là giảng dạy.
+                    </br></br>
+                    Tôi dành phần lớn thời gian nghiên cứu cách làm cho việc học lập trình trở nên thú vị và làm cho các khái niệm khó hiểu trở nên dễ hiểu. Tôi áp dụng mọi điều tôi khám phá vào các khóa học Bootcamp của mình. Trong các khóa học của tôi, bạn sẽ tìm thấy nhiều hài hước "geeky" nhưng cũng có nhiều giải thích và hoạt hình để đảm bảo mọi thứ dễ hiểu.
+                    </br></br>
+                    Tôi sẽ ở đó để hỗ trợ bạn mọi bước của hành trình.
+                </p>
+            </div>
+
+            <div class="col-3">
+
+                <img class="rounded-circle pb-5" src="@user.LinkImage" alt="avatar">
+
+                <div class="button-profile"
+                     style="height: 50px; display: flex;justify-content: center; align-items: center; margin-bottom: 8px; border: 1px solid; ">
+                    <a href="#!"><i class="ti-twitter-alt" style="font-weight: bold;color: black; font-size: 18px">Twitter</i></a>
+                </div>
+
+                <div class="button-profile"
+                     style="height: 50px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; border: 1px solid; ">
+                    <a href="#!"><i class="ti-facebook" style="font-weight: bold;color: black; font-size: 18px">Facebook</i></a>
+                </div>
+
+                <div 
+                     class="button-profile"
+                     style="height: 50px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; border: 1px solid;">
+                    <a href="#!"><i class="ti-instagram" style="font-weight: bold;color: black; font-size: 18px">Instagram</i></a>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <h4 class="pb-5">Khóa học của @user.Name (@listProducts.Count())</h4>
+
+        <div class="row g-lg-3">
+            @foreach (var item in listProducts.Where(x => x.CategoryID == 1))
+            {
+                ViewBag.product = item;
+                Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
+
+            }
+        </div>
+
+
+
+    </div>
+</section>

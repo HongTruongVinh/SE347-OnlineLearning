@@ -94,19 +94,24 @@ namespace Model.Dao
         {
             return DataProvider.Ins.DB.Products.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
         }
-        public List<Product> ListByCategoryID(string searchString, long CategoryID, int page, int itemPerPage)
+        public List<Product> ListByCategoryID(string searchString,string searchTeacherName, long CategoryID, int page, int itemPerPage)
         {
             if (page < 1) page = 1;
             IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
+            IOrderedQueryable<User> users = DataProvider.Ins.DB.Users;
+
+            List<Product> result = new List<Product>();
+
+           
             if (CategoryID == 0)
             {
                 if(!string.IsNullOrEmpty(searchString))
                 {
-                    return model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
                 else
                 {
-                    return model.Where(x=> (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x=> (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
 
             }
@@ -114,15 +119,27 @@ namespace Model.Dao
             {
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    return model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status && x.CategoryID==CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status && x.CategoryID==CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
                 else
                 {
-                    return model.Where(x => (bool)x.Status && x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x => (bool)x.Status && x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
             }
-          
 
+
+            if (!string.IsNullOrEmpty(searchTeacherName))
+            {
+                result = result.Where(
+                    product => (
+                    users.Where(user => (
+                        user.ID.ToString() == product.CreateBy &&
+                        user.Name.Contains(searchTeacherName)
+                    )).Count() > 0)).ToList();
+            
+            }
+
+            return result;
         }
 
         public int CountByCategoryID(string searchString, long CategoryID)
@@ -231,6 +248,13 @@ namespace Model.Dao
                 }
             }
             return lisId;
+        }
+
+        public List<Product> getByUserId(int userId)
+        {
+            IQueryable<Product> model = DataProvider.Ins.DB.Products;
+            model = model.Where(x => x.CreateBy == userId.ToString());
+            return model.OrderByDescending(x => x.CreateDate).ToList();
         }
     }
 }

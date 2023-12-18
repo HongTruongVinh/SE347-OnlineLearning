@@ -21,6 +21,8 @@
     var productVideos = (List<Model.Models.CourseVideo>)ViewBag.productVideos;
     var productDocuments = (List<Model.Models.CourseDocument>)ViewBag.productDocuments;
     var playingVideo = (Model.Models.CourseVideo)ViewBag.playingVideo;
+
+    var listHomeProducts = (List<Model.Models.Product>)ViewBag.HomeProducts;
 }
 @section Childcss
 {
@@ -151,7 +153,7 @@ Page content START -->
                                     <img class="avatar-img rounded-circle" src="@ownUser.LinkImage" alt="avatar">
                                 </div>
                                 <div class="ms-3">
-                                    <h6 class="mb-0"><a href="#">@ownUser.Name</a></h6>
+                                    <h6 class="mb-0"><a href="@Url.Action("ProductAuthor", "User" , new { userId = ownUser.ID })">@ownUser.Name</a></h6>
                                     <p class="mb-0 small">@ownUser.Email</p>
                                 </div>
                             </div>
@@ -696,8 +698,28 @@ Page content START -->
                     </div>
                     <!-- Tags END -->
                 </div><!-- Row End -->
+
+
             </div>
             <!-- Right sidebar END -->
+
+            <h4>Danh sách khóa học liên quan</h4>
+
+            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(4))
+            {
+                ViewBag.product = item;
+                Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
+
+            }
+
+            <h4>Danh sách khóa học được gợi ý bởi giảng viên</h4>
+
+            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(4))
+            {
+                ViewBag.product = item;
+                Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
+
+            }
 
         </div><!-- Row END -->
     </div>

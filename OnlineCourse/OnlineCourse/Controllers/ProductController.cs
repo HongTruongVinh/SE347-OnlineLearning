@@ -20,7 +20,7 @@ namespace OnlineCourse.Controllers
         {
             return View();
         }
-        public ActionResult Category(string searchString, long cateId)
+        public ActionResult Category(string searchString, long cateId, string searchTeacherName)
         {
 
             countPages = (int)Math.Ceiling((double)new ProductDao().CountByCategoryID(searchString, cateId) / ITEMS_PER_PAGE);
@@ -40,7 +40,7 @@ namespace OnlineCourse.Controllers
             var category = new ProductCategoryDao().ViewDetail(cateId);
             ViewBag.Category = category;
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
-            var model = new ProductDao().ListByCategoryID(searchString, cateId, currentPage, ITEMS_PER_PAGE);
+            var model = new ProductDao().ListByCategoryID(searchString, searchTeacherName, cateId, currentPage, ITEMS_PER_PAGE);
 
             return View(model);
         }
@@ -87,6 +87,9 @@ namespace OnlineCourse.Controllers
             }
 
             ViewBag.playingVideo = new CourseVideoDao().GetVideo(playingIdVideo);
+
+            var productdao = new ProductDao();
+            ViewBag.HomeProducts = productdao.ListAllProduct();
 
             return View(product);
         }
