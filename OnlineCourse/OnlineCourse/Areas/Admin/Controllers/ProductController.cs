@@ -6,19 +6,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace OnlineCourse.Areas.Admin.Controllers
 {
     public class ProductController : BaseController
     {
-        public ActionResult Index(string dropdownid,string searchString, int page = 1, int pageSize = 200)
+        public ActionResult Index(string dropdownid,string searchString, int page = 1, int pageSize = 200, int isApproved = -1)
         {
             var dao = new ProductDao();
             if(dropdownid == null)
             {
                 dropdownid = "-1";
             }
-            var model = dao.ListAllPaging(Convert.ToInt16(dropdownid), searchString, page, pageSize);
+            var model = dao.ListAllPaging(Convert.ToInt16(dropdownid), searchString, page, pageSize, isApproved);
 
             ViewBag.SearchString = searchString;
             ViewBag.DropDownID = dropdownid;
@@ -58,7 +59,7 @@ namespace OnlineCourse.Areas.Admin.Controllers
                 product.Description = description;
                 product.Image = image;
                 product.CategoryID = Convert.ToInt16(categoryid);
-                product.Status = true;
+                product.Status = false;
                 product.Detail = detail;
                 product.ListType = listtype;
                 product.ListFile = listfile;
@@ -82,6 +83,37 @@ namespace OnlineCourse.Areas.Admin.Controllers
             }
         }
         [HttpPost]
+        public ActionResult UpdateStatus(int id, bool courseStatus)
+        {
+            try
+            {
+                var dao = new ProductDao();
+                Product product = new Product();
+
+                product = dao.ViewDetail(Convert.ToInt16(id));
+
+                product.Status = courseStatus;
+
+                bool editresult = dao.Update(product);
+                if (editresult == true)
+                {
+                    return Json(new { status = true });
+                }
+                else
+                {
+                    return Json(new { status = false });
+                }
+            }
+            catch
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+        }
+
+    [HttpPost]
         public JsonResult UpdateProductAjax(long id, string name, string code, string metatitle, string description, string detail, string image, string listtype, string listfile, string categoryid)
         {
             try
