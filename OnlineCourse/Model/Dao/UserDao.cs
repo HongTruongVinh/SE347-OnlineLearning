@@ -179,5 +179,40 @@ namespace Model.Dao
             return DataProvider.Ins.DB.Users.SingleOrDefault(x => x.ID == userId);
         }
 
+        public IEnumerable<User> GetListUser()
+        {
+            IQueryable<User> model = DataProvider.Ins.DB.Users;
+            IQueryable<WishProduct> Wproducts = DataProvider.Ins.DB.WishProducts;
+            IQueryable<Product> products = DataProvider.Ins.DB.Products;
+            model = model.Where(x => x.UserName != "admin");
+
+            model = model.Where(u => Wproducts.Where(p => p.UserID == u.ID && p.IsBought == true).Count() <= 0);
+
+            model = model.Where(u => products.Where(p => p.CreateBy == u.ID.ToString()).Count() <= 0);
+
+            return model;
+        }
+
+        public IEnumerable<User> GetListStudent()
+        {
+            IQueryable<User> model = DataProvider.Ins.DB.Users;
+            IQueryable<WishProduct> products = DataProvider.Ins.DB.WishProducts;
+            model = model.Where(x => x.UserName != "admin");
+
+            model = model.Where(u => products.Where(p => p.UserID == u.ID && p.IsBought == true).Count() > 0);
+
+            return model;
+        }
+
+        public IEnumerable<User> GetListTeacher()
+        {
+            IQueryable<User> model = DataProvider.Ins.DB.Users;
+            IQueryable<Product> products = DataProvider.Ins.DB.Products;
+            model = model.Where(x => x.UserName != "admin");
+
+            model = model.Where(u => products.Where(p => p.CreateBy == u.ID.ToString()).Count() > 0);
+
+            return model;
+        }
     }
 }
