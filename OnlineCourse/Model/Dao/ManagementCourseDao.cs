@@ -26,6 +26,16 @@ namespace Model.Dao
             return products;
         }
 
+        public IEnumerable<Product> GetListCoursesByTeacherName(string teacherName)
+        {
+            IQueryable<Product> products = DataProvider.Ins.DB.Products;
+            IQueryable<User> users = DataProvider.Ins.DB.Users;
+            users = users.Where(x => x.UserName != "admin" && x.Name.Contains(teacherName));
+
+            products.Where(p => users.Where(u => p.CreateBy == u.ID.ToString()).Count() > 0);
+
+            return products;
+        }
 
     }
 }
