@@ -35,6 +35,15 @@ namespace OnlineCourse.Areas.Admin.Controllers
             new ProductDao().Delete(id);
             return RedirectToAction("Index");
         }
+
+        [HttpPatch]
+        public ActionResult Activate(int id)
+        {
+            new ProductDao().updateStatus(id, true);
+            //return RedirectToAction("Index");
+           return  Redirect(Request.UrlReferrer.ToString());
+        }
+
         public void SetViewBag(long? selectedId = null)
         {
             var dao = new ProductCategoryDao();
