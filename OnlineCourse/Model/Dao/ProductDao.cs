@@ -63,8 +63,26 @@ namespace Model.Dao
                 return false;
             }
         }
+
+        public bool updateStatus(int id, bool status)
+        {   
+            try
+            {
+                var product = DataProvider.Ins.DB.Products.Find(id);
+                product.Status = status;
+               
+                DataProvider.Ins.DB.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public long Insert(Product entity)
         {
+            entity.Status = false;
             DataProvider.Ins.DB.Products.Add(entity);
             DataProvider.Ins.DB.SaveChanges();
             return entity.ID;

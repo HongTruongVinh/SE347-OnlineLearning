@@ -23,6 +23,8 @@
     var playingVideo = (Model.Models.CourseVideo)ViewBag.playingVideo;
 
     var listHomeProducts = (List<Model.Models.Product>)ViewBag.HomeProducts;
+
+    int currentCategoryId = (int)ViewBag.currentCategoryId;
 }
 @section Childcss
 {
@@ -703,9 +705,9 @@ Page content START -->
             </div>
             <!-- Right sidebar END -->
 
-            <h4>Danh sách khóa học liên quan</h4>
+            <h4>Danh sách khóa học liên quan </h4>
 
-            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(4))
+            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == currentCategoryId).OrderBy(x => Guid.NewGuid()).Take(4))
             {
                 ViewBag.product = item;
                 Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
@@ -714,7 +716,7 @@ Page content START -->
 
             <h4>Danh sách khóa học được gợi ý bởi giảng viên</h4>
 
-            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(4))
+            @foreach (var item in listHomeProducts.Where(x => x.CategoryID == currentCategoryId).OrderBy(x => Guid.NewGuid()).Take(4))
             {
                 ViewBag.product = item;
                 Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
