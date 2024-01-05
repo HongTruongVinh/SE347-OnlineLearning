@@ -91,6 +91,7 @@ namespace OnlineCourse.Controllers
             var productdao = new ProductDao();
             ViewBag.HomeProducts = productdao.ListAllProduct();
 
+            ViewBag.currentCategoryId = (int)product.CategoryID;
             return View(product);
         }
 
