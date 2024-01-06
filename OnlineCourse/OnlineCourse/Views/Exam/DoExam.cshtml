@@ -176,7 +176,7 @@
                         </p>
                         <hr />
                         <div class="cart-totale-price mt-3 mb-4 d-flex align-items-center justify-content-between" style="text-align:center;">
-                            <button data-examfinishid="@Model.ID" data-userfinishid="@ViewBag.UserID" class="btn btn-primary w-100" id="btnFinish" type="button">Nộp bài</button>
+                            <button data-resultessay="abc" data-examfinishid="@Model.ID" data-userfinishid="@ViewBag.UserID" class="btn btn-primary w-100" id="btnFinish" type="button">Nộp bài</button>
 
                         </div>
                     </div>
@@ -244,6 +244,7 @@
                     CheckListQuestion(bid);
                 });
             });
+
             $("#btnFinish").click(function()
             {
                 GetResult();

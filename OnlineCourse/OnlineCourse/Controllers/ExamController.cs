@@ -151,6 +151,7 @@ namespace OnlineCourse.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult DoExam(int examId)
         {
             try
@@ -173,6 +174,37 @@ namespace OnlineCourse.Controllers
             }
         }
 
+        public ActionResult DoneExam(int examId)
+        {
+            try
+            {
+                
 
+
+                bool addresult = true;
+                if (addresult == true)
+                {
+
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        status = false
+                    });
+                }
+            }
+            catch
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+        }
     }
 }

@@ -59,39 +59,81 @@
             <br />
             <br />
 
+            @{ int number = 1; }
+
             @foreach (var question in listCourseQuestion)
             {
-                <div class="form-group row">
-                    <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID"/>
-                    <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
-                    <div class="col-md-12 row">
-                        @{int numberAnswer = 1; }
-                        @foreach (var answer in question.Value.ToList())
-                        {
-                            if (numberAnswer == 1)
-                            {
-                                <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
-                            }
-                            else if (numberAnswer == 2)
-                            {
-                                <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
-                            }
-                            else if (numberAnswer == 3)
-                            {
-                                <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
-                            }
-                            else
-                            {
-                                <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
-                            }
+                    if (true)
+                    {
+                        <div class="form-group row">
+                            <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
+                            <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
+                            <div class="col-md-12 row">
+                                @{int numberAnswer = 1; }
+                                @foreach (var answer in question.Value.ToList())
+                                {
+                                    if (numberAnswer == 1)
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
+                                    }
+                                    else if (numberAnswer == 2)
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
+                                    }
+                                    else if (numberAnswer == 3)
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
+                                    }
 
-                            <br />
-                            <br />
-                            <br />
-                            numberAnswer++;
-                        }
-                    </div>
-                </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    numberAnswer++;
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group row ">
+                            <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
+                            <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
+                            <div class="col-md-12 row">
+                                @{int numberAnswer = 1; }
+                                @foreach (var answer in question.Value.ToList())
+                                {
+                                    if (numberAnswer == 1)
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
+                                    }
+                                    else if (numberAnswer == 2)
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
+                                    }
+                                    else if (numberAnswer == 3)
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
+                                    }
+
+                                    <br />
+                                    <br />
+                                    <br />
+                                    numberAnswer++;
+                                }
+                            </div>
+                        </div>
+                    }
+
+                                        number++;
+                
             }
 
             <hr />
