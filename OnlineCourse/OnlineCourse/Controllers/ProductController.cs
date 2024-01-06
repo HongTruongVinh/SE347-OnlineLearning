@@ -95,6 +95,7 @@ namespace OnlineCourse.Controllers
             lisExam = new VideoExamDao().GetListVideoExamByProductId(playingIdVideo);
             ViewBag.ListVideoExam = lisExam;
 
+            ViewBag.currentCategoryId = (int)product.CategoryID;
             return View(product);
         }
 

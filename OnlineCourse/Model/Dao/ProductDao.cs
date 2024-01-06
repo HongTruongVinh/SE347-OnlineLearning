@@ -14,7 +14,7 @@ namespace Model.Dao
         {
             
         }
-        public IEnumerable<Product> ListAllPaging(long cateID, string searchString, int page, int pagesize)
+        public IEnumerable<Product> ListAllPaging(long cateID, string searchString, int page, int pagesize, int isApproved = -1)
         {
             IQueryable<Product> model = DataProvider.Ins.DB.Products;
             if (cateID != -1)
@@ -25,6 +25,15 @@ namespace Model.Dao
             {
                 model = model.Where(x => x.Name.Contains(searchString) || x.MetaTitle.Contains(searchString));
             }
+            if(isApproved == 0)
+            {
+                model = model.Where(x => x.Status == false);
+            }
+            else if(isApproved == 1)
+            {
+                model = model.Where(x => x.Status == true);
+            }
+
             return model.OrderByDescending(x => x.CreateDate).ToPagedList(page, pagesize);
         }
 
@@ -54,8 +63,26 @@ namespace Model.Dao
                 return false;
             }
         }
+
+        public bool updateStatus(int id, bool status)
+        {   
+            try
+            {
+                var product = DataProvider.Ins.DB.Products.Find(id);
+                product.Status = status;
+               
+                DataProvider.Ins.DB.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public long Insert(Product entity)
         {
+            entity.Status = false;
             DataProvider.Ins.DB.Products.Add(entity);
             DataProvider.Ins.DB.SaveChanges();
             return entity.ID;
@@ -79,6 +106,7 @@ namespace Model.Dao
                 product.ListType = entity.ListType;
                 product.ListFile = entity.ListFile;
                 product.CategoryID = entity.CategoryID;
+                product.Status  = entity.Status;
 
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
@@ -90,11 +118,17 @@ namespace Model.Dao
 
             }
         }
-        public List<Product> ListAllProduct()
+        public List<Product> ListAllProduct(int isApproved =-1 )
         {
-            return DataProvider.Ins.DB.Products.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
+            if(isApproved == 0) 
+            return DataProvider.Ins.DB.Products.Where(x => x.Status == false).OrderByDescending(x => x.ID).ToList();
+            else if (isApproved == 1)
+                return DataProvider.Ins.DB.Products.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
+            return DataProvider.Ins.DB.Products.OrderByDescending(x => x.ID).ToList();
+
+
         }
-        public List<Product> ListByCategoryID(string searchString,string searchTeacherName, long CategoryID, int page, int itemPerPage)
+        public List<Product> ListByCategoryID(string searchString,string searchTeacherName, long CategoryID, int page, int itemPerPage, int isapproved =-1)
         {
             if (page < 1) page = 1;
             IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
@@ -107,11 +141,11 @@ namespace Model.Dao
             {
                 if(!string.IsNullOrEmpty(searchString))
                 {
-                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
                 else
                 {
-                    result =  model.Where(x=> (bool)x.Status).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
 
             }
@@ -119,11 +153,11 @@ namespace Model.Dao
             {
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => (bool)x.Status && x.CategoryID==CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => x.CategoryID==CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
                 else
                 {
-                    result =  model.Where(x => (bool)x.Status && x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+                    result =  model.Where(x =>  x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
                 }
             }
 
@@ -139,6 +173,14 @@ namespace Model.Dao
             
             }
 
+            if(isapproved == 0)
+            {
+                result = result.Where(x => (bool)x.Status == false).ToList();
+            }
+            else if( isapproved == 1)
+            {
+                result = result.Where(x => (bool)x.Status == true).ToList();
+            }
             return result;
         }
 
