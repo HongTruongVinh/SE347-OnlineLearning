@@ -12,11 +12,12 @@ namespace Model.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Author
+    public partial class VideoExam
     {
         public int ID { get; set; }
+        public int VideoID { get; set; }
         public string Name { get; set; }
-        public string Decription { get; set; }
-        public Nullable<System.DateTime> DateUpdate { get; set; }
+        public short Time { get; set; }
+        public string TYPE { get; set; }
     }
 }

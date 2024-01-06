@@ -29,6 +29,10 @@ namespace OnlineCourse.Controllers
         [System.Web.Mvc.HttpPost]
         public ActionResult Login(LoginModel model)
         {
+
+
+
+
             if (ModelState.IsValid)
             {
                 var dao = new UserDao();

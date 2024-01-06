@@ -89,6 +89,7 @@
     <Compile Include="Dao\CourseDocumentDao.cs" />
     <Compile Include="Dao\CourseVideoDao.cs" />
     <Compile Include="Dao\ExamDao.cs" />
+    <Compile Include="Dao\ExamQuestionDao.cs" />
     <Compile Include="Dao\GetInforDao.cs" />
     <Compile Include="Dao\ManagementCourseDao.cs" />
     <Compile Include="Dao\OwnProductDao.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Dao\ResultDao.cs" />
     <Compile Include="Dao\RoleDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
+    <Compile Include="Dao\VideoExamDao.cs" />
     <Compile Include="Models\Admin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -113,8 +115,17 @@
     <Compile Include="Models\CourseVideo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Course_Author.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataProvider.cs" />
     <Compile Include="Models\Exam.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamQuestion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Exam_Question.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -144,6 +155,9 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionAnswer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RecommenedCourse.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -159,19 +173,20 @@
     <Compile Include="Models\Role_Per.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VideoExam.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WishProduct.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CommentViewModel.cs" />
+    <Compile Include="ViewModel\ExamViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

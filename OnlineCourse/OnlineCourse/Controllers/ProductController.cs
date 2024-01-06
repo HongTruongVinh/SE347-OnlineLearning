@@ -91,6 +91,10 @@ namespace OnlineCourse.Controllers
             var productdao = new ProductDao();
             ViewBag.HomeProducts = productdao.ListAllProduct();
 
+            var lisExam = new List<VideoExam>();
+            lisExam = new VideoExamDao().GetListVideoExamByProductId(playingIdVideo);
+            ViewBag.ListVideoExam = lisExam;
+
             return View(product);
         }
 

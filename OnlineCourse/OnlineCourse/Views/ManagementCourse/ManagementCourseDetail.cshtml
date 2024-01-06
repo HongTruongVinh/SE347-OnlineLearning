@@ -67,10 +67,12 @@
                                         <td>@item.DateUpdate</td>
                                         <td>@item.Name</td>
                                         <td style="width:10px;">
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#update" id="@item.ID"
-                                                    data-url="@Url.Action($"UpdateUser/{item.ID}", "User")">
-                                                Sửa
-                                            </button>
+                                            @Html.ActionLink("Sửa", // <-- Link text
+                                                            "UpdateVideoDetail", // <-- Action Method Name
+                                                            "ManagementCourse",
+                                                                new { videoId = item.ID},
+                                                                new { @class = "btn btn-primary" }// <-- Route value
+                        )
                                         </td>
 
                                         <td style="text-align:center;width:15px;vertical-align:middle;">

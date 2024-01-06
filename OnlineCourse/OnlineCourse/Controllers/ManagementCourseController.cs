@@ -1,6 +1,7 @@
 ﻿using Microsoft.Ajax.Utilities;
 using Model.Dao;
 using Model.Models;
+using Model.ViewModel;
 using OnlineCourse.Models;
 using System;
 using System.Collections.Generic;
@@ -286,6 +287,69 @@ namespace OnlineCourse.Controllers
             }
         }
 
+        public ActionResult UpdateVideoDetail(int videoId)
+        {
+            var video = new CourseVideoDao().GetVideo(videoId);
+
+            var listVideoExam = new VideoExamDao().GetListVideoExamByProductId(videoId);
+
+            ViewBag.ListVideoExam = listVideoExam!=null?listVideoExam:new List<VideoExam>();
+
+            return View(video);
+        }
+
+        public ActionResult AddExamView(int videoId)
+        {
+            var newExamViewModel = new ExamViewModel();
+            newExamViewModel.Exam = new VideoExam();
+            newExamViewModel.ChosenQuestion = new Dictionary<int, bool>();
+            newExamViewModel.Exam.VideoID = videoId;
+
+            ViewBag.courseVideo = new CourseVideoDao().GetVideo(videoId);
+
+            var listCourseQuestion = new ExamQuestionDao().GetDictionaryQuetionByVideoId(videoId);
+            ViewBag.ListCourseQuestion = listCourseQuestion;
+
+            return View(newExamViewModel);
+        }
+
+        static List<int> listChosenQuestionId = new List<int>();
+        [HttpPost]
+        public JsonResult UpdateCheckboxes(string checkboxId, string isChecked)
+        {
+            if (bool.Parse(isChecked) == true && !listChosenQuestionId.Contains(int.Parse(checkboxId)))
+            {
+                listChosenQuestionId.Add(int.Parse(checkboxId));
+            }
+            else if(bool.Parse(isChecked) == false && listChosenQuestionId.Contains(int.Parse(checkboxId)))
+            {
+                listChosenQuestionId.Remove(int.Parse(checkboxId));
+            }
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public ActionResult AddExam(ExamViewModel examViewModel)
+        {
+            var result = new VideoExamDao().Add(examViewModel.Exam, listChosenQuestionId);
+
+            return RedirectToAction("UpdateVideoDetail", new { videoId = examViewModel.Exam.VideoID });
+        }
+
+        public ActionResult AddQuestionView(int videoId)
+        {
+            ViewBag.videoID = videoId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddQuestion(int videoId, ExamQuestion examQuestion, string answer1, string answer2, string answer3, string answer4, string trueAnswer)
+        {
+            var result = new ExamQuestionDao().Add(examQuestion, answer1, answer2, answer3, answer4, trueAnswer, videoId);
+
+            return RedirectToAction("AddExamView", new { videoId = videoId } );
+        }
 
         void GetListProductOfUser(int userId)
         {

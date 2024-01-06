@@ -12,11 +12,10 @@ namespace Model.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Author
+    public partial class Exam_Question
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Decription { get; set; }
-        public Nullable<System.DateTime> DateUpdate { get; set; }
+        public int QuestionID { get; set; }
+        public int ExamID { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -23,6 +23,8 @@
     var playingVideo = (Model.Models.CourseVideo)ViewBag.playingVideo;
 
     var listHomeProducts = (List<Model.Models.Product>)ViewBag.HomeProducts;
+
+    var listVideoExam = (List<Model.Models.VideoExam>)ViewBag.ListVideoExam;
 }
 @section Childcss
 {
@@ -198,6 +200,23 @@ Page content START -->
                                                              OnComplete = "$(this).hide();"
                                                          },
                                                          new { @class = "btn btn-sm mb-0 btn-warning-soft small fas bi bi-cart" }
+                                                         )
+                                            </div>
+
+                                            <div class="dropdown ms-2">
+
+                                                @Ajax.ActionLink(" Mua luôn",
+                                                         "BuyProduct",
+                                                         "Profile",
+                                                         new { productId = Model.ID, userId = usersession.UserID },
+                                                         new AjaxOptions
+                                                         {
+                                                             HttpMethod = "GET",
+                                                             InsertionMode = InsertionMode.Replace,
+                                                             UpdateTargetId = "dialog_window_id",
+                                                             OnComplete = "$(this).hide();"
+                                                         },
+                                                         new { @class = "btn btn-danger-soft btn-sm mb-0 small fas bi bi-cart" }
                                                          )
                                             </div>
                                         }
@@ -551,6 +570,9 @@ Page content START -->
                                 <div class="col-12">
                                     <!-- Accordion START -->
                                     <div class="accordion accordion-icon accordion-bg-light" id="accordionExample2">
+
+
+
                                         <!-- Item -->
                                         <div class="accordion-item mb-3">
                                             <h6 class="accordion-header font-base" id="heading-1">
@@ -672,6 +694,44 @@ Page content START -->
                                                     </div>
                                                 </div>
                                                 <!-- Accordion body END -->
+                                            </div>
+                                        </div>
+
+
+                                        <div class="accordion-item mb-3">
+                                            <h6 class="accordion-header font-base" id="heading-3">
+
+                                                <a class="accordion-button fw-bold rounded collapsed d-block" href="#collapse-3" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="true" aria-controls="collapse-3">
+                                                    <span class="mb-0">Các bài test</span>
+                                                    <span class="small d-block mt-1">(@listVideoExam.Count Test)</span>
+                                                </a>
+                                            </h6>
+                                            <div id="collapse-3" class="accordion-collapse collapse show" aria-labelledby="heading-3" data-bs-parent="#accordionExample3">
+                                                <div class="accordion-body mt-3">
+                                                    <div class="vstack gap-3">
+
+                                                        @{
+                                                            //var isBoughtProduct = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault();
+
+                                                            if (isBoughtProduct.Value == true || isProductOfUserSession == true)
+                                                            {
+                                                                foreach (var exam in listVideoExam)
+                                                                {
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <div class="position-relative d-flex align-items-center">
+                                                                            <a href="@Url.Action("DoExam", "Exam", new { ExamId = exam.ID })" class="btn btn-info-soft btn-round btn-sm mb-0 stretched-link position-static">
+                                                                                <i class="fas fa-play me-0"></i>
+                                                                            </a>
+                                                                            <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@exam.Name</span>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                        }
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 

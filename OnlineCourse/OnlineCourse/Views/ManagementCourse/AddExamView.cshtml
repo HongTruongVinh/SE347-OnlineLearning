@@ -1,0 +1,182 @@
+﻿@model Model.ViewModel.ExamViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+
+    var courseVideo = (Model.Models.CourseVideo)ViewBag.CourseVideo;
+
+    var listCourseQuestion = (Dictionary<Model.Models.ExamQuestion, List<Model.Models.QuestionAnswer>>)ViewBag.ListCourseQuestion;
+}
+
+<h2>Tạo bài kiểm tra cho @courseVideo.Title</h2>
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title">Tạo bài kiểm tra cho @courseVideo.Title</h5>
+
+    </div>
+    <div class="modal-body">
+        @using (Html.BeginForm("AddExam", "ManagementCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Exam.ID, new { @class = "form-control", type = "text", style = "display:none" })
+                    @Html.ValidationMessageFor(model => model.Exam.ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Exam.VideoID, new { @class = "form-control", type = "text", style = "display:none" })
+                    @Html.ValidationMessageFor(model => model.Exam.VideoID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Tên bài kiểm tra</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Exam.Name, new { htmlAttributes = new { @class = "form-control", type = "text" }, @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Exam.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Thời gian làm bài (phút)</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Exam.Time, new { htmlAttributes = new { @class = "form-control", type = "number" }, rows = 2, cols = 100 })
+                    @Html.ValidationMessageFor(model => model.Exam.Time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <span class="control-label col-md-5 row" style="font-size: 2vw;">Chọn danh sách câu hỏi</span>
+
+            <br />
+            <br />
+
+            @foreach (var question in listCourseQuestion)
+            {
+                <div class="form-group row">
+                    <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID"/>
+                    <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
+                    <div class="col-md-12 row">
+                        @{int numberAnswer = 1; }
+                        @foreach (var answer in question.Value.ToList())
+                        {
+                            if (numberAnswer == 1)
+                            {
+                                <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
+                            }
+                            else if (numberAnswer == 2)
+                            {
+                                <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
+                            }
+                            else if (numberAnswer == 3)
+                            {
+                                <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
+                            }
+                            else
+                            {
+                                <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
+                            }
+
+                            <br />
+                            <br />
+                            <br />
+                            numberAnswer++;
+                        }
+                    </div>
+                </div>
+            }
+
+            <hr />
+
+            <div class="form-group " style="text-align:right;">
+                @Html.ActionLink("Thêm câu hỏi", // <-- Link text
+                "AddQuestionView", // <-- Action Method Name
+                "ManagementCourse",
+                    new { videoId = courseVideo.ID },
+                    new { @class = "btn btn-primary" }// <-- Route value
+                )
+
+                <a id="save" class="abclaice">
+                    <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
+                </a>
+
+            </div>
+
+        </div>
+
+        }
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    //$(document).ready(function () {
+    //    // Mảng để lưu trữ trạng thái của các checkbox
+    //    var selectedCheckboxes = [];
+    //    debugger;
+    //    // Bắt sự kiện change của checkbox
+    //    $(".checkbox").change(function () {
+    //        debugger;
+    //        // Lấy tất cả các checkbox được chọn và lưu vào mảng
+    //        selectedCheckboxes = $(".checkbox:checked").map(function () {
+    //            return this.id;
+    //        }).get();
+
+    //        // Cập nhật nội dung hiển thị
+    //        $("#selectedCheckboxes").text(selectedCheckboxes.join(', '));
+    //    });
+    //});
+
+    $(document).ready(function () {
+        $(".checkbox-item").change(function () {
+            var checkboxId = $(this).attr("id");
+            var isChecked = $(this).prop("checked");
+            //debugger;
+            // Gửi giá trị từ checkbox đến controller
+            $.ajax({
+                url: "/ManagementCourse/UpdateCheckboxes",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ checkboxId: checkboxId, isChecked: isChecked }),
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+
+
+    var selectedCheckboxes = [];
+
+    function handleCheckboxChange(checkbox) {
+        var checkboxValue = checkbox.id;
+
+        if (checkbox.checked) {
+            // Nếu checkbox được chọn, thêm giá trị vào mảng
+            selectedCheckboxes.push(checkboxValue);
+
+            //Model.ChosenQuestion.Add(checkbox.id);
+        } else {
+            // Nếu checkbox không được chọn, loại bỏ giá trị khỏi mảng
+            var index = selectedCheckboxes.indexOf(checkboxValue);
+            if (index !== -1) {
+                selectedCheckboxes.splice(index, 1);
+            }
+        }
+
+    }
+</script>
+
+

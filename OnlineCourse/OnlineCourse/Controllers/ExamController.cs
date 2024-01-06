@@ -18,6 +18,7 @@ namespace OnlineCourse.Controllers
         {
             return View();
         }
+
         public ActionResult Category(string searchString, string Type)
         {
             ViewBag.Category = Type;
@@ -49,6 +50,7 @@ namespace OnlineCourse.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         public JsonResult AddResult(long examid,long userid)
         {
@@ -149,8 +151,28 @@ namespace OnlineCourse.Controllers
             }
         }
 
+        public ActionResult DoExam(int examId)
+        {
+            try
+            {
+                var exam = new VideoExamDao().GetById(examId);
+                ViewBag.ListExamQuestion = new VideoExamDao().GetListQuestion(examId);
+
+                var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+                ViewBag.Result = new ResultDao().GetByUserExamID(session.UserID, exam.ID);
+
+                ViewBag.Msnv = session.UserName;
+                ViewBag.UserID = session.UserID;
+
+                return View(exam);
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
 
-    
     }
 }
