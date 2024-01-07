@@ -13,6 +13,9 @@
         cateid = category.ID;
     }
     var productcategory = (List<Model.Models.ProductCategory>)ViewBag.CategoryID;
+
+    var userProducts = (List<Model.Models.User>)ViewBag.UserProducts;
+    var products = (List<Model.Models.Product>)ViewBag.Products;
 }
 @section Childcss
 {
@@ -204,7 +207,7 @@ Page content START -->
 
                 <!-- Phân trang -->
                 @{
-                    //string parameters = Request.Url.ToString().Split('-'); , searchString = Request.Url.ToString().g, cateId = 
+                    //string parameters = Request.Url.ToString().Split('-'); , searchString = Request.Url.ToString().g, cateId =
 
                     var pagingmodel = new OnlineCourse.Models.PagingModel()
                     {
@@ -218,26 +221,23 @@ Page content START -->
 
 
                 <!-- Course Grid START -->
-                <div class="row g-4">
-                    @if (cateid == 0)
-                    {
-                        foreach (var item in Model)
-                        {
-                            ViewBag.product = item;
-                            Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
-                        }
-                    }
-                    else
-                    {
-                        foreach (var item in Model.Where(x => x.CategoryID == category.ID))
-                        {
-                            ViewBag.product = item;
-                            Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
-
-                        }
-                    }
-                </div>
+                <!--
+    <div class="row g-4">
+   
+    </div>
+        -->
                 <!-- Course Grid END -->
+             
+
+                <div class="row g-4">
+                    @for (var i = 0; i< products.Count(); i++)
+                    {
+                        ViewBag.product = products[i];
+                        ViewBag.user = userProducts[i];
+                        Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
+                    }
+                  
+                </div>
             </div>
             <!-- Main content END -->
         </div><!-- Row END -->

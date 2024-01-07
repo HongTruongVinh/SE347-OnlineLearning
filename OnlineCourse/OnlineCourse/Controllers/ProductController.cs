@@ -103,7 +103,19 @@ namespace OnlineCourse.Controllers
                     Int32.Parse(valueMaxPrice)
                 );
 
-            return View(model);
+            List<Model.Models.User> users = new List<Model.Models.User>();
+
+            var userDao = new UserDao();
+
+            foreach (var product in model)
+            {
+                users.Add(userDao.GetByUserId(Int32.Parse(product.CreateBy)));
+            }
+
+            ViewBag.UserProducts = users;
+            ViewBag.Products = model;
+
+            return View();
         }
 
         public ActionResult Detaill(long id, long detailid)
@@ -123,6 +135,8 @@ namespace OnlineCourse.Controllers
 
             int createrID = (int)Convert.ToDouble(product.CreateBy);
             ViewBag.CreatedBy = new ProductDao().GetCreatedByUser(createrID);
+
+
 
             return View(product);
         }
@@ -165,6 +179,33 @@ namespace OnlineCourse.Controllers
             ViewBag.ListVideoExam = lisExam;
 
             ViewBag.currentCategoryId = (int)product.CategoryID;
+
+
+            var model = new ProductDao()
+               .ListByCategoryID(
+                   null, null,
+                   0, 1, 20,
+                   "1",
+                   1000,
+                   10000000
+               );
+
+            model = model
+                .Where(x => x.CategoryID == product.CategoryID)
+                .OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+            List<Model.Models.User> users = new List<Model.Models.User>();
+
+            var userDao = new UserDao();
+
+            foreach (var item in model)
+            {
+                users.Add(userDao.GetByUserId(Int32.Parse(item.CreateBy)));
+            }
+
+            ViewBag.UserProducts = users;
+            ViewBag.RecommendProducts = model;
+
             return View(product);
         }
 
