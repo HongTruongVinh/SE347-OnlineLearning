@@ -1,4 +1,5 @@
-﻿using Model.Dao;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Model.Dao;
 using Model.Models;
 using OnlineCourse.Common;
 using System;
@@ -7,10 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.Security;
 
 namespace OnlineCourse.Controllers
 {
-    public class ProductController : BaseController
+    public class ProductController : Controller
     {
         public const int ITEMS_PER_PAGE = 120;
         public int currentPage { get; set; }
@@ -47,6 +50,10 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Detaill(long id, long detailid)
         {
+            // nếu chưa login thì out ra
+            var checkLogin = CheckLogin();
+            if (checkLogin != null) return checkLogin;
+
             var product = new ProductDao().ViewDetail(id);
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
@@ -64,6 +71,10 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Detail(int productId, int playingIdVideo)
         {
+            // nếu chưa login thì out ra
+            var checkLogin = CheckLogin();
+            if (checkLogin != null) return checkLogin;
+
             var product = new ProductDao().ViewDetail(productId);
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
@@ -102,6 +113,10 @@ namespace OnlineCourse.Controllers
         [ChildActionOnly]
         public ActionResult _ChildComment(long parentid, long productid)
         {
+            // nếu chưa login thì out ra
+            var checkLogin = CheckLogin();
+            if (checkLogin != null) return checkLogin;
+
             var data = new CommentDao().ListCommentViewModel(parentid, productid);
             var sessionuser = (UserLogin)Session[CommonConstants.USER_SESSION];
             for (int k = 0; k < data.Count; k++)
@@ -184,6 +199,16 @@ namespace OnlineCourse.Controllers
                 {".gif", "image/gif"},
                 {".csv", "text/csv"}
             };
+        }
+
+        private ActionResult CheckLogin()
+        {
+            var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+            if (session == null)
+            {
+                return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Login" }));
+            }
+            return null;           
         }
     }
 }
