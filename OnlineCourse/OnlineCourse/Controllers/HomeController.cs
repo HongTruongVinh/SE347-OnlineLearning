@@ -25,5 +25,12 @@ namespace OnlineCourse.Controllers
             return View();
         }
 
+        public ActionResult About()
+        {
+            var dao = new ProductCategoryDao();
+            ViewBag.CategoryID = dao.ListAll();
+
+            return View();
+        }
     }
 }

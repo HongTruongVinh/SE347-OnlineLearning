@@ -23,8 +23,59 @@ namespace OnlineCourse.Controllers
         {
             return View();
         }
-        public ActionResult Category(string searchString, long cateId, string searchTeacherName)
-        {
+        public ActionResult Category(
+            string searchString, long cateId, 
+            string searchTeacherName, string filterCategory, string order,
+            string minPrice,
+            string maxPrice
+        )
+        {   
+            // Truyền giá trị từ url vào filter
+            string valueSearchString = "";
+            if (searchString != null)
+            {
+                valueSearchString = searchString;
+            }
+            ViewBag.ValueSearchString = valueSearchString;
+
+            // Truyền giá trị từ url vào filter
+            string valueFilterCategory = "0";
+            if (filterCategory != null)
+            {
+                cateId = Int32.Parse(filterCategory);
+                valueFilterCategory = filterCategory;
+            }
+            else
+            {
+                valueFilterCategory = cateId.ToString();
+            }
+            ViewBag.ValueFilterCategory = valueFilterCategory;
+
+
+            // Truyền giá trị từ url vào filter
+            string valueOrder = "1";
+            if (order != null && order != "")
+            {
+                valueOrder = order;
+                
+            }
+            ViewBag.ValueOrder = valueOrder;
+
+            // Truyền giá trị từ url vào filter
+            string valueMinPrice = "1000";
+            if (minPrice != null && minPrice != "")
+            {
+                valueMinPrice = minPrice;
+            }
+            ViewBag.ValueMinPrice = valueMinPrice;
+
+            // Truyền giá trị từ url vào filter
+            string valueMaxPrice = "100000000";
+            if (maxPrice != null && maxPrice != "")
+            {
+                valueMaxPrice = maxPrice;
+            }
+            ViewBag.ValueMaxPrice = valueMaxPrice;
 
             countPages = (int)Math.Ceiling((double)new ProductDao().CountByCategoryID(searchString, cateId) / ITEMS_PER_PAGE);
 
@@ -43,7 +94,14 @@ namespace OnlineCourse.Controllers
             var category = new ProductCategoryDao().ViewDetail(cateId);
             ViewBag.Category = category;
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
-            var model = new ProductDao().ListByCategoryID(searchString, searchTeacherName, cateId, currentPage, ITEMS_PER_PAGE);
+            var model = new ProductDao()
+                .ListByCategoryID(
+                    searchString, searchTeacherName, 
+                    cateId, currentPage, ITEMS_PER_PAGE, 
+                    valueOrder,
+                    Int32.Parse(valueMinPrice),
+                    Int32.Parse(valueMaxPrice)
+                );
 
             return View(model);
         }
