@@ -94,6 +94,7 @@
             @foreach (var item in listProducts.Where(x => x.CategoryID == 1))
             {
                 ViewBag.product = item;
+                ViewBag.user = null;
                 Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
 
             }

@@ -4,7 +4,7 @@
     var listHomeProducts = (List<Model.Models.Product>)ViewBag.HomeProducts;
     var listHomeExams = (List<Model.Models.Exam>)ViewBag.HomeExams;
     var homeInfor = (Model.Dao.HomeInfor)ViewBag.HomeInfor;
-
+    var userProducts = (List<Model.Models.User>)ViewBag.UserProducts;
 }
 
 @section CustomHomeCSS
@@ -326,6 +326,8 @@ Popular course START -->
                     @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 1).Take(8))
                     {
                         ViewBag.product = item;
+                        var index = listHomeProducts.IndexOf(item);
+                        ViewBag.user = userProducts[index];
                         Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
 
                     }
@@ -338,6 +340,8 @@ Popular course START -->
                     @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 2).Take(8))
                     {
                         ViewBag.product = item;
+                        var index = listHomeProducts.IndexOf(item);
+                        ViewBag.user = userProducts[index];
                         Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
                     }
                 </div>
@@ -349,6 +353,8 @@ Popular course START -->
                     @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 5).Take(8))
                     {
                         ViewBag.product = item;
+                        var index = listHomeProducts.IndexOf(item);
+                        ViewBag.user = userProducts[index];
                         Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
                     }
                 </div>
@@ -360,6 +366,8 @@ Popular course START -->
                     @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 3).Take(8))
                     {
                         ViewBag.product = item;
+                        var index = listHomeProducts.IndexOf(item);
+                        ViewBag.user = userProducts[index];
                         Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
                     }
                 </div>
@@ -371,6 +379,8 @@ Popular course START -->
                     @foreach (var item in listHomeProducts.Where(x => x.CategoryID == 7).Take(8))
                     {
                         ViewBag.product = item;
+                        var index = listHomeProducts.IndexOf(item);
+                        ViewBag.user = userProducts[index];
                         Html.RenderPartial("~/Views/PartialView/CourseCard.cshtml");
                     }
                 </div>

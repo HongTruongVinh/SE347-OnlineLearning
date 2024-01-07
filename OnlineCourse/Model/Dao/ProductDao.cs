@@ -128,52 +128,56 @@ namespace Model.Dao
 
 
         }
-        public List<Product> ListByCategoryID(string searchString,string searchTeacherName, long CategoryID, int page, int itemPerPage, int isapproved =-1)
+        public List<Product> ListByCategoryID(
+            string searchString,string searchTeacherName, long CategoryID, 
+            int page, int itemPerPage, 
+            string order,
+            int minPrice,
+            int maxPrice,
+            int isapproved =-1
+        )
         {
+         
             if (page < 1) page = 1;
             IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
             IOrderedQueryable<User> users = DataProvider.Ins.DB.Users;
 
             List<Product> result = new List<Product>();
 
-           
-            if (CategoryID == 0)
-            {
-                if(!string.IsNullOrEmpty(searchString))
-                {
-                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
-                }
-                else
-                {
-                    result =  model.OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
-                }
-
-            }
+            // lấy theo loại khóa học
+            if (CategoryID > 0)
+                result = model.Where(x => x.CategoryID == CategoryID).ToList();
             else
+                result = model.ToList();
+
+            // tìm kiếm theo chuổi
+            if (!string.IsNullOrEmpty(searchString))
             {
-                if (!string.IsNullOrEmpty(searchString))
-                {
-                    result =  model.Where(x => x.Name.Contains(searchString) || x.Description.Contains(searchString)).Where(x => x.CategoryID==CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
-                }
-                else
-                {
-                    result =  model.Where(x =>  x.CategoryID == CategoryID).OrderByDescending(x => x.CreateDate).Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
-                }
+                result = result.Where(x =>
+                            // điều kiện theo tên khóa học
+                            x.Name.ToLower().Contains(searchString.ToLower()) ||
+                            // điều kiện theo tên người đăng
+                            (users.Where(user => (
+                                user.ID.ToString() == x.CreateBy &&
+                                user.Name.Contains(searchString.ToLower())
+                            )).Count() > 0)
+                         ).ToList();
             }
 
+            // sắp xếp mới nhất cũ nhất
+            if (order == "1")
+                result = result.OrderByDescending(x => x.CreateDate).ToList();
+            else
+                result = result.OrderBy(x => x.CreateDate).ToList();
 
-            if (!string.IsNullOrEmpty(searchTeacherName))
-            {
-                result = result.Where(
-                    product => (
-                    users.Where(user => (
-                        user.ID.ToString() == product.CreateBy &&
-                        user.Name.Contains(searchTeacherName)
-                    )).Count() > 0)).ToList();
-            
-            }
+            // lấy theo giá
+            result = result.Where(x => x.Price >= minPrice).ToList();
+            result = result.Where(x => x.Price <= maxPrice).ToList();
 
-            if(isapproved == 0)
+            // phân trang
+            result = result.Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
+
+            if (isapproved == 0)
             {
                 result = result.Where(x => (bool)x.Status == false).ToList();
             }

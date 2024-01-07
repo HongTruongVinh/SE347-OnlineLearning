@@ -1,4 +1,5 @@
-﻿using Model.Dao;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Model.Dao;
 using Model.Models;
 using OnlineCourse.Common;
 using System;
@@ -7,10 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.Security;
 
 namespace OnlineCourse.Controllers
 {
-    public class ProductController : BaseController
+    public class ProductController : Controller
     {
         public const int ITEMS_PER_PAGE = 120;
         public int currentPage { get; set; }
@@ -20,8 +23,59 @@ namespace OnlineCourse.Controllers
         {
             return View();
         }
-        public ActionResult Category(string searchString, long cateId, string searchTeacherName)
-        {
+        public ActionResult Category(
+            string searchString, long cateId, 
+            string searchTeacherName, string filterCategory, string order,
+            string minPrice,
+            string maxPrice
+        )
+        {   
+            // Truyền giá trị từ url vào filter
+            string valueSearchString = "";
+            if (searchString != null)
+            {
+                valueSearchString = searchString;
+            }
+            ViewBag.ValueSearchString = valueSearchString;
+
+            // Truyền giá trị từ url vào filter
+            string valueFilterCategory = "0";
+            if (filterCategory != null)
+            {
+                cateId = Int32.Parse(filterCategory);
+                valueFilterCategory = filterCategory;
+            }
+            else
+            {
+                valueFilterCategory = cateId.ToString();
+            }
+            ViewBag.ValueFilterCategory = valueFilterCategory;
+
+
+            // Truyền giá trị từ url vào filter
+            string valueOrder = "1";
+            if (order != null && order != "")
+            {
+                valueOrder = order;
+                
+            }
+            ViewBag.ValueOrder = valueOrder;
+
+            // Truyền giá trị từ url vào filter
+            string valueMinPrice = "1000";
+            if (minPrice != null && minPrice != "")
+            {
+                valueMinPrice = minPrice;
+            }
+            ViewBag.ValueMinPrice = valueMinPrice;
+
+            // Truyền giá trị từ url vào filter
+            string valueMaxPrice = "100000000";
+            if (maxPrice != null && maxPrice != "")
+            {
+                valueMaxPrice = maxPrice;
+            }
+            ViewBag.ValueMaxPrice = valueMaxPrice;
 
             countPages = (int)Math.Ceiling((double)new ProductDao().CountByCategoryID(searchString, cateId) / ITEMS_PER_PAGE);
 
@@ -40,13 +94,36 @@ namespace OnlineCourse.Controllers
             var category = new ProductCategoryDao().ViewDetail(cateId);
             ViewBag.Category = category;
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
-            var model = new ProductDao().ListByCategoryID(searchString, searchTeacherName, cateId, currentPage, ITEMS_PER_PAGE);
+            var model = new ProductDao()
+                .ListByCategoryID(
+                    searchString, searchTeacherName, 
+                    cateId, currentPage, ITEMS_PER_PAGE, 
+                    valueOrder,
+                    Int32.Parse(valueMinPrice),
+                    Int32.Parse(valueMaxPrice)
+                );
 
-            return View(model);
+            List<Model.Models.User> users = new List<Model.Models.User>();
+
+            var userDao = new UserDao();
+
+            foreach (var product in model)
+            {
+                users.Add(userDao.GetByUserId(Int32.Parse(product.CreateBy)));
+            }
+
+            ViewBag.UserProducts = users;
+            ViewBag.Products = model;
+
+            return View();
         }
 
         public ActionResult Detaill(long id, long detailid)
         {
+            // nếu chưa login thì out ra
+            var checkLogin = CheckLogin();
+            if (checkLogin != null) return checkLogin;
+
             var product = new ProductDao().ViewDetail(id);
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
@@ -59,11 +136,17 @@ namespace OnlineCourse.Controllers
             int createrID = (int)Convert.ToDouble(product.CreateBy);
             ViewBag.CreatedBy = new ProductDao().GetCreatedByUser(createrID);
 
+
+
             return View(product);
         }
 
         public ActionResult Detail(int productId, int playingIdVideo)
         {
+            // nếu chưa login thì out ra
+            var checkLogin = CheckLogin();
+            if (checkLogin != null) return checkLogin;
+
             var product = new ProductDao().ViewDetail(productId);
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
@@ -96,12 +179,43 @@ namespace OnlineCourse.Controllers
             ViewBag.ListVideoExam = lisExam;
 
             ViewBag.currentCategoryId = (int)product.CategoryID;
+
+
+            var model = new ProductDao()
+               .ListByCategoryID(
+                   null, null,
+                   0, 1, 20,
+                   "1",
+                   1000,
+                   10000000
+               );
+
+            model = model
+                .Where(x => x.CategoryID == product.CategoryID)
+                .OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+            List<Model.Models.User> users = new List<Model.Models.User>();
+
+            var userDao = new UserDao();
+
+            foreach (var item in model)
+            {
+                users.Add(userDao.GetByUserId(Int32.Parse(item.CreateBy)));
+            }
+
+            ViewBag.UserProducts = users;
+            ViewBag.RecommendProducts = model;
+
             return View(product);
         }
 
         [ChildActionOnly]
         public ActionResult _ChildComment(long parentid, long productid)
         {
+            // nếu chưa login thì out ra
+            var checkLogin = CheckLogin();
+            if (checkLogin != null) return checkLogin;
+
             var data = new CommentDao().ListCommentViewModel(parentid, productid);
             var sessionuser = (UserLogin)Session[CommonConstants.USER_SESSION];
             for (int k = 0; k < data.Count; k++)
@@ -184,6 +298,16 @@ namespace OnlineCourse.Controllers
                 {".gif", "image/gif"},
                 {".csv", "text/csv"}
             };
+        }
+
+        private ActionResult CheckLogin()
+        {
+            var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+            if (session == null)
+            {
+                return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Login" }));
+            }
+            return null;           
         }
     }
 }
