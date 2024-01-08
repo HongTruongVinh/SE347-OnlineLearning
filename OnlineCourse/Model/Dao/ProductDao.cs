@@ -9,10 +9,10 @@ namespace Model.Dao
 {
     public class ProductDao
     {
-        
+
         public ProductDao()
         {
-            
+
         }
         public IEnumerable<Product> ListAllPaging(long cateID, string searchString, int page, int pagesize, int isApproved = -1)
         {
@@ -25,11 +25,11 @@ namespace Model.Dao
             {
                 model = model.Where(x => x.Name.Contains(searchString) || x.MetaTitle.Contains(searchString));
             }
-            if(isApproved == 0)
+            if (isApproved == 0)
             {
                 model = model.Where(x => x.Status == false);
             }
-            else if(isApproved == 1)
+            else if (isApproved == 1)
             {
                 model = model.Where(x => x.Status == true);
             }
@@ -39,7 +39,7 @@ namespace Model.Dao
 
         public bool IsProductOfUserSession(int productId, int userId)
         {
-            
+
             Product product = DataProvider.Ins.DB.Products.Where(x => x.ID == productId).SingleOrDefault();
 
             if (product != null && int.Parse(product.CreateBy) == userId)
@@ -65,12 +65,12 @@ namespace Model.Dao
         }
 
         public bool updateStatus(int id, bool status)
-        {   
+        {
             try
             {
                 var product = DataProvider.Ins.DB.Products.Find(id);
                 product.Status = status;
-               
+
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
             }
@@ -106,7 +106,7 @@ namespace Model.Dao
                 product.ListType = entity.ListType;
                 product.ListFile = entity.ListFile;
                 product.CategoryID = entity.CategoryID;
-                product.Status  = entity.Status;
+                product.Status = entity.Status;
 
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
@@ -118,10 +118,10 @@ namespace Model.Dao
 
             }
         }
-        public List<Product> ListAllProduct(int isApproved =-1 )
+        public List<Product> ListAllProduct(int isApproved = -1)
         {
-            if(isApproved == 0) 
-            return DataProvider.Ins.DB.Products.Where(x => x.Status == false).OrderByDescending(x => x.ID).ToList();
+            if (isApproved == 0)
+                return DataProvider.Ins.DB.Products.Where(x => x.Status == false).OrderByDescending(x => x.ID).ToList();
             else if (isApproved == 1)
                 return DataProvider.Ins.DB.Products.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
             return DataProvider.Ins.DB.Products.OrderByDescending(x => x.ID).ToList();
@@ -129,15 +129,15 @@ namespace Model.Dao
 
         }
         public List<Product> ListByCategoryID(
-            string searchString,string searchTeacherName, long CategoryID, 
-            int page, int itemPerPage, 
+            string searchString, string searchTeacherName, long CategoryID,
+            int page, int itemPerPage,
             string order,
             int minPrice,
             int maxPrice,
-            int isapproved =-1
+            int isapproved = -1
         )
         {
-         
+
             if (page < 1) page = 1;
             IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
             IOrderedQueryable<User> users = DataProvider.Ins.DB.Users;
@@ -181,7 +181,7 @@ namespace Model.Dao
             {
                 result = result.Where(x => (bool)x.Status == false).ToList();
             }
-            else if( isapproved == 1)
+            else if (isapproved == 1)
             {
                 result = result.Where(x => (bool)x.Status == true).ToList();
             }
@@ -241,7 +241,7 @@ namespace Model.Dao
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
             }
-            catch 
+            catch
             {
                 return result;
             }
@@ -266,9 +266,9 @@ namespace Model.Dao
         {
             try
             {
-                WishProduct wishProduct = DataProvider.Ins.DB.WishProducts.Where(x =>  x.ProductID == productId && x.UserID == userId).SingleOrDefault();
+                WishProduct wishProduct = DataProvider.Ins.DB.WishProducts.Where(x => x.ProductID == productId && x.UserID == userId).SingleOrDefault();
                 DataProvider.Ins.DB.WishProducts.Remove(wishProduct);
-                DataProvider.Ins.DB.SaveChanges();  
+                DataProvider.Ins.DB.SaveChanges();
                 return true;
             }
             catch
@@ -277,7 +277,7 @@ namespace Model.Dao
             }
         }
 
-        
+
 
         public Dictionary<string, bool> GetWishListProduct(int userId)
         {
@@ -301,6 +301,37 @@ namespace Model.Dao
             IQueryable<Product> model = DataProvider.Ins.DB.Products;
             model = model.Where(x => x.CreateBy == userId.ToString());
             return model.OrderByDescending(x => x.CreateDate).ToList();
+        }
+
+        public List<Product> getListRecommend(Product product)
+        {
+            IOrderedQueryable<Product> model = DataProvider.Ins.DB.Products;
+
+            List<Product> result = new List<Product>();
+            result = model.ToList();
+
+            result = result
+                .Where(x => checkIsSuitable(x.Name, product.Name) || x.CategoryID == product.CategoryID)
+                .OrderBy(x => Guid.NewGuid())
+                .Take(4).ToList();
+
+            // sắp xếp mới nhất cũ nhất
+            result = result.OrderByDescending(x => x.CreateDate).ToList();
+
+            return result;
+        }
+
+        private bool checkIsSuitable(String name1, string name2)
+        {
+            string[] list1 = name1.Split('#');
+            foreach (var item in list1)
+            {
+                if (name2.Contains(item))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

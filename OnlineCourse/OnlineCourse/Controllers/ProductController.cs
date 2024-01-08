@@ -181,18 +181,8 @@ namespace OnlineCourse.Controllers
             ViewBag.currentCategoryId = (int)product.CategoryID;
 
 
-            var model = new ProductDao()
-               .ListByCategoryID(
-                   null, null,
-                   0, 1, 20,
-                   "1",
-                   1000,
-                   10000000
-               );
-
-            model = model
-                .Where(x => x.CategoryID == product.CategoryID)
-                .OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+            var model = new ProductDao().getListRecommend(product);
+            
 
             List<Model.Models.User> users = new List<Model.Models.User>();
 

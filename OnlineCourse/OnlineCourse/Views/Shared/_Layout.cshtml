@@ -2,7 +2,6 @@
     Layout = null;
     var productcategory = (List<Model.Models.ProductCategory>)ViewBag.CategoryID;
 }
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +36,7 @@
     <!-- Theme CSS -->
     @RenderSection("Childcss", required: false)
     <link rel="stylesheet" type="text/css" href="/assets/client/css/style.css">
-    
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N7LGGGWT1"></script>
     <script>
@@ -102,11 +101,11 @@
                         <!-- Nav item 2 Pages -->
                         <li class="nav-item dropdown">
                             <!--
-    <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
-    <ul class="dropdown-menu" aria-labelledby="pagesMenu">
-        <li> <a class="dropdown-item" href="\gioi-thieu">Tổng quan</a></li>
-        <li> <a class="dropdown-item" href="\gioi-thieu\giang-vien">Giảng viên</a></li>
-    </ul>-->
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Giới thiệu</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\gioi-thieu">Tổng quan</a></li>
+                                <li> <a class="dropdown-item" href="\gioi-thieu\giang-vien">Giảng viên</a></li>
+                            </ul>-->
                             <a class="nav-link dropdown" href="@Url.Action("About", "Home")">Giới thiệu</a>
                         </li>
                         <!-- Nav item 2 Pages -->
@@ -134,22 +133,22 @@
                             </ul>
                         </li>
                         <!--
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sách</a>
-                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
-                                <li> <a class="dropdown-item" href="\sach\tat-ca-0">Tất cả sách</a></li>
-                                <li> <a class="dropdown-item" href="\sach\cong-nghe-thong-tin-1">CNTT</a></li>
-                                <li> <a class="dropdown-item" href="\sach\kinh-te-2">Kinh tế</a></li>
-                            </ul>
-                        </li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sách</a>
+                                                <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                                    <li> <a class="dropdown-item" href="\sach\tat-ca-0">Tất cả sách</a></li>
+                                                    <li> <a class="dropdown-item" href="\sach\cong-nghe-thong-tin-1">CNTT</a></li>
+                                                    <li> <a class="dropdown-item" href="\sach\kinh-te-2">Kinh tế</a></li>
+                                                </ul>
+                                            </li>
 
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin tức</a>
-        <ul class="dropdown-menu" aria-labelledby="pagesMenu">
-            <li> <a class="dropdown-item" href="\bai-chia-se">Bài chia sẻ</a></li>
-            <li> <a class="dropdown-item" href="\thu-vien-anh">Thư viện ảnh</a></li>
-        </ul>
-    </li>-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin tức</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item" href="\bai-chia-se">Bài chia sẻ</a></li>
+                                <li> <a class="dropdown-item" href="\thu-vien-anh">Thư viện ảnh</a></li>
+                            </ul>
+                        </li>-->
 
                     </ul>
                     <!-- Nav Main menu END -->
@@ -365,5 +364,5 @@
     @Scripts.Render("~/bundles/bootstrap")
 </body>
 
- 
+
 </html>
