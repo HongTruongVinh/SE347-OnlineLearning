@@ -1,6 +1,21 @@
 ﻿@model Model.Models.Product
 
 @{
+    string getProductName(string name)
+    {
+        return name.Split('#')[0];
+    }
+
+    List<string> getProductTag(string name)
+    {
+        List<string> list = name.Split('#').ToList();
+        if (list.Count > 1)
+            list.RemoveAt(0);
+        return list;
+    }
+}
+
+@{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -10,7 +25,7 @@
 
     var listcomment = (List<Model.ViewModel.CommentViewModel>)ViewBag.ListComment;
 
-    var TitleDetail = Model.Name;
+    var TitleDetail = getProductName(Model.Name);
 
     ViewBag.Title = TitleDetail;
 
@@ -30,6 +45,9 @@
     var recommendProducts = (List<Model.Models.Product>)ViewBag.RecommendProducts;
     var userProducts = (List<Model.Models.User>)ViewBag.UserProducts;
 
+    //var wishProducts = (List<Model.Models.WishProduct>)Session["WishProducts"];
+    //wishProducts = wishProduct.Where(x => x.ProductID == Model.ID && x.IsBought == true).ToList();
+    var isBought = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault(); ;
 }
 @section Childcss
 {
@@ -49,8 +67,15 @@
 }
 
 
-
-<section class="py-0 pb-lg-5">
+<!--
+<div>isBought.Value</div>
+/foreach (KeyValuePair<string, bool> kvp in usersession.WishListIdProduct)
+{
+   <div> //kvp.Key //kvp.Value)
+    </div>
+}
+    -->
+<section class="pt-5 pb-0 pb-lg-5">
     <div class="container">
         <div class="row g-3">
             <!-- Course video START -->
@@ -623,7 +648,7 @@ Page content START -->
                                                                                 </a>
                                                                                 <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@video.Title</span>
                                                                             </div>
-                                                                            <p class="mb-0 text-truncate">20m 10s</p>
+
                                                                         </div>
                                                                     }
                                                                 }
@@ -656,7 +681,7 @@ Page content START -->
                                                                                 <i class="fas bi bi-cart me-0 btn btn-warning-soft btn-round btn-sm disabled" style="max-width: 150%; max-height: 150%"></i>
                                                                                 <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@video.Title</span>
                                                                             </div>
-                                                                            <p class="mb-0 text-truncate">20m 10s</p>
+                                                                            <!--<p class="mb-0 text-truncate">20m 10s</p>-->
                                                                         </div>
                                                                     }
                                                                 }
@@ -751,14 +776,12 @@ Page content START -->
                     <div class="col-12">
                         <h4 class="mb-3">Tags</h4>
                         <ul class="list-inline mb-0">
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">blog</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">business</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">theme</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">bootstrap</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">data science</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">web development</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">tips</a> </li>
-                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">machine learning</a> </li>
+                            @foreach (var item in getProductTag(Model.Name))
+                            {
+                                <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">@item</a> </li>
+                            }
+
+
                         </ul>
                     </div>
                     <!-- Tags END -->
@@ -770,7 +793,7 @@ Page content START -->
 
             <h4>Danh sách khóa học liên quan </h4>
 
-            @for (var i =0; i< recommendProducts.Count(); i++)
+            @for (var i = 0; i < recommendProducts.Count(); i++)
             {
                 ViewBag.product = recommendProducts[i];
                 ViewBag.user = userProducts[i];

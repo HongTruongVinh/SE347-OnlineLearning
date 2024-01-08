@@ -11,8 +11,8 @@
 
             @foreach (var product in cartProducts)
             {
-                var url = "/chi-tiet/" + product.MetaTitle + "-" + product.ID + "-1";
-
+                //var url = "/chi-tiet/" + product.MetaTitle + "-" + product.ID + "-1";
+                var url = "/Product/Detail?productId=" + product.ID + "&playingIdVideo=-1";
                 <div class="row p-2 bg-white border rounded mt-2" id="@product.ID">
                     <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="@product.Image"></div>
                     <div class="col-md-6 mt-1">

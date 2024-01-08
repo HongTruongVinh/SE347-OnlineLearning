@@ -2,7 +2,12 @@
     var product = (Model.Models.Product)ViewBag.product;
     var user = (Model.Models.User)ViewBag.user;
 }
-
+@{
+    string getProductName(string name)
+    {
+        return name.Split('#')[0];
+    }
+}
 @{
     <div class="col-sm-6 col-lg-4 col-xl-3">
         <div class="card shadow h-100">
@@ -32,7 +37,7 @@
 
 
                 <!-- Title -->
-                <h5 class="card-title fw-normal"><a href="@Url.Action("Detail", "Product" , new { productId = product.ID, playingIdVideo = -1 })">@product.Name</a></h5>
+                <h5 class="card-title fw-normal"><a href="@Url.Action("Detail", "Product" , new { productId = product.ID, playingIdVideo = -1 })">@getProductName(product.Name)</a></h5>
                 <p class="mb-2 text-truncate-2">@product.Description</p>
                 <!-- Rating star -->
                 <ul class="list-inline mb-0">

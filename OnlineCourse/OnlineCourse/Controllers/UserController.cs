@@ -43,8 +43,13 @@ namespace OnlineCourse.Controllers
                     var user = dao.GetByUserName(model.UserName);
                     var usersession = SetUserSession(user);
                     usersession.Address = user.Address;
-                    usersession.WishListIdProduct = new ProductDao().GetWishListProduct((int)user.ID);
+
+                    var wishProducts = new ProductDao().GetWishListProduct((int)user.ID);
+                    usersession.WishListIdProduct = wishProducts;
                     Session.Add(CommonConstants.USER_SESSION, usersession);
+
+                    Session["WishProuducts"] = new WishProductDao().GetListWishProduct((int)user.ID);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else if (result == 0)
