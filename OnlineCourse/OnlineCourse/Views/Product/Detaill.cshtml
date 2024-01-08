@@ -550,6 +550,7 @@ Page content START -->
                                             <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordionExample2">
                                                 <div class="accordion-body mt-3">
                                                     <div class="vstack gap-3">
+                                              
                                                         @for (int i = 0; i < arrListFile.Length; i++)
                                                         {
                                                             if (arrListType[i].ToString() == "0")
@@ -575,6 +576,7 @@ Page content START -->
                                                                                     <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@arrListFile[i].ToString()</span>
                                                                                 </div>
                                                                                 <p class="mb-0 text-truncate">Playing</p>
+
                                                                             </div>
                                                                         </div>
 
@@ -586,7 +588,7 @@ Page content START -->
                                                                                 <i class="fas bi bi-cart me-0 btn btn-warning-soft btn-round btn-sm disabled" style="max-width: 150%; max-height: 150%"></i>
                                                                                 <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@arrListFile[i].ToString()</span>
                                                                             </div>
-                                                                            <p class="mb-0 text-truncate">2m 10s</p>
+                                                                            <!--<p class="mb-0 text-truncate">20m 10s</p>-->
                                                                         </div>
                                                                     }
                                                                 }

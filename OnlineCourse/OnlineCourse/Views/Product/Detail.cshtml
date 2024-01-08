@@ -45,6 +45,9 @@
     var recommendProducts = (List<Model.Models.Product>)ViewBag.RecommendProducts;
     var userProducts = (List<Model.Models.User>)ViewBag.UserProducts;
 
+    //var wishProducts = (List<Model.Models.WishProduct>)Session["WishProducts"];
+    //wishProducts = wishProduct.Where(x => x.ProductID == Model.ID && x.IsBought == true).ToList();
+    var isBought = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault(); ;
 }
 @section Childcss
 {
@@ -64,7 +67,14 @@
 }
 
 
-
+<!--
+<div>isBought.Value</div>
+/foreach (KeyValuePair<string, bool> kvp in usersession.WishListIdProduct)
+{
+   <div> //kvp.Key //kvp.Value)
+    </div>
+}
+    -->
 <section class="pt-5 pb-0 pb-lg-5">
     <div class="container">
         <div class="row g-3">
@@ -638,7 +648,7 @@ Page content START -->
                                                                                 </a>
                                                                                 <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@video.Title</span>
                                                                             </div>
-                                                                            <p class="mb-0 text-truncate">20m 10s</p>
+
                                                                         </div>
                                                                     }
                                                                 }
@@ -671,7 +681,7 @@ Page content START -->
                                                                                 <i class="fas bi bi-cart me-0 btn btn-warning-soft btn-round btn-sm disabled" style="max-width: 150%; max-height: 150%"></i>
                                                                                 <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@video.Title</span>
                                                                             </div>
-                                                                            <p class="mb-0 text-truncate">20m 10s</p>
+                                                                            <!--<p class="mb-0 text-truncate">20m 10s</p>-->
                                                                         </div>
                                                                     }
                                                                 }
@@ -766,10 +776,10 @@ Page content START -->
                     <div class="col-12">
                         <h4 class="mb-3">Tags</h4>
                         <ul class="list-inline mb-0">
-                            @foreach(var item in getProductTag(Model.Name))
-                                        {
-                                            <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">@item</a> </li>
-                                        }
+                            @foreach (var item in getProductTag(Model.Name))
+                            {
+                                <li class="list-inline-item"> <a class="btn btn-outline-light btn-sm" href="#">@item</a> </li>
+                            }
 
 
                         </ul>

@@ -124,7 +124,9 @@ namespace Model.Dao
                 return DataProvider.Ins.DB.Products.Where(x => x.Status == false).OrderByDescending(x => x.ID).ToList();
             else if (isApproved == 1)
                 return DataProvider.Ins.DB.Products.Where(x => x.Status == true).OrderByDescending(x => x.ID).ToList();
-            return DataProvider.Ins.DB.Products.OrderByDescending(x => x.ID).ToList();
+            return DataProvider.Ins.DB.Products
+                .OrderByDescending(x => x.ID)
+                .Where(x => (bool)x.Status == true).ToList();
 
 
         }
@@ -177,6 +179,7 @@ namespace Model.Dao
             // phân trang
             result = result.Skip((page - 1) * itemPerPage).Take(itemPerPage).ToList();
 
+            /*
             if (isapproved == 0)
             {
                 result = result.Where(x => (bool)x.Status == false).ToList();
@@ -185,6 +188,10 @@ namespace Model.Dao
             {
                 result = result.Where(x => (bool)x.Status == true).ToList();
             }
+            */
+
+            result = result.Where(x => (bool)x.Status == true).ToList();
+
             return result;
         }
 
@@ -300,7 +307,9 @@ namespace Model.Dao
         {
             IQueryable<Product> model = DataProvider.Ins.DB.Products;
             model = model.Where(x => x.CreateBy == userId.ToString());
-            return model.OrderByDescending(x => x.CreateDate).ToList();
+            return model
+                .OrderByDescending(x => x.CreateDate)
+                .Where(x => (bool)x.Status == true).ToList();
         }
 
         public List<Product> getListRecommend(Product product)
@@ -311,6 +320,7 @@ namespace Model.Dao
             result = model.ToList();
 
             result = result
+                .Where(x => (bool)x.Status == true)
                 .Where(x => checkIsSuitable(x.Name, product.Name) || x.CategoryID == product.CategoryID)
                 .OrderBy(x => Guid.NewGuid())
                 .Take(4).ToList();
