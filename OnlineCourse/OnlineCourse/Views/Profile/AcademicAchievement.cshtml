@@ -1,12 +1,12 @@
 ﻿
 @{
     ViewBag.Title = "AcademicAchievement";
-    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
     Dictionary<string, string> listResultExamOfUser = ViewBag.ListResultExam;
 }
 
-<div class="mb-4 mb-sm-5">
+<div class="pt-3 container mb-4 mb-sm-5">
     <span class="section-title text-primary mb-3 mb-sm-4" style="font-size: 30px">Điểm số các bài kiểm tra gần đây</span>
     <div class="row" style="height:50px"></div>
     @if (listResultExamOfUser.Count != 0)

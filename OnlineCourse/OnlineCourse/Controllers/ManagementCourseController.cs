@@ -25,6 +25,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Index()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -39,6 +42,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult ManagementCourseDetail(long productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             ViewBag.ListDocument = new CourseDocumentDao().GetListDocumentInfor((int)productId);
             ViewBag.ListVideo = new CourseVideoDao().GetListVideoInfor((int)productId);
 
@@ -59,6 +65,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult ViewEditCourse(long productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -79,6 +88,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult ViewAddVieoToCourse(long productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -97,6 +109,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpPost]
         public ActionResult AddVieoToCourse(CourseVideo video, HttpPostedFileBase file)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -118,6 +133,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult ViewAddDocumentToCourse(long productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -136,6 +154,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpPost]
         public ActionResult AddDocumentToCourse(CourseDocument document, HttpPostedFileBase file)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -155,6 +176,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult DeleteDocumentOfCourse(int documentId, int productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -168,6 +192,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult DeleteVideoOfCourse(int videoId, int productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -195,6 +222,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpPost]
         public ActionResult UpdateCourse(Product product, HttpPostedFileBase imageFile)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -268,6 +298,8 @@ namespace OnlineCourse.Controllers
 
         public ActionResult DeleteCourse(int productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
@@ -289,6 +321,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult UpdateVideoDetail(int videoId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var video = new CourseVideoDao().GetVideo(videoId);
 
             var listVideoExam = new VideoExamDao().GetListVideoExamByProductId(videoId);
@@ -300,6 +335,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult AddExamView(int videoId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var newExamViewModel = new ExamViewModel();
             newExamViewModel.Exam = new VideoExam();
             newExamViewModel.ChosenQuestion = new Dictionary<int, bool>();
@@ -317,6 +355,9 @@ namespace OnlineCourse.Controllers
         [HttpPost]
         public JsonResult UpdateCheckboxes(string checkboxId, string isChecked)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             if (bool.Parse(isChecked) == true && !listChosenQuestionId.Contains(int.Parse(checkboxId)))
             {
                 listChosenQuestionId.Add(int.Parse(checkboxId));
@@ -332,6 +373,9 @@ namespace OnlineCourse.Controllers
         [HttpPost]
         public ActionResult AddExam(ExamViewModel examViewModel)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var result = new VideoExamDao().Add(examViewModel.Exam, listChosenQuestionId);
 
             return RedirectToAction("UpdateVideoDetail", new { videoId = examViewModel.Exam.VideoID });
@@ -339,6 +383,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult AddQuestionView(int videoId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             ViewBag.videoID = videoId;
             return View();
         }
@@ -346,6 +393,9 @@ namespace OnlineCourse.Controllers
         [HttpPost]
         public ActionResult AddQuestion(int videoId, ExamQuestion examQuestion, string answer1, string answer2, string answer3, string answer4, string trueAnswer)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var result = new ExamQuestionDao().Add(examQuestion, answer1, answer2, answer3, answer4, trueAnswer, videoId);
 
             return RedirectToAction("AddExamView", new { videoId = videoId } );
@@ -353,6 +403,7 @@ namespace OnlineCourse.Controllers
 
         void GetListProductOfUser(int userId)
         {
+
             MyProducts = new ManagementCourseDao().GetProductOfUser(userId);
         }
 

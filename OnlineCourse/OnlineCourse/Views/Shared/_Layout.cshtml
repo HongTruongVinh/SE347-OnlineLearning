@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
     var productcategory = (List<Model.Models.ProductCategory>)ViewBag.CategoryID;
+    int productInCart = 0;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -166,6 +167,21 @@
                     <!-- Nav Search END -->
                 </div>
                 <!-- Main navbar END -->
+
+                <!--Cart-->
+                <a href="@Url.Action("Cart", "Profile")"
+                   class="d-flex justify-content-between align-items-center position-relative">
+                    <i class="fa fa-shopping-cart position-relative px-4 py-2" style="font-size: 20px">
+
+                    </i>
+                    @if (productInCart > 0)
+                    {
+                        <div class="px-2 py-1 position-absolute"
+                             style="color:white; background-color: red;border-radius:20px;bottom:-7px;right:8px;font-size:10px">@productInCart</div>
+                    }
+
+                </a>
+                
                 <!-- Profile START -->
                 @{
                     var user = (OnlineCourse.Common.UserLogin)HttpContext.Current.Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
@@ -191,7 +207,15 @@
                                     <hr>
                                 </li>
                                 <!-- Links -->
-                                <li><a class="dropdown-item" href="@Url.Action("Index", "Profile")"><i class="bi bi-person fa-fw me-2"></i>Hồ sơ cá nhân</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Profile")"><i class="bi bi-person fa-fw me-2"></i>Thông tin cá nhân</a></li>
+
+                                <li><a class="dropdown-item" href="@Url.Action("CourseBought", "Profile")"><i class="bi bi-bag fa-fw me-2"></i>Các khóa học đã mua</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Cart", "Profile")"><i class="bi bi-cart fa-fw me-2"></i>Giỏ hàng</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyCourse", "Profile")"><i class="bi bi-book fa-fw me-2"></i>Các khóa học của tôi</a></li>
+
+                                <li><a class="dropdown-item" href="@Url.Action("AcademicAchievement", "Profile")"><i class="bi bi-star fa-fw me-2"></i>Thành tích học tập</a></li>
+                              
+
                                 <li><a class="dropdown-item bg-danger-soft-hover" href="@Url.Action("LogUot", "User")"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
                                 <li> <hr class="dropdown-divider"></li>
 
