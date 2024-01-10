@@ -227,7 +227,7 @@ Page content START -->
                                                              HttpMethod = "GET",
                                                              InsertionMode = InsertionMode.Replace,
                                                              UpdateTargetId = "dialog_window_id",
-                                                             OnComplete = "$(this).hide();"
+                                                             OnComplete = "$(this).hide();location.reload(true);alert('Đã thêm vào giỏ hàng')"
                                                          },
                                                          new { @class = "btn btn-sm mb-0 btn-warning-soft small fas bi bi-cart" }
                                                          )
