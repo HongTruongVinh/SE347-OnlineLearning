@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Model.Models;
@@ -213,6 +214,30 @@ namespace Model.Dao
             model = model.Where(u => products.Where(p => p.CreateBy == u.ID.ToString()).Count() > 0);
 
             return model;
+        }
+
+        public int countStudentByID(int userID)
+        {
+            IQueryable<Product> products = DataProvider.Ins.DB.Products.Where(p=>p.CreateBy == userID.ToString());
+            IQueryable<WishProduct> Wproducts = DataProvider.Ins.DB.WishProducts.Where(wp=>wp.IsBought == true);
+
+            //Wproducts = Wproducts.Where(wp => products.Where(p => p.ID == wp.ProductID).Count() > 0).Select(wp=>wp.UserID).Distinct().ToList();
+
+            int count = Wproducts.Where(wp => products.Where(p => p.ID == wp.ProductID).Count() > 0).Select(wp => wp.UserID).Distinct().Count();
+
+            return count;
+        }
+
+        public int countCommentByID(int userID)
+        {
+            IQueryable<Product> products = DataProvider.Ins.DB.Products.Where(p => p.CreateBy == userID.ToString());
+            IQueryable<Comment> comments = DataProvider.Ins.DB.Comments;
+
+            //Wproducts = Wproducts.Where(wp => products.Where(p => p.ID == wp.ProductID).Count() > 0).Select(wp=>wp.UserID).Distinct().ToList();
+
+            int count = comments.Where(c => products.Where(p => p.ID == c.ProductID).Count() > 0).Count();
+
+            return count;
         }
     }
 }
