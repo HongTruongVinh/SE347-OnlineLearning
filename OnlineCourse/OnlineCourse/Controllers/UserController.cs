@@ -161,7 +161,8 @@ namespace OnlineCourse.Controllers
     
             ViewBag.User = new UserDao().GetByUserId(userId);
             ViewBag.UserProducts = new ProductDao().getByUserId(userId);
-
+            ViewBag.CountStudent = new UserDao().countStudentByID(userId);
+            ViewBag.countComment = new UserDao().countCommentByID(userId);
 
 
             return View();

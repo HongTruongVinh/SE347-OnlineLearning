@@ -6,6 +6,9 @@
 
     var user = (Model.Models.User)ViewBag.User;
     var listProducts = (List<Model.Models.Product>)ViewBag.UserProducts;
+    var countStudent = ViewBag.CountStudent;
+    var countComment = ViewBag.countComment;
+
 }
 @section Childcss
 {
@@ -41,12 +44,12 @@
                 <div class="row pb-5">
                     <div class="col">
                         <h5>Số học sinh</h5>
-                        <h4>2,447</h4>
+                        <h4>@countStudent</h4>
                     </div>
 
                     <div class="col">
                         <h5>Số đánh giá</h5>
-                        <h4>1,123</h4>
+                        <h4>@countComment</h4>
                     </div>
 
                 </div>
@@ -67,7 +70,7 @@
 
                 <img class="rounded-circle pb-5" src="@user.LinkImage" alt="avatar">
 
-                <div class="button-profile"
+                @*<div class="button-profile"
                      style="height: 50px; display: flex;justify-content: center; align-items: center; margin-bottom: 8px; border: 1px solid; ">
                     <a href="#!"><i class="ti-twitter-alt" style="font-weight: bold;color: black; font-size: 18px">Twitter</i></a>
                 </div>
@@ -81,7 +84,7 @@
                      class="button-profile"
                      style="height: 50px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; border: 1px solid;">
                     <a href="#!"><i class="ti-instagram" style="font-weight: bold;color: black; font-size: 18px">Instagram</i></a>
-                </div>
+                </div>*@
 
 
             </div>
