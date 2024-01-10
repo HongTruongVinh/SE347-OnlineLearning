@@ -12,120 +12,94 @@
             <div class="row align-users-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <img src="@Model.Image" alt="..." style="max-width: 70%">
+
                 </div>
                 <div class="col-lg-6 px-xl-10">
-                    <div class="bg-primary d-lg-inline-block  rounded p-3">
-                        <h3 class="h5 text-white mb-0">@Model.FullName (@Model.Role)</h3>
-                 
+                    <div class="">
+
+                        <div class="">
+                            @using (Html.BeginForm("UpdateProfile", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <div class="col">
+                                            @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", type = "text", style = "display:none;min-width: 100% !important" })
+                                            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Tài khoản</label>
+                                        <div class="col">
+                                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", type = "text", @style = "min-width: 100% !important" }, @disabled = "disabled" })
+                                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Họ tên</label>
+                                        <div class="col">
+                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", type = "text", @style = "min-width: 100% !important" } })
+                                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Điện thoại</label>
+                                        <div class="col">
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", type = "text", @style = "min-width: 100% !important" } })
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Email</label>
+                                        <div class="col">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "text", @style = "min-width: 100% !important" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Địa chỉ</label>
+                                        <div class="" style="">
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", type = "text", @style = "min-width: 100% !important" } })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Ảnh</label>
+                                        <div class="">
+                                            @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", type = "text" } })*@
+
+                                            <input type="file" id="imageFile" name="imageFile" class="btn btn-info" style="min-width: 100% !important" />
+
+                                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group " style="text-align:right;">
+                                        <a id="save" class="abclaice ">
+                                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Cập nhật" />
+                                        </a>
+                                        <button id="closeModel" type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    </div>
+
+                                </div>
+
+                            }
+                        </div>
                     </div>
-                    <ul class="list-unstyled mb-1-9 pt-2">
-                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Tài khoản:</span> <span class="font-22">@Model.UserName</span></li>
-                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Vai trò:</span> <span class="font-22">@Model.Role</span></li>
-                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Ngày tham gia:</span> <span class="font-22">@Model.CreateDate</span></li>
-                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span><span class="font-22"> @Model.Email</span></li>
-                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Địa chỉ:</span><span class="font-22"> @Model.Address</span></li>
-                        <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Số điện thoại</span><span class="font-22"> @Model.Phone</span></li>
-                    </ul>
-                    <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
-
-
-                        <li style="text-align:right;">
-                            <button id="openModel" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                Cập nhật thông tin
-                            </button>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="profileModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hUserIDden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Cập nhật thông tin</h5>
 
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("UpdateProfile", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <div class="form-horizontal">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", type = "text", style = "display:none" })
-                                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Tài khoản</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", type = "text" }, @disabled = "disabled" })
-                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Họ tên</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Điện thoại</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Email</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Địa chỉ</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Ảnh</label>
-                            <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", type = "text" } })*@
-
-                                <input type="file" id="imageFile" name="imageFile" class="btn btn-info" />
-
-                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <hr />
-
-                        <div class="form-group " style="text-align:right;">
-                            <a id="save" class="abclaice ">
-                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Cập nhật" />
-                            </a>
-                            <button id="closeModel" type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        </div>
-
-                    </div>
-
-                }
-            </div>
-        </div>
-    </div>
-
-</div>
+<hr />
