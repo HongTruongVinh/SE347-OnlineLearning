@@ -12,7 +12,7 @@
             var rate = document.getElementById('ddlRate');
             if (commentmsg.value == "") {
 
-                bootbox.alert("Chưa nhập nội dung bình luận");
+                //bootbox.alert("Chưa nhập nội dung bình luận");
                 return;
             }
             $.ajax({
@@ -29,15 +29,15 @@
                 success: function (response) {
                     if (response.status == true) {
                         commentmsg.value = "";
-                        bootbox.alert({
-                            message: "Bạn đã thêm bình luận thành công",
-                            size: 'medium',
-                            closeButton: false
-                        });
+                        //bootbox.alert({
+                        //    message: "Bạn đã thêm bình luận thành công",
+                        //    size: 'medium',
+                        //    closeButton: false
+                        //});
                         $("#div_allcomment").load("/Product/GetComment?productid=" + productid);
                     }
                     else {
-                        bootbox.alert("Thêm bình luận lỗi");
+                    //    bootbox.alert("Thêm bình luận lỗi");
                     }
                 }
             });
@@ -57,7 +57,7 @@
 
             if (commentmsgvalue.value == "") {
 
-                bootbox.alert("Chưa nhập nội dung bình luận");
+                //bootbox.alert("Chưa nhập nội dung bình luận");
                 return;
             }
             $.ajax({
@@ -74,15 +74,15 @@
                 success: function (response) {
                     if (response.status == true) {
                         commentmsg.value = "";
-                        bootbox.alert({
-                            message: "Bạn đã thêm bình luận thành công",
-                            size: 'medium',
-                            closeButton: false
-                        });
+                        //bootbox.alert({
+                        //    message: "Bạn đã thêm bình luận thành công",
+                        //    size: 'medium',
+                        //    closeButton: false
+                        //});
                         $("#div_allcomment").load("/Product/GetComment?productid=" + productid);
                     }
                     else {
-                        bootbox.alert("Thêm bình luận lỗi");
+                    //    bootbox.alert("Thêm bình luận lỗi");
                     }
                 }
             });
