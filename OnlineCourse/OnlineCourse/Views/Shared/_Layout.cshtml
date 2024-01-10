@@ -44,6 +44,18 @@
     {
         productInCart = ConvertToProductModels(new wishProductDao().GetListCartProduct(userCheck.UserID), false).Count();
     }
+    else
+    {
+        // khi chưa đăng nhập
+        var strProductCart = OnlineCourse.Common.CommonConstants.PRODUCTS_CART;
+        var userNotLoginSession = (OnlineCourse.Common.UserNotLogin)Session[strProductCart];
+
+        if (userNotLoginSession != null)
+        {
+            productInCart = userNotLoginSession.productsInCart.Count();
+        }
+    }
+
 }
 <!DOCTYPE html>
 <html lang="en">

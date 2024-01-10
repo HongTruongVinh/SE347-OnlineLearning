@@ -50,6 +50,9 @@ namespace OnlineCourse.Controllers
 
                     Session["WishProuducts"] = new WishProductDao().GetListWishProduct((int)user.ID);
 
+                    // xóa dữ liệu giỏ hàng tạm thời
+                    Session.Remove(OnlineCourse.Common.CommonConstants.PRODUCTS_CART);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else if (result == 0)

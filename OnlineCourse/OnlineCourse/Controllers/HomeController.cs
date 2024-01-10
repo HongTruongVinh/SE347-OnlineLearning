@@ -1,5 +1,6 @@
 ﻿using Model.Dao;
 using Model.Models;
+using OnlineCourse.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Index()
         {
+            Session.Add(Common.CommonConstants.PRODUCTS_CART, new UserNotLogin() { 
+                productsInCart = new List<Product>()
+            });
+
             var dao = new ProductCategoryDao();
             ViewBag.CategoryID = dao.ListAll();
             var productdao = new ProductDao();
@@ -25,8 +30,7 @@ namespace OnlineCourse.Controllers
             HomeInfor homeInfor = new GetInforDao().GetHomeInfor();
             ViewBag.HomeInfor = homeInfor;
 
-
-           
+         
             List<Model.Models.User> users = new List<Model.Models.User>();
 
             var userDao = new UserDao();

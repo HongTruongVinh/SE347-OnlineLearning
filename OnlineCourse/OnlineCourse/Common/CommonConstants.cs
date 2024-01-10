@@ -8,6 +8,8 @@ namespace OnlineCourse.Common
     public static class CommonConstants
     {
         public static string USER_SESSION = "USER_SESSION";
-        public static string CurrentCulture { set; get; } 
+        public static string CurrentCulture { set; get; }
+
+        public static string PRODUCTS_CART = "PRODUCTS_CART_SESSION";
     }
 }
