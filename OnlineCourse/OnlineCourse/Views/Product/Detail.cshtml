@@ -31,7 +31,14 @@
 
     var ownUser = (Model.Models.User)ViewBag.CreatedBy;
     var usersession = (OnlineCourse.Common.UserLogin)HttpContext.Current.Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
-    bool isProductOfUserSession = (bool)ViewBag.isProductOfUserSession;
+
+    bool isProductOfUserSession = false;
+    //sau khi đăng nhập
+    if (usersession != null)
+    {
+        isProductOfUserSession = (bool)ViewBag.isProductOfUserSession;
+    }
+
 
     var productVideos = (List<Model.Models.CourseVideo>)ViewBag.productVideos;
     var productDocuments = (List<Model.Models.CourseDocument>)ViewBag.productDocuments;
@@ -47,7 +54,22 @@
 
     //var wishProducts = (List<Model.Models.WishProduct>)Session["WishProducts"];
     //wishProducts = wishProduct.Where(x => x.ProductID == Model.ID && x.IsBought == true).ToList();
-    var isBought = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault(); ;
+    var isBoughtProduct = new KeyValuePair<string, bool>("", false);
+
+    if (usersession != null)
+    {
+        isBoughtProduct = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault();
+    }
+
+    var allowButtonAddCart = true;
+
+    var strProductCart = OnlineCourse.Common.CommonConstants.PRODUCTS_CART;
+    var userNotLoginSession = (OnlineCourse.Common.UserNotLogin)Session[strProductCart];
+    var checkList = userNotLoginSession.productsInCart.Where(x => x.ID == Model.ID).ToList();
+    if (checkList.Count() > 0)
+    {
+        allowButtonAddCart = false;
+    }
 }
 @section Childcss
 {
@@ -251,6 +273,25 @@ Page content START -->
                                             </div>
                                         }
 
+                                    }
+                                    else if (allowButtonAddCart == true)
+                                    {
+                                        <div class="dropdown ms-2">
+
+                                            @Ajax.ActionLink(" Thêm vào giỏ",
+                                                     "AddProductToCart",
+                                                     "Profile",
+                                                     new { productId = Model.ID, userId = -1},
+                                                     new AjaxOptions
+                                                     {
+                                                         HttpMethod = "GET",
+                                                         InsertionMode = InsertionMode.Replace,
+                                                         UpdateTargetId = "dialog_window_id",
+                                                         OnComplete = "$(this).hide();location.reload(true);alert('Đã thêm vào giỏ hàng')"
+                                                     },
+                                                     new { @class = "btn btn-sm mb-0 btn-warning-soft small fas bi bi-cart" }
+                                                     )
+                                        </div>
                                     }
                                 }
                             </div>
@@ -490,11 +531,15 @@ Page content START -->
                                                                 <textarea class="form-control" id="txtCommentMsg_@itemcomment.ID" placeholder="Viết nhận xét tại đây" rows="3"></textarea>
 
                                                             </div>
-                                                            <div class="mt-2 text-right">
-                                                                <a class="abcdefghkj" data-productid="@itemcomment.ProductID" data-userid="@ViewBag.UserID" data-parentid="@itemcomment.ID" data-commentmsg="txtCommentMsg_@itemcomment.ID">
-                                                                    <input type="submit" class="btn btn-primary mb-0" value="Gửi bình luận" />
-                                                                </a>
-                                                            </div>
+                                                            @if (ViewBag.UserID != null)
+                                                            {
+                                                                <div class="mt-2 text-right">
+                                                                    <a class="abcdefghkj" data-productid="@itemcomment.ProductID" data-userid="@ViewBag.UserID" data-parentid="@itemcomment.ID" data-commentmsg="txtCommentMsg_@itemcomment.ID">
+                                                                        <input type="submit" class="btn btn-primary mb-0" value="Gửi bình luận" />
+                                                                    </a>
+                                                                </div>
+                                                            }
+
                                                         </div>
 
                                                         <!-- Reply button -->
@@ -528,9 +573,13 @@ Page content START -->
                                             <textarea class="form-control" id="txtCommentNew" placeholder="Viết nhận xét tại đây" rows="3"></textarea>
                                         </div>
                                         <!-- Button -->
-                                        <div class="col-12">
-                                            <button type="button" id="btnCommentNew" data-productid="@Model.ID" data-userid="@ViewBag.UserID" class="btn btn-primary mb-0">Bình luận</button>
-                                        </div>
+                                        @if (ViewBag.UserID != null)
+                                        {
+                                            <div class="col-12">
+                                                <button type="button" id="btnCommentNew" data-productid="@Model.ID" data-userid="@ViewBag.UserID" class="btn btn-primary mb-0">Bình luận</button>
+                                            </div>
+                                        }
+
                                     </form>
                                 </div>
                                 <!-- Leave Review END -->
@@ -617,7 +666,7 @@ Page content START -->
                                                     <div class="vstack gap-3">
 
                                                         @{
-                                                            var isBoughtProduct = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault();
+                                                            //var isBoughtProduct = usersession.WishListIdProduct.Where(x => x.Key == Model.ID.ToString() && x.Value == true).SingleOrDefault();
 
 
                                                             //Nếu chưa mua khóa học này thì sẽ disable link đến các video khác

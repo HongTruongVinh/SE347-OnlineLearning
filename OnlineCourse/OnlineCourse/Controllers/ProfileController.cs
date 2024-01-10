@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -21,7 +22,7 @@ namespace OnlineCourse.Controllers
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
-            if (user == null)
+            if ( user == null)
             {
                 return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index" }));
             }
@@ -86,10 +87,39 @@ namespace OnlineCourse.Controllers
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
-                return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index" }));
-            }
+                //return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index" }));
 
-            ViewBag.CartProducts = ConvertToProductModels(new WishProductDao().GetListCartProduct(user.UserID), false);
+                // khi chưa đăng nhập
+                var strProductCart = OnlineCourse.Common.CommonConstants.PRODUCTS_CART;
+                var userNotLoginSession = (OnlineCourse.Common.UserNotLogin)Session[strProductCart];
+                var products = userNotLoginSession.productsInCart;
+
+                if (products == null) products = new List<Model.Models.Product>();
+                ViewBag.CartProducts = ConvertToProductModels(
+                    products, 
+                    false
+                );
+                user = new UserLogin()
+                {
+                    UserID = -1,
+                    GroupID = "not_login",
+                    Email = "not_login",
+                    FullName = "not_login",
+                    Image = "not_login",
+                    Phone = "not_login",
+                    CreateDate = new DateTime(),
+                    ProductList = "not_login",
+                    Address = "not_login",
+                    Role = "not_login",
+                    Password = "not_login",
+                    WishListIdProduct = new Dictionary<string, bool>(),
+                };
+            }
+            else
+            {
+                ViewBag.CartProducts = ConvertToProductModels(new WishProductDao().GetListCartProduct(user.UserID), false);
+            }
+         
 
             return View(user);
         }
@@ -254,6 +284,12 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpGet]
         public ActionResult BuyProduct(int userId, int productId)
         {
+            // chưa login
+            if (userId == -1)
+            {
+                return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Login" }));
+            }
+
             // data for nav bar product type
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
@@ -272,29 +308,66 @@ namespace OnlineCourse.Controllers
         [System.Web.Mvc.HttpGet]
         public ActionResult AddProductToCart(int userId, int productId)
         {
+         
+
             // data for nav bar product type
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+             
+            var product = new ProductDao().ViewDetail(productId);
 
-            bool status = new ProductDao().AddProductToCart(userId, productId);
 
-            if (status == true)
+            if (userId == -1)
             {
-                var usersession = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
-                Session.Remove(CommonConstants.USER_SESSION);
-                usersession.WishListIdProduct.Add(productId.ToString(), false);
-                Session.Add(CommonConstants.USER_SESSION, usersession);
+                // chưa login
+                var strProductCart = OnlineCourse.Common.CommonConstants.PRODUCTS_CART;
+                var userNotLoginSession = (OnlineCourse.Common.UserNotLogin)Session[strProductCart];
+                userNotLoginSession.productsInCart.Add(product);
+                   
+                Session.Remove(strProductCart);
+                Session.Add(strProductCart, userNotLoginSession);
 
-                return Json(new { status = true }); ;
             }
             else
             {
-                return Json(new { status = false });
+                // đã login
+                bool status = new ProductDao().AddProductToCart(userId, productId);
+
+                if (status == true)
+                {
+                    var usersession = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
+                    Session.Remove(CommonConstants.USER_SESSION);
+                    usersession.WishListIdProduct.Add(productId.ToString(), false);
+                    Session.Add(CommonConstants.USER_SESSION, usersession);
+
+                    return Json(new { status = true });
+                }
+                else
+                {
+                    return Json(new { status = false });
+                }
+
             }
+            return Json(new { status = true });
         }
 
         [System.Web.Http.HttpPost]
         public ActionResult DeleteProduct(int userId, int productId)
         {
+            //chưa login
+            if (userId == -1)
+            {
+                var product = new ProductDao().ViewDetail(productId);
+
+                var strProductCart = OnlineCourse.Common.CommonConstants.PRODUCTS_CART;
+                var userNotLoginSession = (OnlineCourse.Common.UserNotLogin)Session[strProductCart];
+                userNotLoginSession.productsInCart.Remove(product);
+
+                Session.Remove(strProductCart);
+                Session.Add(strProductCart, userNotLoginSession);
+
+                return Json(new { status = true });
+            }
+
             // data for nav bar product type
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 

@@ -144,17 +144,22 @@ namespace OnlineCourse.Controllers
         public ActionResult Detail(int productId, int playingIdVideo)
         {
             // nếu chưa login thì out ra
-            var checkLogin = CheckLogin();
-            if (checkLogin != null) return checkLogin;
+            //var checkLogin = CheckLogin();
+            //if (checkLogin != null) return checkLogin;
 
             var product = new ProductDao().ViewDetail(productId);
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
             var sessionUser = (UserLogin)Session[CommonConstants.USER_SESSION];
-            ViewBag.UserID = sessionUser.UserID;
-            ViewBag.ListComment = new CommentDao().ListCommentViewModel(0, productId);
 
-            ViewBag.isProductOfUserSession = new ProductDao().IsProductOfUserSession(productId, (int)sessionUser.UserID);
+            // đã đăng nhập
+            if (sessionUser != null)
+            {
+                ViewBag.UserID = sessionUser.UserID;
+                ViewBag.isProductOfUserSession = new ProductDao().IsProductOfUserSession(productId, (int)sessionUser.UserID);
+            }
+
+            ViewBag.ListComment = new CommentDao().ListCommentViewModel(0, productId);
 
             int createrID = (int)Convert.ToDouble(product.CreateBy);
             ViewBag.CreatedBy = new ProductDao().GetCreatedByUser(createrID);

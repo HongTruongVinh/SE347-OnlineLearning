@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -27,11 +28,8 @@ namespace OnlineCourse.Controllers
             return View();
         }
         [System.Web.Mvc.HttpPost]
-        public ActionResult Login(LoginModel model)
+        public async Task<ActionResult> Login(LoginModel model)
         {
-
-
-
 
             if (ModelState.IsValid)
             {
@@ -45,10 +43,40 @@ namespace OnlineCourse.Controllers
                     usersession.Address = user.Address;
 
                     var wishProducts = new ProductDao().GetWishListProduct((int)user.ID);
+
+                    
+                    
+                    // lấy giỏ hàng nạp vào data
+                    var strProductCart = OnlineCourse.Common.CommonConstants.PRODUCTS_CART;
+                    var userNotLoginSession = (OnlineCourse.Common.UserNotLogin)Session[strProductCart];
+
+                    var products = userNotLoginSession.productsInCart;
+                    var productDao = new ProductDao();
+                    foreach(var item in products)
+                    {
+                        // khóa học này chưa trong giỏ hàng hoặc đã mua thì add
+                        if (wishProducts.ContainsKey(item.ID.ToString()) == false)
+                        {
+                            productDao.AddProductToCart((int)user.ID, (int)item.ID);
+                        }
+                    }
+                    
+
+                    // xóa dữ liệu trong session
+                    userNotLoginSession.productsInCart.Clear();
+
+                    Session.Remove(strProductCart);
+                    Session.Add(strProductCart, userNotLoginSession);
+
+                    await Task.Delay(2000);
+
+
+                    wishProducts = new ProductDao().GetWishListProduct((int)user.ID);
                     usersession.WishListIdProduct = wishProducts;
                     Session.Add(CommonConstants.USER_SESSION, usersession);
 
                     Session["WishProuducts"] = new WishProductDao().GetListWishProduct((int)user.ID);
+
 
                     return RedirectToAction("Index", "Home");
                 }
