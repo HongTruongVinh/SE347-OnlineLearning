@@ -5,12 +5,12 @@
 <div class="container mt-5 mb-5">
     <div class="d-flex justify-content-center row">
         <div class="col-md-10">
-
+            <span class="section-title text-primary mb-3 mb-sm-4" style="font-size: 30px">Các khóa học đã mua(@ListOwnProducts.Count())</span>
             @foreach (var product in ListOwnProducts)
             {
                 //var url = "/chi-tiet/" + product.MetaTitle + "-" + product.ID + "-1";
 
-                var url = "/Product/Detail?productId="+product.ID + "&playingIdVideo=-1";
+                var url = "/Product/Detail?productId=" + product.ID + "&playingIdVideo=-1";
                 <div class="row p-2 bg-white border rounded mt-2">
                     <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="@product.Image"></div>
                     <div class="col-md-6 mt-1">

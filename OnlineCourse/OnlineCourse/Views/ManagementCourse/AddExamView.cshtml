@@ -2,162 +2,163 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
     var courseVideo = (Model.Models.CourseVideo)ViewBag.CourseVideo;
 
     var listCourseQuestion = (Dictionary<Model.Models.ExamQuestion, List<Model.Models.QuestionAnswer>>)ViewBag.ListCourseQuestion;
 }
 
-<h2>Tạo bài kiểm tra cho @courseVideo.Title</h2>
+<div class="container pt-5">
+    <h2>Tạo bài kiểm tra cho @courseVideo.Title</h2>
 
-<div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title">Tạo bài kiểm tra cho @courseVideo.Title</h5>
-
-    </div>
-    <div class="modal-body">
-        @using (Html.BeginForm("AddExam", "ManagementCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Exam.ID, new { @class = "form-control", type = "text", style = "display:none" })
-                    @Html.ValidationMessageFor(model => model.Exam.ID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Exam.VideoID, new { @class = "form-control", type = "text", style = "display:none" })
-                    @Html.ValidationMessageFor(model => model.Exam.VideoID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Tên bài kiểm tra</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Exam.Name, new { htmlAttributes = new { @class = "form-control", type = "text" }, @disabled = "disabled" })
-                    @Html.ValidationMessageFor(model => model.Exam.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Thời gian làm bài (phút)</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Exam.Time, new { htmlAttributes = new { @class = "form-control", type = "number" }, rows = 2, cols = 100 })
-                    @Html.ValidationMessageFor(model => model.Exam.Time, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <hr />
-
-            <span class="control-label col-md-5 row" style="font-size: 2vw;">Chọn danh sách câu hỏi</span>
-
-            <br />
-            <br />
-
-            @{ int number = 1; }
-
-            @foreach (var question in listCourseQuestion)
-            {
-                    if (true)
-                    {
-                        <div class="form-group row">
-                            <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
-                            <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
-                            <div class="col-md-12 row">
-                                @{int numberAnswer = 1; }
-                                @foreach (var answer in question.Value.ToList())
-                                {
-                                    if (numberAnswer == 1)
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
-                                    }
-                                    else if (numberAnswer == 2)
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
-                                    }
-                                    else if (numberAnswer == 3)
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
-                                    }
-
-                                    <br />
-                                    <br />
-                                    <br />
-                                    numberAnswer++;
-                                }
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="form-group row ">
-                            <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
-                            <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
-                            <div class="col-md-12 row">
-                                @{int numberAnswer = 1; }
-                                @foreach (var answer in question.Value.ToList())
-                                {
-                                    if (numberAnswer == 1)
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
-                                    }
-                                    else if (numberAnswer == 2)
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
-                                    }
-                                    else if (numberAnswer == 3)
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
-                                    }
-
-                                    <br />
-                                    <br />
-                                    <br />
-                                    numberAnswer++;
-                                }
-                            </div>
-                        </div>
-                    }
-
-                                        number++;
-                
-            }
-
-            <hr />
-
-            <div class="form-group " style="text-align:right;">
-                @Html.ActionLink("Thêm câu hỏi", // <-- Link text
-                "AddQuestionView", // <-- Action Method Name
-                "ManagementCourse",
-                    new { videoId = courseVideo.ID },
-                    new { @class = "btn btn-primary" }// <-- Route value
-                )
-
-                <a id="save" class="abclaice">
-                    <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
-                </a>
-
-            </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Tạo bài kiểm tra cho @courseVideo.Title</h5>
 
         </div>
+        <div class="modal-body">
+            @using (Html.BeginForm("AddExam", "ManagementCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Exam.ID, new { @class = "form-control", type = "text", style = "display:none" })
+                            @Html.ValidationMessageFor(model => model.Exam.ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        }
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Exam.VideoID, new { @class = "form-control", type = "text", style = "display:none" })
+                            @Html.ValidationMessageFor(model => model.Exam.VideoID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Tên bài kiểm tra</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Exam.Name, new { htmlAttributes = new { @class = "form-control", type = "text" }, @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.Exam.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Thời gian làm bài (phút)</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Exam.Time, new { htmlAttributes = new { @class = "form-control", type = "number" }, rows = 2, cols = 100 })
+                            @Html.ValidationMessageFor(model => model.Exam.Time, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <span class="control-label col-md-5 row" style="font-size: 2vw;">Chọn danh sách câu hỏi</span>
+
+                    <br />
+                    <br />
+
+                    @{ int number = 1; }
+
+                    @foreach (var question in listCourseQuestion)
+                    {
+                        if (true)
+                        {
+                            <div class="form-group row">
+                                <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
+                                <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
+                                <div class="col-md-12 row">
+                                    @{int numberAnswer = 1; }
+                                    @foreach (var answer in question.Value.ToList())
+                                    {
+                                        if (numberAnswer == 1)
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
+                                        }
+                                        else if (numberAnswer == 2)
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
+                                        }
+                                        else if (numberAnswer == 3)
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
+                                        }
+
+                                        <br />
+                                        <br />
+                                        <br />
+                                        numberAnswer++;
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group row ">
+                                <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
+                                <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
+                                <div class="col-md-12 row">
+                                    @{int numberAnswer = 1; }
+                                    @foreach (var answer in question.Value.ToList())
+                                    {
+                                        if (numberAnswer == 1)
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">A.&nbsp;@answer.Content</span>
+                                        }
+                                        else if (numberAnswer == 2)
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">B.&nbsp;@answer.Content</span>
+                                        }
+                                        else if (numberAnswer == 3)
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">C.&nbsp;@answer.Content</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="col-md-3 " style="font-size: 1.5vw;">D.&nbsp;@answer.Content</span>
+                                        }
+
+                                        <br />
+                                        <br />
+                                        <br />
+                                        numberAnswer++;
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                        number++;
+
+                    }
+
+                    <hr />
+
+                    <div class="form-group " style="text-align:right;">
+                        @Html.ActionLink("Thêm câu hỏi", // <-- Link text
+                        "AddQuestionView", // <-- Action Method Name
+                        "ManagementCourse",
+                            new { videoId = courseVideo.ID },
+                            new { @class = "btn btn-primary" }// <-- Route value
+                        )
+
+                        <a id="save" class="abclaice">
+                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
+                        </a>
+
+                    </div>
+
+                </div>
+
+            }
+        </div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     //$(document).ready(function () {

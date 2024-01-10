@@ -17,6 +17,9 @@ namespace OnlineCourse.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -27,6 +30,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult AcademicAchievement()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -40,6 +46,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Exam()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -55,6 +64,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult CourseBought()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -68,6 +80,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult Cart()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -81,6 +96,9 @@ namespace OnlineCourse.Controllers
 
         public ActionResult MyCourse()
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             var user = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
             if (user == null)
             {
@@ -92,6 +110,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpPost]
         public ActionResult UpdateProfile(UserLogin _user, HttpPostedFileBase imageFile)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             try
             {
                 var dao = new UserDao();
@@ -233,6 +254,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpGet]
         public ActionResult BuyProduct(int userId, int productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             bool status = new ProductDao().BuyProduct(userId, productId);
 
             if (status == true)
@@ -248,6 +272,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Mvc.HttpGet]
         public ActionResult AddProductToCart(int userId, int productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             bool status = new ProductDao().AddProductToCart(userId, productId);
 
             if (status == true)
@@ -268,6 +295,9 @@ namespace OnlineCourse.Controllers
         [System.Web.Http.HttpPost]
         public ActionResult DeleteProduct(int userId, int productId)
         {
+            // data for nav bar product type
+            ViewBag.CategoryID = new ProductCategoryDao().ListAll();
+
             bool status = new ProductDao().DeleteProductFromCart(userId, productId);
 
             if (status == true)

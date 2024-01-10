@@ -2,23 +2,8 @@
 
 @{
     ViewBag.Title = "Thông tin cá nhân";
-    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-}
-
-@section Css
-{
-    <link href="~/Content/ProfileUser.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/admin/images/logo.png">
-    <!-- Plugins css-->
-    <link href="/assets/admin/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-    <!-- App css -->
-    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-    <link href="/assets/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/admin/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
 }
 
 <div class="col-lg-12 mb-4 mb-sm-5">
@@ -29,23 +14,20 @@
                     <img src="@Model.Image" alt="..." style="max-width: 70%">
                 </div>
                 <div class="col-lg-6 px-xl-10">
-                    <div class="bg-primary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
-                        <h3 class="h2 text-white mb-0">@Model.FullName</h3>
-                        <span class="text-warning">@Model.Role</span>
+                    <div class="bg-primary d-lg-inline-block  rounded p-3">
+                        <h3 class="h5 text-white mb-0">@Model.FullName (@Model.Role)</h3>
+                 
                     </div>
-                    <ul class="list-unstyled mb-1-9">
+                    <ul class="list-unstyled mb-1-9 pt-2">
                         <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Tài khoản:</span> <span class="font-22">@Model.UserName</span></li>
                         <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Vai trò:</span> <span class="font-22">@Model.Role</span></li>
                         <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Ngày tham gia:</span> <span class="font-22">@Model.CreateDate</span></li>
                         <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span><span class="font-22"> @Model.Email</span></li>
                         <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Địa chỉ:</span><span class="font-22"> @Model.Address</span></li>
-                        <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Di động:</span><span class="font-22"> @Model.Phone</span></li>
+                        <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Số điện thoại</span><span class="font-22"> @Model.Phone</span></li>
                     </ul>
                     <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
-                        <li><a href="#!"><i class="ti-twitter-alt"> @Model.FullName</i></a></li>
-                        <li><a href="#!"><i class="ti-facebook"> @Model.FullName</i></a></li>
-                        <li><a href="#!"><i class="ti-pinterest"> @Model.FullName</i></a></li>
-                        <li><a href="#!"><i class="ti-instagram"> @Model.FullName</i></a></li>
+
 
                         <li style="text-align:right;">
                             <button id="openModel" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
@@ -147,29 +129,3 @@
     </div>
 
 </div>
-
-
-@section Script
-{
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript"></script>
-
-    <script src="/assets/admin/libs/bootstrap/js/bootbox.min.js"></script>
-
-    <script src="~/Scripts/site.js"></script>
-
-    <script>
-
-        $('#openModel').click(function () {
-            $('#profileModel').modal('show');
-        })
-
-        $('#closeModel').click(function () {
-            $('#profileModel').modal('hide');
-        })
-
-    </script>
-
-}
