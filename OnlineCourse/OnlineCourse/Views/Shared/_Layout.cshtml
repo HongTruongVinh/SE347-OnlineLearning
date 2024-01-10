@@ -1,7 +1,49 @@
-﻿@{
+﻿@using productDao = Model.Dao.ProductDao;
+@using productModel = OnlineCourse.Models.ProductModel;
+@using productModel2 = Model.Models.Product;
+@using wishProductDao = Model.Dao.WishProductDao;
+
+@functions{
+    public static List<productModel> ConvertToProductModels(List<productModel2> products, bool isBought = false)
+    {
+        List<productModel> productModels = new List<productModel>();
+
+        foreach (productModel2 product in products)
+        {
+            productModel model = new productModel();
+            model.ID = product.ID;
+            model.Name = product.Name;
+            model.Description = product.Description;
+            model.ModifiDate = product.ModifiDate;
+            model.Detail = product.Detail;
+            model.Image = product.Image;
+            model.IsBought = isBought;
+            model.Price = product.Price;
+            model.MetaTitle = product.MetaTitle;
+
+            int createrID = (int)Convert.ToDouble(product.CreateBy);
+            model.CreateBy = new productDao().GetCreatedByUser(createrID).Name;
+
+            model.CountVideo = product.ListFile.Split('*').Length;
+
+            model.CountComment = new productDao().GetCountComment(product.ID);
+
+            productModels.Add(model);
+        }
+
+        return productModels;
+    }
+}
+@{
     Layout = null;
     var productcategory = (List<Model.Models.ProductCategory>)ViewBag.CategoryID;
     int productInCart = 0;
+
+    var userCheck = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
+    if (userCheck != null)
+    {
+        productInCart = ConvertToProductModels(new wishProductDao().GetListCartProduct(userCheck.UserID), false).Count();
+    }
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -157,9 +199,8 @@
                     <div class="nav my-3 my-xl-0 px-4 flex-nowrap align-items-center">
                         <div class="nav-item w-100">
                             <form class="position-relative" action="/khoa-hoc/tat-ca-0">
-                                <input 
-                                       name="searchString"
-                                      class="form-control pe-5 bg-transparent" type="search" placeholder="Nhập khóa học cần tìm" aria-label="Search">
+                                <input name="searchString"
+                                       class="form-control pe-5 bg-transparent" type="search" placeholder="Nhập khóa học cần tìm" aria-label="Search">
                                 <button class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i class="fas fa-search fs-6 "></i></button>
                             </form>
                         </div>
@@ -167,7 +208,6 @@
                     <!-- Nav Search END -->
                 </div>
                 <!-- Main navbar END -->
-
                 <!--Cart-->
                 <a href="@Url.Action("Cart", "Profile")"
                    class="d-flex justify-content-between align-items-center position-relative">
@@ -178,10 +218,10 @@
                     {
                         <div class="px-2 py-1 position-absolute"
                              style="color:white; background-color: red;border-radius:20px;bottom:-7px;right:8px;font-size:10px">@productInCart</div>
-                    }
+                        }
 
                 </a>
-                
+
                 <!-- Profile START -->
                 @{
                     var user = (OnlineCourse.Common.UserLogin)HttpContext.Current.Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
@@ -214,7 +254,7 @@
                                 <li><a class="dropdown-item" href="@Url.Action("MyCourse", "Profile")"><i class="bi bi-book fa-fw me-2"></i>Các khóa học của tôi</a></li>
 
                                 <li><a class="dropdown-item" href="@Url.Action("AcademicAchievement", "Profile")"><i class="bi bi-star fa-fw me-2"></i>Thành tích học tập</a></li>
-                              
+
 
                                 <li><a class="dropdown-item bg-danger-soft-hover" href="@Url.Action("LogUot", "User")"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
                                 <li> <hr class="dropdown-divider"></li>

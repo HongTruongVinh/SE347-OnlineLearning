@@ -57,7 +57,7 @@
                                             HttpMethod = "POST",
                                             InsertionMode = InsertionMode.Replace,
                                             UpdateTargetId = "dialog_window_id",
-                                            OnComplete = "$('#" + product.ID + "').remove();"
+                                            OnComplete = "$('#" + product.ID + "').remove();location.reload(true);"
                                         },
                                         new { @class = "btn btn-outline-secondary btn-sm mt-2" }
                                         )
