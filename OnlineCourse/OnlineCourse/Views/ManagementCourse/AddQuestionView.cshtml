@@ -14,73 +14,89 @@
         @using (Html.BeginForm("AddQuestion", "ManagementCourse", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-        <div id="form-horizontal" class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.ID, new { @class = "form-control", type = "text", style = "display:none" })
-                    @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+            <div id="form-horizontal" class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ID, new { @class = "form-control", type = "text", style = "display:none" })
+                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Nội dung câu hỏi</label>
-                <div class="col-md-10 row">
-                    @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control col-md-6", type = "text", style = "Width: 50%; height: 100px;" }, rows = 5, cols = 100 })
-                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2" style="font-size: 20px">Nội dung câu hỏi</label>
+                    <div class="col-md-10 row ">
+                        @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control col-md-6", type = "text", style = "Width: 50%; height: 100px;" }, rows = 5, cols = 100, id = "txtContent" })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Đáp án 1</label>
-                <div class="col-md-10 row">
-                    <input type="text" class="form-control col-md-6" name="answer1" />
-                    <input class="col-md-1" checked="checked" type="radio" id="answer1" name="trueAnswer" value="1">
+                <hr class="col-md-10" />
+
+                <div class="form-group row">
+                    <label class="control-label col-md-1 row">Đáp án A</label>
+                    <div class="col-md-6  row">
+                        <input type="text" class="form-control" name="answer1" />
+                    </div>
+                    <div class="col-md-1 row">
+                        <input checked="checked" type="radio" id="answer1" name="trueAnswer" value="1">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Đáp án 2</label>
-                <div class="col-md-10 row">
-                    <input type="text" class="form-control col-md-6" name="answer2" />
-                    <input class="col-md-1" type="radio" id="answer2" name="trueAnswer" value="2">
+                <hr class="col-md-10" />
+
+                <div class="form-group row">
+                    <label class="control-label col-md-1 row">Đáp án B</label>
+                    <div class="col-md-6 row">
+                        <input type="text" class="form-control" name="answer2" />
+                    </div>
+                    <div class="col-md-1 row">
+                        <input type="radio" id="answer2" name="trueAnswer" value="2">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Đáp án 3</label>
-                <div class="col-md-10 row">
-                    <input type="text" class="form-control col-md-6" name="answer3" />
-                    <input class="col-md-1" type="radio" id="answer3" name="trueAnswer" value="3">
+                <hr class="col-md-10" />
+
+                <div class="form-group row">
+                    <label class="control-label col-md-1 row">Đáp án C</label>
+                    <div class="col-md-6 row">
+                        <input type="text" class="form-control" name="answer3" />
+                    </div>
+                    <div class="col-md-1 row">
+                        <input type="radio" id="answer3" name="trueAnswer" value="3">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Đáp án 4</label>
-                <div class="col-md-10 row">
-                    <input type="text" class="form-control col-md-6" name="answer4" />
-                    <input class="col-md-1" type="radio" id="answer4" name="trueAnswer" value="4">
+                <hr class="col-md-10" />
+
+                <div class="form-group row">
+                    <label class="control-label col-md-1 row">Đáp án D</label>
+                    <div class="col-md-6 row">
+                        <input type="text" class="form-control" name="answer4" />
+                    </div>
+                    <div class="col-md-1 row">
+                        <input type="radio" id="answer4" name="trueAnswer" value="4">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-10 row">
-                    <input type="hidden" class="form-control col-md-6" name="videoId" value="@ViewBag.videoID"/>
+                <div class="form-group">
+                    <div class="col-md-10 row">
+                        <input type="hidden" class="form-control col-md-6" name="videoId" value="@ViewBag.videoID" />
+                    </div>
                 </div>
+
+                <hr />
+
+                <div class="form-group " style="text-align:right;">
+                    @*<p>Selected option: <span id="selectedOption"></span></p>*@
+
+                    <a id="save" class="abclaice ">
+                        <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
+                    </a>
+
+                </div>
+
             </div>
-
-            <hr />
-
-            <div class="form-group " style="text-align:right;">
-                @*<p>Selected option: <span id="selectedOption"></span></p>*@
-
-                <a id="save" class="abclaice ">
-                    <input type="submit" class="btn btn-info waves-effect waves-light" value="Lưu" />
-                </a>
-
-            </div>
-
-        </div>
 
         }
     </div>
@@ -96,4 +112,22 @@
             $("#selectedOption").text(selectedValue ? "trueAnswer " + selectedValue : "None");
         });
     });
+
+
 </script>
+
+@section CustomHomeJavaScript
+{
+    <script src="/assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/assets/admin/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="/assets/client/vendor/bootstrap/bootbox.min.js"></script>
+    <script src="/assets/client/controller/examController.js"></script>
+    <script type="text/javascript">
+        var editor = CKEDITOR.replace('txtContent', { customConfig: '/assets/admin/js/plugins/ckeditor/config.js', });
+    </script>
+}
+
+@section CustomHomeCSS
+{
+    <link href="/assets/client/css/quiz.css" rel="stylesheet" />
+}

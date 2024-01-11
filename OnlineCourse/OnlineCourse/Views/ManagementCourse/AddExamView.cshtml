@@ -9,6 +9,26 @@
     var listCourseQuestion = (Dictionary<Model.Models.ExamQuestion, List<Model.Models.QuestionAnswer>>)ViewBag.ListCourseQuestion;
 }
 
+@section CustomHomeCSS
+{
+    <link rel="shortcut icon" href="/assets/admin/images/logo.png">
+    <!-- Plugins css-->
+    <link href="/assets/admin/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- App css -->
+    <link href="/assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+    <link href="/assets/admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/admin/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+}
+
+@section CustomHomeJavaScript
+{
+    <script src="/assets/admin/js/vendor.min.js"></script>
+    <script src="/assets/admin/libs/moment/moment.min.js"></script>
+    <script src="/assets/admin/libs/jquery-scrollto/jquery.scrollTo.min.js"></script>
+    <script src="/assets/admin/libs/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/assets/admin/js/app.min.js"></script>
+}
+
 <div class="container pt-5">
     <h2>Tạo bài kiểm tra cho @courseVideo.Title</h2>
 
@@ -67,8 +87,14 @@
                         if (true)
                         {
                             <div class="form-group row">
-                                <input type="checkbox" class="form-control col-md-1 checkbox-item" style="font-size: 0.5vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
-                                <label class="control-label col-md-3" style="font-size: 1.5vw;">@question.Key.Content</label>
+                                <div class="col-md-1 row d-flex align-items-center justify-content-center">
+                                    <input type="checkbox" class="form-control form-check-input " style="font-size: 2.0vw;" name="@question.Key.ID" onchange="handleCheckboxChange(this)" id="@question.Key.ID" />
+                                </div>
+                                <div class=" col-md-3 row ">
+                                    @*<label class="control-label mt-3" style="font-size: 1.5vw;">@question.Key.Content</label>*@
+                                    @Html.Raw("<label class=\"control-label mt-3\" style=\"font-size: 1.5vw;\">" + @question.Key.Content + "</label>")
+                                </div> 
+
                                 <div class="col-md-12 row">
                                     @{int numberAnswer = 1; }
                                     @foreach (var answer in question.Value.ToList())
@@ -97,6 +123,7 @@
                                     }
                                 </div>
                             </div>
+                            <hr />
                         }
                         else
                         {
@@ -179,7 +206,7 @@
     //});
 
     $(document).ready(function () {
-        $(".checkbox-item").change(function () {
+        $(".form-check-input").change(function () {
             var checkboxId = $(this).attr("id");
             var isChecked = $(this).prop("checked");
             //debugger;

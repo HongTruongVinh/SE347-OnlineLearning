@@ -370,7 +370,7 @@ namespace OnlineCourse.Controllers
             return Json(new { success = true });
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult AddExam(ExamViewModel examViewModel)
         {
             // data for nav bar product type
@@ -390,7 +390,7 @@ namespace OnlineCourse.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult AddQuestion(int videoId, ExamQuestion examQuestion, string answer1, string answer2, string answer3, string answer4, string trueAnswer)
         {
             // data for nav bar product type
