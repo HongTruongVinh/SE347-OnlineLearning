@@ -798,7 +798,7 @@ Page content START -->
                                                                 {
                                                                     <div class="d-flex justify-content-between align-items-center">
                                                                         <div class="position-relative d-flex align-items-center">
-                                                                            <a href="@Url.Action("DoExam", "Exam", new { ExamId = exam.ID })" class="btn btn-info-soft btn-round btn-sm mb-0 stretched-link position-static">
+                                                                            <a href="@Url.Action("DoExam", "Exam", new { examId = exam.ID, productId = Model.ID, playingIdVideo = playingVideo.ID  })" class="btn btn-info-soft btn-round btn-sm mb-0 stretched-link position-static">
                                                                                 <i class="fas fa-play me-0"></i>
                                                                             </a>
                                                                             <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-200px">@exam.Name</span>

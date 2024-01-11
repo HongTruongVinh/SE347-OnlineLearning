@@ -61,10 +61,6 @@
                     Bạn có <b style="font-size:17pt;color:blue;">@Model.Time</b> phút để trả lời
                     <b style="font-size:17pt;color:blue;">@listExamQuestion.Keys.Count</b> câu hỏi.
                 </li>
-                @*<li>
-                Mã số nhân viên   <b style="font-size:17pt;color:blue;">@ViewBag.Msnv</b>
-
-            </li>*@
 
             </ul>
 
@@ -74,9 +70,8 @@
         </div>
 
     </div>
-
-
 </div>
+
 <main class="main-page-content main-top-gape-papexam" style="font-size:12px">
     <section class="cart-main-sec pb-8">
         <div class="container" style="display:none;" id="div_container">
@@ -127,7 +122,7 @@
                                         }
                                         <button class="remove-cart-course" data-bid="@i@abc" id="btnAddOption">
                                             <span class="card-title d-block mb-2">
-                                                <a class="btn slide-btn circle" style="border:1px;" data-id="@i@abc">
+                                                <a class="btn slide-btn circle" style="border:1px;" data-id="@i@abc" data-answerId="@arrListQuestion[k].ID"  >
                                                     @abc
                                                 </a> @arrListQuestion[k].Content.ToString()
 
@@ -144,6 +139,7 @@
 
                         </li>
                     }
+
 
                 </ul>
 
@@ -176,7 +172,7 @@
                         </p>
                         <hr />
                         <div class="cart-totale-price mt-3 mb-4 d-flex align-items-center justify-content-between" style="text-align:center;">
-                            <button data-resultessay="abc" data-examfinishid="@Model.ID" data-userfinishid="@ViewBag.UserID" class="btn btn-primary w-100" id="btnFinish" type="button">Nộp bài</button>
+                            <button onclick="finishExam()" class="btn btn-primary w-100" id="btnFinish" type="button">Nộp bài</button>
 
                         </div>
                     </div>
@@ -188,6 +184,54 @@
         </div>
     </section>
 </main>
+
+<div style="text-align:center;width:70%;padding-left:30%;padding-top:30px;" id="div_endquiz">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header" style="background-color:lightblue;">
+            <div style="float:left;width:10%">
+                <a href="\trang-chu"><img src="~/assets/client/images/logo.png" /> </a>
+
+            </div>
+            <div style="float:right;width:90%;margin-top:4px;">
+                <h5 class="my-0 font-weight-normal">@Model.Name</h5>
+            </div>
+        </div>
+        <div class="card-body" style="text-align:center;">
+            <p style="color:red;">Bài ôn tập</p>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>
+                    Bạn đạt <b id="score_lable" style="font-size:17pt;color:blue;">50%</b> số điểm. Tổng số
+                    <b style="font-size:17pt;color:blue;">@listExamQuestion.Keys.Count </b> câu hỏi.
+                </li>
+                <li>
+                    Chúc mừng <b style="font-size:17pt;color:blue;">@ViewBag.Msnv</b>
+
+                </li>
+
+            </ul>
+            <input type="button" disabled="disabled" value="Bạn đã hoàn thành bài kiểm tra" class="btn btn-lg btn-block btn-active-icon-success" id="btnExit" />
+            <br /><a href="/lich-su-kiem-tra"></a>
+                  <div class="row">
+                      
+                      @Html.ActionLink("Làm lại", // <-- Link text
+                                         "DoExam", // <-- Action Method Name
+                                         "Exam",
+                                         new { examId = Model.ID, productId = @ViewBag.ProductId, playingIdVideo = @ViewBag.PlayingIdVideo },
+                                         new { @class = "btn btn-lg btn-block btn-success" }
+                                         )
+
+                      @Html.ActionLink("Xem đáp án", // <-- Link text
+                                       "ViewAnswer", // <-- Action Method Name
+                                       "Exam",
+                                       new { examId = Model.ID },
+                                       new { @class = "btn btn-lg btn-block btn-warning" }
+                                       )
+                  </div>
+        </div>
+
+    </div>
+</div>
+
 @section jsFooter
 {
     <script src="/assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
@@ -196,7 +240,10 @@
     <script src="/assets/client/controller/examController.js"></script>
 
     <script>
-    var editor = CKEDITOR.replace('txtContent', { customConfig: '/assets/admin/js/plugins/ckeditor/config.js', });
+
+        document.getElementById("div_endquiz").style.display = 'none';
+
+    //var editor = CKEDITOR.replace('txtContent', { customConfig: '/assets/admin/js/plugins/ckeditor/config.js', });
     var min =@Model.Time;
     var sec = 00;
 
@@ -232,19 +279,18 @@
         },1000);
     }
     </script>
+
     <script>
-        $(document).ready(function()
-        {
-            $(".remove-cart-course").each(function()
-            {
-                $(this).on("click", function()
-                {
+        $(document).ready(function () {
+            $(".remove-cart-course").each(function () {
+                $(this).on("click", function () {
                     var bid = $(this).data('bid');
                     AddOptionIntoList(bid);
                     CheckListQuestion(bid);
                 });
             });
 
+            ///Hàm này ko chạy được (vì nằm trong khối $(document) này) nên đã tạo ra hàm finishExam thay thế
             $("#btnFinish").click(function()
             {
                 GetResult();
@@ -252,73 +298,147 @@
                 document.getElementById("btnFinish").textContent = "Đã nộp bài";
                 $('#timer').text("00 : 00");
                 clearInterval(cdID);
-
-
             }
             );
-            $("#btnStartQuiz").click(function()
-            {
+
+            $("#btnStartQuiz").click(function () {
                 go_full_screen();
                 countdown();
                 document.getElementById("div_startquiz").style.display = 'none';
+                document.getElementById("div_endquiz").style.display = 'none';
                 document.getElementById("div_container").style.display = 'block';
 
             });
 
         });
+
+        function finishExam() {
+            //GetResult();
+            document.getElementById("btnFinish").disabled = true;
+            document.getElementById("btnFinish").textContent = "Đã nộp bài";
+            $('#timer').text("00 : 00");
+            clearInterval(cdID);
+
+            var da = $.ajax({
+                async: false,
+                type: "POST",
+                global: false,
+                dataType: 'json',
+                url: '@Url.Action("GetResultExam", "Exam")',
+                data: {
+                        'examId': @Model.ID,
+                      },
+                success: function (dataResponse)
+                {
+                    var result = dataResponse['status'];
+                    var score = dataResponse['score'];
+
+                    if (result == true) {
+                        document.getElementById("div_endquiz").style.display = 'block';
+                        document.getElementById("div_container").style.display = 'none';
+                        $('#score_lable').text(score + '% ');
+                    }
+                    else {
+                        $("#save_failue").show();
+                        setTimeout(function () { $("#save_failue").hide(); }, 5000);
+                    }
+
+                }
+            });
+
+            escape_full_screen();
+        }
+
         function AddOptionIntoList(bid) {
-            $('button span a').each(function()
-            {
-                if($(this).data('id') == bid) {
+            $('button span a').each(function () {
+                if ($(this).data('id') == bid) {
                     $(this).removeClass("btn slide-btn circle");
                     $(this).removeClass("btn slide-btn circleblue");
                     $(this).addClass("btn slide-btn circleblue");
                 }
-                else
-                {
+                else {
                     var a = $(this).data('id');
-                    if(a.substring(0,a.length -1) == bid.substring(0,bid.length-1))
-                    {
+                    if (a.substring(0, a.length - 1) == bid.substring(0, bid.length - 1)) {
                         $(this).removeClass("btn slide-btn circleblue");
                         $(this).removeClass("btn slide-btn circl");
                         $(this).addClass("btn slide-btn circle");
                     }
                 }
+
+
             });
         }
-        function CheckListQuestion(bid){
-            var bien = "#cauhoi" + bid.substring(0,bid.length - 1);
+
+        function CheckListQuestion(bid) {
+            var bien = "#cauhoi" + bid.substring(0, bid.length - 1);
             $(bien).removeClass("btn slide-btn-list circlelist");
             $(bien).removeClass("btn slide-btn-list circlelistblue");
             $(bien).addClass("btn slide-btn-list circlelistblue");
+            SaveAnswer(bid);
         }
+
+        function SaveAnswer(bid) {
+            
+            var saveAnswer = $.ajax({
+                async: false,
+                type: "POST",
+                global: false,
+                dataType: 'json',
+                url: '@Url.Action("SaveAnswer", "Exam")',
+                data: {
+                        'chosenAnswer': bid,
+                      },
+                success: function (dataResponse)
+                {
+                    var result = dataResponse['status'];
+                    
+                    if (result == true) {
+                        $("#save_success").show();
+                        setTimeout(function () { $("#save_success").hide(); }, 5000);
+                    }
+                    else {
+                        $("#save_failue").show();
+                        setTimeout(function () { $("#save_failue").hide(); }, 5000);
+                    }
+
+                }
+            });
+        }
+
         function GetResult() {
             bootbox.alert({
-                message : "Chúc mừng anh/ chị đã hoàn thành bài. Kết quả sẽ được thông báo tại mục Cá nhân trong thời gian sớm nhất<br>",
-                size : 'medium' ,
-                closeButton : false,
+                message: "Chúc mừng bạn đã hoàn thành bài. Bạn đã thu hoạch được 50% kiến thức trong bài này.<br>",
+                size: 'medium',
+                closeButton: false,
             });
-
         }
-        function go_full_screen()
-        {
+
+        function go_full_screen() {
             var elem = document.documentElement;
-            if(elem.requestFullscreen)
-            {
+            if (elem.requestFullscreen) {
                 elem.requestFullscreen();
             }
             else
-                if(elem.msRequestFullscreen)
-                {
+                if (elem.msRequestFullscreen) {
                     elem.msRequestFullscreen;
                 }
-            else if(elem.mozRequestFullscreen)
-            {
-                elem.mozRequestFullscreen;
-            }
-            else if(elem.webkitRequestFullscreen)
-            {
-                elem.webkitRequestFullscreen;
+                else if (elem.mozRequestFullscreen) {
+                    elem.mozRequestFullscreen;
+                }
+                else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen;
+                }
+
+        }
+
+        function escape_full_screen() {
+            if (document.fullscreenElement) {
+                document
+                    .exitFullscreen()
+                    .then(() => console.log("Document Exited from Full screen mode"))
+                    .catch((err) => console.error(err));
+            } else {
+                document.documentElement.requestFullscreen();
             }
 
         }

@@ -104,5 +104,27 @@ namespace Model.Dao
             return result;
         }
 
+        public bool isTrueAnswer(int questionId, int answerId)
+        {
+            bool result = false;
+            try
+            {
+                var answer = DataProvider.Ins.DB.QuestionAnswers.Where(x=>x.ID == answerId).FirstOrDefault();
+                if ( answer.IsTrueAnswer == true )
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
+
+                return result;
+            }
+            catch
+            {
+                return result;
+            }
+        }
     }
 }

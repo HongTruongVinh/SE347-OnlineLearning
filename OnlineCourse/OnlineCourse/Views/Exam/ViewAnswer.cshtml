@@ -1,0 +1,246 @@
+﻿@model Model.Models.VideoExam
+
+@{
+    ViewBag.Title = "Bài ôn tập - kiểm tra";
+    Layout = "~/Views/Shared/_LayoutExam.cshtml";
+    var listExamQuestion = (Dictionary<Model.Models.ExamQuestion, List<Model.Models.QuestionAnswer>>)ViewBag.ListExamQuestion;
+
+    var userAnswers = (List<OnlineCourse.Common.UserAnswer>)ViewBag.UserAnswers;
+}
+
+@section Childcss
+{
+    <link href="/assets/client/css/quiz.css" rel="stylesheet" />
+    <style>
+        .circle {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .circleblue {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 10px;
+            background-color: #325d81;
+        }
+
+        .circlelist {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 2px;
+        }
+
+        .circlelistblue {
+            border: 1px solid #dee2e6;
+            border-radius: 50%;
+            text-align: center;
+            padding-top: 2px;
+            background-color: blue;
+        }
+    </style>
+}
+
+<main class="main-page-content main-top-gape-papexam" style="font-size:12px">
+    <section class="cart-main-sec pb-8">
+        <div class="container" style="display:none;" id="div_container">
+            <div class="cart-main-content d-flex flex-wrap flex-lg-nowrap justify-content-between">
+                <ul class="cart-course-list w-100">
+                    <li>
+                        <h5 class="text-center" style="border: 1px solid #dee2e6 !important; padding:10px;"><b>@Model.Name</b></h5>
+
+                    </li>
+                    @{
+                        var i = 0;
+                        List<Model.Models.QuestionAnswer> arrListQuestion = null;
+                        var abc = "";
+                    }
+
+                    @foreach (var question in listExamQuestion)
+                    {
+                        arrListQuestion = question.Value.ToList();
+                        i++;
+                        <li class="col-md-12" style="border: 1px solid #dee2e6 !important; padding: 10px;">
+                            <h4>Câu hỏi @i.ToString()</h4>
+                        </li>
+                        <li class="cart-course-item border p-3 bg-white d-flex align-items-center justify-content-between flex-md-nowrap">
+                            <div class="cart-course-info d-flex align-items-center flex-wrap flex-sm-nowrap">
+                                <div class="cart-course-txt ms-sm-4 mt-sm-0 mt-3">
+                                    <h5 class="card-title mb-4" style="color:#325d81"><b>@Html.Raw(question.Key.Content)</b></h5>
+                                    @for (int k = 0; k < arrListQuestion.Count; k++)
+                                    {
+                                        if (k == 0)
+                                        {
+                                            abc = "A";
+                                        }
+                                        if (k == 1)
+                                        {
+                                            abc = "B";
+                                        }
+                                        if (k == 2)
+                                        {
+                                            abc = "C";
+                                        }
+                                        if (k == 3)
+                                        {
+                                            abc = "D";
+                                        }
+                                        if (k == 4)
+                                        {
+                                            abc = "E";
+                                        }
+                                        <button class="remove-cart-course" data-bid="@i@abc" id="btnAddOption">
+                                            <span class="card-title d-block mb-2">
+                                                <a class="btn slide-btn circle" style="border:1px;" data-id="@i@abc" data-answerId="@arrListQuestion[k].ID">
+                                                    @abc
+                                                </a> @arrListQuestion[k].Content.ToString()
+
+                                                @{ var userAnswer = userAnswers.Where(x => x.Question.ID == question.Key.ID).FirstOrDefault();
+
+                                                    if (userAnswer != null)
+                                                    {
+                                                        if (userAnswer.IsTrueAnwser == true && userAnswer.ChosenAnswerId == arrListQuestion[k].ID)
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#00FF00" class="bi bi-check-circle-fill green" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                                            </svg>
+                                                        }
+                                                        else if (userAnswer.IsTrueAnwser == false && userAnswer.ChosenAnswerId == arrListQuestion[k].ID)
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#FF0000" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
+                                                            </svg>
+                                                        }
+                                                        else if (question.Value.Where(x=>x.IsTrueAnswer).FirstOrDefault().ID == arrListQuestion[k].ID)
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#00FF00" class="bi bi-check-circle-fill green" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                                            </svg>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (question.Value.Where(x => x.IsTrueAnswer == true && x.ID == arrListQuestion[k].ID).FirstOrDefault() != null)
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#FFFF00" class="bi bi-check-circle-fill green" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                                            </svg>
+                                                        }
+                                                    }
+
+
+                                                }
+
+                                            </span>
+
+                                        </button><br />
+                                    }
+
+                                </div>
+
+
+                            </div>
+
+
+                        </li>
+                    }
+
+
+                </ul>
+
+                <div class="check-out-crd p-lg-4 p-sm-5 p-4 mt-5 ms-lg-3 mt-lg-0 col-md-2" style="border-style:solid;border-width:1px;border-color:blueviolet;">
+                    <div style="position:fixed;">
+                        @for (int z = 1; z <= listExamQuestion.Keys.Count; z++)
+                        {
+                            var listid = "cauhoi" + z.ToString();
+                            if (z % 4 == 0)
+                            {
+                                foreach (var answer in userAnswers)
+                                {
+                                    if (listExamQuestion.ElementAt(z - 1).Key.ID == answer.Question.ID)
+                                    {
+                                        if (answer.IsTrueAnwser == true)
+                                        {
+                                            <button class="btn slide-btn-list circlelist btn-success" id="@listid" data-list="@z">@z</button><br />
+                                        }
+                                        else
+                                        {
+                                            <button class="btn slide-btn-list circlelist btn-danger" id="@listid" data-list="@z">@z</button><br />
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn circlelist btn-warning" id="@listid" data-list="@z">@z</button><br />
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var answer in userAnswers)
+                                {
+                                    if (listExamQuestion.ElementAt(z - 1).Key.ID == answer.Question.ID)
+                                    {
+                                        if (answer.IsTrueAnwser == true)
+                                        {
+                                            <button type="submit" class="btn circlelist btn-success" id="@listid" data-list="@z">@z</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn circlelist btn-danger" id="@listid" data-list="@z">@z</button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn circlelist btn-warning" id="@listid" data-list="@z">@z</button>
+                                    }
+                                }
+                            }
+                        }
+                        <hr />
+                        <h3 class="card-title" style="text-align:center;visibility:visible;">
+                            <p style="font-size:12pt;color:#325d81;">
+                                Tổng số câu: <b>@listExamQuestion.Keys.Count</b>
+
+                            </p>
+                        </h3>
+                        <hr />
+                        <p style="font-size:12pt;color:#325d81;">
+                            Số câu đúng: <b>@userAnswers.Where(x => x.IsTrueAnwser == true).Count()</b>
+
+                        </p>
+                        <hr />
+                        <div class="cart-totale-price mt-3 mb-4 d-flex align-items-center justify-content-between" style="text-align:center;">
+                            @Html.ActionLink("Thoát", // <-- Link text
+                                 "Detail", // <-- Action Method Name
+                                 "Product",
+                                 new { productId = @ViewBag.ProductId, playingIdVideo = @ViewBag.PlayingVideoId },
+                                 new { @class = "btn btn-primary w-100" }
+                                 )
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+@section jsFooter
+{
+    <script src="/assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/assets/admin/js/plugins/ckfinder/ckfinder.js"></script>
+    <script src="/assets/client/vendor/bootstrap/bootbox.min.js"></script>
+    <script src="/assets/client/controller/examController.js"></script>
+
+    <script>
+        document.getElementById("div_container").style.display = 'block';
+    </script>
+}

@@ -190,6 +190,7 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\ConvertLanguage.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\UserAnswer.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Common\UserNotLogin.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -2236,6 +2237,7 @@
     <Content Include="Views\ManagementCourse\UpdateVideoDetail.cshtml" />
     <Content Include="Views\ManagementCourse\AddQuestionView.cshtml" />
     <Content Include="Views\Exam\DoExam.cshtml" />
+    <Content Include="Views\Exam\ViewAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
