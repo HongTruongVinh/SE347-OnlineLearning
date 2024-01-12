@@ -65,5 +65,29 @@ namespace Model.Dao
                 return false;
             }
         }
+
+        public CourseDocument GetByName(string courseDocumentName)
+        {
+            try
+            {
+                return DataProvider.Ins.DB.CourseDocuments.Where(x=>x.Name == courseDocumentName).FirstOrDefault();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public CourseDocument GetByLink(string courseDocumentLink)
+        {
+            try
+            {
+                return DataProvider.Ins.DB.CourseDocuments.Where(x => x.Link == courseDocumentLink).FirstOrDefault();
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

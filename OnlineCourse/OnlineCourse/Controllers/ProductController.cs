@@ -3,9 +3,11 @@ using Model.Dao;
 using Model.Models;
 using OnlineCourse.Common;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -266,15 +268,13 @@ namespace OnlineCourse.Controllers
 
         public FileResult LearnerDownloadDocument(string link)
         {
-            //var memory = new MemoryStream();
-            //using (var stream = new FileStream(link, FileMode.Open))
-            //{
-            //    stream.CopyTo(memory);
-            //}
-            //memory.Position = 0;
+            if (link == "-1") return null;
 
-            string ext = Path.GetExtension(link).ToLowerInvariant();
-            return File(link, GetMimeTypes()[ext]);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath(link));
+
+            string fileName = new CourseDocumentDao().GetByLink(link).Name;
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
         private Dictionary<string, string> GetMimeTypes()
