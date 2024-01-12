@@ -82,7 +82,7 @@ namespace Model.Dao
 
         public long Insert(Product entity)
         {
-            entity.Status = false;
+            entity.Status = true;
             DataProvider.Ins.DB.Products.Add(entity);
             DataProvider.Ins.DB.SaveChanges();
             return entity.ID;
