@@ -88,6 +88,7 @@ CREATE TABLE [dbo].[Exam_Question](
 CREATE TABLE [dbo].[ExamQuestion](
 	[ID] [int] IDENTITY(1,1) PRIMARY KEY,
 	[ProductID] [int] NOT NULL,
+	[VideoID] [int] NOT NULL,
 	[Content] [nvarchar](max) NOT NULL,
 	[TYPE] [varchar](20),
 	[Score] [int],

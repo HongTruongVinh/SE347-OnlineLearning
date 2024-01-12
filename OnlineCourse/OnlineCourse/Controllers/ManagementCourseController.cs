@@ -345,7 +345,7 @@ namespace OnlineCourse.Controllers
 
             ViewBag.courseVideo = new CourseVideoDao().GetVideo(videoId);
 
-            var listCourseQuestion = new ExamQuestionDao().GetDictionaryQuetionByVideoId(videoId);
+            var listCourseQuestion = new ExamQuestionDao().GetDictionaryVideoQuetionByVideoId(videoId);
             ViewBag.ListCourseQuestion = listCourseQuestion;
 
             return View(newExamViewModel);

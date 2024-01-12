@@ -26,10 +26,7 @@ namespace Model.Dao
 
                 examQuestion.ProductID = courseVideo.productID.GetValueOrDefault();
 
-                //if (courseVideo.productID == null)
-                //    examQuestion.ProductID = default(int);
-                //else
-                //    examQuestion.ProductID = courseVideo.productID.Value;
+                examQuestion.VideoID = videoId;
 
                 var resultQuestion = DataProvider.Ins.DB.ExamQuestions.Add(examQuestion);
 
@@ -84,7 +81,12 @@ namespace Model.Dao
             return DataProvider.Ins.DB.ExamQuestions.Where(x => x.ProductID == courseId).ToList();
         }
 
-        public Dictionary<ExamQuestion, List<QuestionAnswer>> GetDictionaryQuetionByVideoId(int videoId)
+        public List<ExamQuestion> GetListQuetionByVideoId(int videoId)
+        {
+            return DataProvider.Ins.DB.ExamQuestions.Where(x => x.VideoID == videoId).ToList();
+        }
+
+        public Dictionary<ExamQuestion, List<QuestionAnswer>> GetDictionaryCourseQuetionByVideoId(int videoId)
         {
             int courseId = DataProvider.Ins.DB.CourseVideos.Where(x => x.ID == videoId).FirstOrDefault().productID.GetValueOrDefault();
 
@@ -94,6 +96,24 @@ namespace Model.Dao
             listQuest = DataProvider.Ins.DB.ExamQuestions.Where(x => x.ProductID == courseId).ToList();
 
             foreach ( var quest in listQuest )
+            {
+                var listAnswer = new List<QuestionAnswer>();
+                listAnswer = DataProvider.Ins.DB.QuestionAnswers.Where(x => x.QuestionID == quest.ID).ToList();
+
+                result.Add(quest, listAnswer);
+            }
+
+            return result;
+        }
+
+        public Dictionary<ExamQuestion, List<QuestionAnswer>> GetDictionaryVideoQuetionByVideoId(int videoId)
+        {
+            Dictionary<ExamQuestion, List<QuestionAnswer>> result = new Dictionary<ExamQuestion, List<QuestionAnswer>>();
+
+            var listQuest = new List<ExamQuestion>();
+            listQuest = DataProvider.Ins.DB.ExamQuestions.Where(x => x.VideoID == videoId).ToList();
+
+            foreach (var quest in listQuest)
             {
                 var listAnswer = new List<QuestionAnswer>();
                 listAnswer = DataProvider.Ins.DB.QuestionAnswers.Where(x => x.QuestionID == quest.ID).ToList();

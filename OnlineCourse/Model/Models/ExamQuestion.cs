@@ -16,6 +16,7 @@ namespace Model.Models
     {
         public int ID { get; set; }
         public int ProductID { get; set; }
+        public int VideoID { get; set; }
         public string Content { get; set; }
         public string TYPE { get; set; }
         public Nullable<int> Score { get; set; }

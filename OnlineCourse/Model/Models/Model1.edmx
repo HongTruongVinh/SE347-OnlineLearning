@@ -103,6 +103,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="VideoID" Type="int" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TYPE" Type="varchar" MaxLength="20" />
           <Property Name="Score" Type="int" />
@@ -319,7 +320,6 @@
           <EntitySet Name="CourseVideos" EntityType="OnlineCourseVer1Model.CourseVideo" />
           <EntitySet Name="Exams" EntityType="OnlineCourseVer1Model.Exam" />
           <EntitySet Name="Exam_Question" EntityType="OnlineCourseVer1Model.Exam_Question" />
-          <EntitySet Name="ExamQuestions" EntityType="OnlineCourseVer1Model.ExamQuestion" />
           <EntitySet Name="Permissions" EntityType="OnlineCourseVer1Model.Permission" />
           <EntitySet Name="Products" EntityType="OnlineCourseVer1Model.Product" />
           <EntitySet Name="ProductCategories" EntityType="OnlineCourseVer1Model.ProductCategory" />
@@ -334,6 +334,7 @@
           <EntitySet Name="User_Role" EntityType="OnlineCourseVer1Model.User_Role" />
           <EntitySet Name="VideoExams" EntityType="OnlineCourseVer1Model.VideoExam" />
           <EntitySet Name="WishProducts" EntityType="OnlineCourseVer1Model.WishProduct" />
+          <EntitySet Name="ExamQuestions" EntityType="OnlineCourseVer1Model.ExamQuestion" />
         </EntityContainer>
         <EntityType Name="Admin">
           <Key>
@@ -426,16 +427,6 @@
           <Property Name="QuestionID" Type="Int32" Nullable="false" />
           <Property Name="ExamID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="ExamQuestion">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Score" Type="Int32" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -611,6 +602,17 @@
           <Property Name="IsBought" Type="Boolean" />
           <Property Name="DateBought" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="ExamQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="VideoID" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Score" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -712,17 +714,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ExamID" ColumnName="ExamID" />
                 <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ExamQuestions">
-            <EntityTypeMapping TypeName="OnlineCourseVer1Model.ExamQuestion">
-              <MappingFragment StoreEntitySet="ExamQuestion">
-                <ScalarProperty Name="Score" ColumnName="Score" />
-                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -907,6 +898,18 @@
                 <ScalarProperty Name="IsBought" ColumnName="IsBought" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamQuestions">
+            <EntityTypeMapping TypeName="OnlineCourseVer1Model.ExamQuestion">
+              <MappingFragment StoreEntitySet="ExamQuestion">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

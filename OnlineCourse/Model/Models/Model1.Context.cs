@@ -33,7 +33,6 @@ namespace Model.Models
         public virtual DbSet<CourseVideo> CourseVideos { get; set; }
         public virtual DbSet<Exam> Exams { get; set; }
         public virtual DbSet<Exam_Question> Exam_Question { get; set; }
-        public virtual DbSet<ExamQuestion> ExamQuestions { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
@@ -48,5 +47,6 @@ namespace Model.Models
         public virtual DbSet<User_Role> User_Role { get; set; }
         public virtual DbSet<VideoExam> VideoExams { get; set; }
         public virtual DbSet<WishProduct> WishProducts { get; set; }
+        public virtual DbSet<ExamQuestion> ExamQuestions { get; set; }
     }
 }
