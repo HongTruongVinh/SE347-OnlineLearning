@@ -373,6 +373,11 @@ namespace OnlineCourse.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult AddExam(ExamViewModel examViewModel)
         {
+            if (string.IsNullOrWhiteSpace(examViewModel.Exam.Name) || examViewModel.Exam.Time < 1 || listChosenQuestionId.Count < 1)
+            {
+                return RedirectToAction("UpdateVideoDetail", new { videoId = examViewModel.Exam.VideoID });
+            }
+
             // data for nav bar product type
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
@@ -393,6 +398,12 @@ namespace OnlineCourse.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult AddQuestion(int videoId, ExamQuestion examQuestion, string answer1, string answer2, string answer3, string answer4, string trueAnswer)
         {
+            if (string.IsNullOrWhiteSpace(examQuestion.Content) || string.IsNullOrWhiteSpace(answer1) 
+                || string.IsNullOrWhiteSpace(answer2) || string.IsNullOrWhiteSpace(answer3) || string.IsNullOrWhiteSpace(answer4))
+            {
+                return RedirectToAction("AddExamView", new { videoId = videoId });
+            }
+
             // data for nav bar product type
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
 
