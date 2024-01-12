@@ -256,20 +256,21 @@ Page content START -->
                                             </div>
 
                                             <div class="dropdown ms-2">
-
-                                                @Ajax.ActionLink(" Mua luôn",
-                                                         "BuyProduct",
-                                                         "Profile",
-                                                         new { productId = Model.ID, userId = usersession.UserID },
-                                                         new AjaxOptions
-                                                         {
-                                                             HttpMethod = "GET",
-                                                             InsertionMode = InsertionMode.Replace,
-                                                             UpdateTargetId = "dialog_window_id",
-                                                             OnComplete = "$(this).hide();"
-                                                         },
-                                                         new { @class = "btn btn-danger-soft btn-sm mb-0 small fas bi bi-cart" }
-                                                         )
+                                                <!--
+    Ajax.ActionLink(" Mua luôn",
+             "BuyProduct",
+             "Profile",
+             new { productId = Model.ID, userId = usersession.UserID },
+             new AjaxOptions
+             {
+                 HttpMethod = "GET",
+                 InsertionMode = InsertionMode.Replace,
+                 UpdateTargetId = "dialog_window_id",
+                 OnComplete = "$(this).hide();"
+             },
+             new { class = "btn btn-danger-soft btn-sm mb-0 small fas bi bi-cart" }
+             )
+    -->
                                             </div>
                                         }
 

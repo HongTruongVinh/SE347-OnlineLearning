@@ -285,10 +285,12 @@ namespace OnlineCourse.Controllers
         public ActionResult BuyProduct(int userId, int productId)
         {
             // chưa login
+            
             if (userId == -1)
             {
                 return new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Login" }));
             }
+            
 
             // data for nav bar product type
             ViewBag.CategoryID = new ProductCategoryDao().ListAll();
@@ -297,6 +299,13 @@ namespace OnlineCourse.Controllers
 
             if (status == true)
             {
+                // cập nhật lại session
+                var usersession = (OnlineCourse.Common.UserLogin)Session[OnlineCourse.Common.CommonConstants.USER_SESSION];
+                var wishProducts = new ProductDao().GetWishListProduct(userId);
+                usersession.WishListIdProduct = wishProducts;
+                Session.Add(CommonConstants.USER_SESSION, usersession);
+                Session["WishProuducts"] = new WishProductDao().GetListWishProduct(userId);
+
                 return RedirectToAction("Cart");
             }
             else
