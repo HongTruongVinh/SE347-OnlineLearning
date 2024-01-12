@@ -18,7 +18,7 @@ namespace Model.Dao
 
         public List<VideoExam> GetListVideoExamByProductId(int videoId)
         {
-            return DataProvider.Ins.DB.VideoExams.Where(x => x.ID == videoId).ToList();
+            return DataProvider.Ins.DB.VideoExams.Where(x => x.VideoID == videoId).ToList();
         }
 
         public bool Add(VideoExam entity)
